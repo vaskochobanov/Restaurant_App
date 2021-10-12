@@ -9,6 +9,10 @@ body {
 html {
   height: 100%;
 }
+.main-nav {
+    padding-top: 0;
+    padding-bottom: 0%;
+}
 .footer {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -25,6 +29,10 @@ html {
     text-decoration: none;
 }
 @media (max-width: 350px) {
+    .main-nav {
+        padding-top: 0.2rem;
+        padding-bottom: 0.6rem;
+    }
   .image-brand {
     width: 50px;
     height: 50px;
@@ -42,6 +50,10 @@ html {
   }
 }
 @media (max-width: 400px) {
+    .main-nav {
+        padding-top: 0.2rem;
+        padding-bottom: 0.6rem;
+    }
     .image-brand {
       width: 50px;
       height: 50px;
