@@ -7,6 +7,7 @@ import javax.persistence.Table;
 @Table(name = "ingredients")
 public class Ingredient {
     private Long id;
+    private String imageUrl;
     private String name;
     private Integer quantity;
 
@@ -21,6 +22,15 @@ public class Ingredient {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Column(name = "image_url", nullable = false)
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Column(name = "name", nullable = false, unique = true)

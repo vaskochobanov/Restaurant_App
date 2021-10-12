@@ -14,6 +14,8 @@ public class Meal {
     private MealType type;
     private Double price;
     private String description;
+    private String imageUrl;
+    private boolean isPromoted;
     private boolean isActive;
     private List<Ingredient> ingredients;
 
@@ -64,6 +66,24 @@ public class Meal {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(name = "image_url", nullable = false)
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Column(name = "is_promoted", nullable = false)
+    public boolean isPromoted() {
+        return isPromoted;
+    }
+
+    public void setPromoted(boolean promoted) {
+        isPromoted = promoted;
     }
 
     @Column(name = "is_active", nullable = false)
