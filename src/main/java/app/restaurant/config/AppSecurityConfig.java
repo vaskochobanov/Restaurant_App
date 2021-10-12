@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("../static/js/**", "../static/css/**", "../static/img/**").permitAll()
+        http.authorizeRequests().antMatchers("/js/**", "/css/**", "/img/**").permitAll()
                 .antMatchers("/").permitAll();
     }
     @Override

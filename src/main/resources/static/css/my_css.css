@@ -1,10 +1,9 @@
 body {
-  margin-bottom: 0%;
+  margin-bottom: 0rem;
   background-image: url("../img/Restaurant_Background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 100%;
 }
 html {
   height: 100%;
@@ -64,6 +63,9 @@ html {
   .sandwich-button {
     margin-left: 0rem;
   }
+  .card-wrapper {
+    padding-bottom: 3.5rem;
+  }
 }
 @media (max-width: 400px) {
   .main-nav {
@@ -84,5 +86,32 @@ html {
   }
   .sandwich-button {
     margin-left: 0rem;
+  }
+  .card-wrapper {
+    padding-bottom: 3.5rem;
+  }
+}
+@media (max-width: 450px) {
+  .main-nav {
+    padding-top: 0.2rem;
+    padding-bottom: 0.6rem;
+  }
+  .image-brand {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+  }
+  .navbar-div {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .text-brand {
+    margin-right: 0.1rem;
+  }
+  .sandwich-button {
+    margin-left: 0rem;
+  }
+  .card-wrapper {
+    padding-bottom: 3.5rem;
   }
 }
