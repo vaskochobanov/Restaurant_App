@@ -10,8 +10,13 @@ html {
   height: 100%;
 }
 .main-nav {
-    padding-top: 0;
-    padding-bottom: 0%;
+  padding-top: 0;
+  padding-bottom: 0%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 .footer {
   padding-top: 1rem;
@@ -22,61 +27,62 @@ html {
   left: 0;
 }
 .intro-text {
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity));
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity));
+  margin-top: 6rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .intro-text-content {
-    padding-top: 0%;
-    padding-bottom: 0%;
+  padding-top: 0%;
+  padding-bottom: 0%;
 }
 .login-text {
-    color: coral;
-    text-decoration: none;
+  color: coral;
+  text-decoration: none;
 }
 .cards {
-    background-color: rgb(33, 37, 41);
-    color: white;
+  background-color: rgb(33, 37, 41);
+  color: white;
 }
 @media (max-width: 350px) {
-    .main-nav {
-        padding-top: 0.2rem;
-        padding-bottom: 0.6rem;
-    }
+  .main-nav {
+    padding-top: 0.2rem;
+    padding-bottom: 0.6rem;
+  }
   .image-brand {
     width: 50px;
     height: 50px;
     padding: 0;
   }
   .navbar-div {
-      padding-left: 1rem;
-      padding-right: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .text-brand {
-      margin-right: 0.1rem;
+    margin-right: 0.1rem;
   }
   .sandwich-button {
-      margin-left: 0rem;
+    margin-left: 0rem;
   }
 }
 @media (max-width: 400px) {
-    .main-nav {
-        padding-top: 0.2rem;
-        padding-bottom: 0.6rem;
-    }
-    .image-brand {
-      width: 50px;
-      height: 50px;
-      padding: 0;
-    }
-    .navbar-div {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    .text-brand {
-        margin-right: 0.1rem;
-    }
-    .sandwich-button {
-        margin-left: 0rem;
-    }
+  .main-nav {
+    padding-top: 0.2rem;
+    padding-bottom: 0.6rem;
   }
+  .image-brand {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+  }
+  .navbar-div {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .text-brand {
+    margin-right: 0.1rem;
+  }
+  .sandwich-button {
+    margin-left: 0rem;
+  }
+}
