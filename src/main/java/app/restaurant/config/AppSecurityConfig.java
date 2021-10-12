@@ -12,7 +12,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/js/**", "/css/**", "/img/**").permitAll()
-                .antMatchers("/").permitAll();
+                .antMatchers("/", "/users/register").permitAll();
+        http.csrf().disable();
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

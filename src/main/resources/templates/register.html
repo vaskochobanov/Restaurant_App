@@ -67,53 +67,57 @@
         </div>
     </div>
     <!-- Content Row-->
-    <form class="register-form" action="/users/register" method="post">
     <div class="form-holder">
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="username" name="username"
-                       aria-describedby="usernameHelpInline" placeholder="Username">
-                <small id="usernameHelpInline"
-                       class="bg-danger text-light rounded">
-                    Username length must be between 5 and 20 characters.
-                </small>
+        <form class="register-form" action="/users/register" method="POST" th:object="${userRegisterBindingModel}">
+            <div class="form-group row input-el">
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username" name="username" th:field="*{username}"
+                           th:errorclass="bg-danger"
+                           aria-describedby="usernameHelpInline" placeholder="Username">
+                    <small id="usernameHelpInline" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                           class="bg-danger text-light rounded">
+                        Username length must be between 5 and 20 characters.
+                    </small>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="fullName" name="fullName"
-                       aria-describedby="usernameHelpInline" placeholder="Full Name">
-                <small id="fullNameHelpInline"
-                       class="bg-danger text-light rounded">
-                    Username length must be between 5 and 20 characters.
-                </small>
+            <div class="form-group row input-el" >
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="fullName" name="fullName" th:field="*{fullName}"
+                           th:errorclass="bg-danger"
+                           aria-describedby="usernameHelpInline" placeholder="Full Name">
+                    <small id="fullNameHelpInline" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"
+                           class="bg-danger text-light rounded">
+                        Username length must be between 5 and 20 characters.
+                    </small>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="password"
-                       aria-describedby="passwordHelpInline" placeholder="Password">
-                <small id="passwordHelpInline"
-                       class="bg-danger text-light rounded">
-                    Username length must be between 5 and 20 characters.
-                </small>
+            <div class="form-group row input-el">
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="password" th:errorclass="bg-danger"
+                           aria-describedby="passwordHelpInline" placeholder="Password">
+                    <small id="passwordHelpInline" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                           class="bg-danger text-light rounded">
+                        Username length must be between 5 and 20 characters.
+                    </small>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                       aria-describedby="conPassHelpInline" placeholder="Confirm Password">
-                <small id="conPassHelpInline"
-                       class="bg-danger text-light rounded">
-                    Username length must be between 5 and 20 characters.
-                </small>
+            <div class="form-group row input-el">
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                           th:errorclass="bg-danger"
+                           aria-describedby="conPassHelpInline" placeholder="Confirm Password">
+                    <small id="conPassHelpInline" th:if="${#fields.hasErrors('confirmPassword')}"
+                           th:errors="*{confirmPassword}"
+                           class="bg-danger text-light rounded">
+                        Username length must be between 5 and 20 characters.
+                    </small>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-success btn-lg">Register</button>
+            <button type="submit" class="btn btn-success btn-lg">Register</button>
 
 
+        </form>
     </div>
-    </form>
     <!-- Footer-->
     <footer class="py-5 bg-dark footer">
         <div class="container px-4 px-lg-5 footer_container">
