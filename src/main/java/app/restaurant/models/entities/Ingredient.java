@@ -2,6 +2,7 @@ package app.restaurant.models.entities;
 
 import javax.persistence.*;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "ingredients")
@@ -10,6 +11,7 @@ public class Ingredient {
     private String imageUrl;
     private String name;
     private Integer quantity;
+    private LocalDate bestBefore;
 
     public Ingredient() {
     }
@@ -49,5 +51,14 @@ public class Ingredient {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @Column(name = "best_before", nullable = false)
+    public LocalDate getBestBefore() {
+        return bestBefore;
+    }
+
+    public void setBestBefore(LocalDate bestBefore) {
+        this.bestBefore = bestBefore;
     }
 }
