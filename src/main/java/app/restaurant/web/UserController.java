@@ -1,6 +1,5 @@
 package app.restaurant.web;
 
-import app.restaurant.models.bindings.UserLoginBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
 import app.restaurant.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;

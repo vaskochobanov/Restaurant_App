@@ -1,17 +1,13 @@
 package app.restaurant.services.impl;
 
-import app.restaurant.models.bindings.UserLoginBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.repositories.UserRepository;
 import app.restaurant.services.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,17 +64,5 @@ public class UserServiceImpl implements UserService {
         userToAdd.setRole(UserRole.CUSTOMER);
         userRepository.save(userToAdd);
         return false;
-    }
-
-    @Override
-    public boolean checkUserExistsInDB(String username) {
-        return userRepository.findByUsername(username).isPresent();
-    }
-
-    @Override
-    public void loginUser(UserLoginBindingModel userLoginBindingModel) {
-        UserDetails userDetails = this.loadUserByUsername(userLoginBindingModel.getUsername());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userLoginBindingModel.getPassword());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
