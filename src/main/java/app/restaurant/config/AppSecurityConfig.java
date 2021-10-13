@@ -23,9 +23,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/js/**", "/css/**", "/img/**").permitAll()
                 .antMatchers("/", "/users/register", "/users/login").permitAll()
-                .antMatchers("/**").authenticated().and().formLogin().loginPage("/users/login")
+                .antMatchers("/**").authenticated().and().formLogin().loginProcessingUrl("/users/login")
                 .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/home")
-                .failureForwardUrl("/users/login-error");
+                .failureForwardUrl("/users/log-error");
         http.csrf().disable();
     }
     @Override

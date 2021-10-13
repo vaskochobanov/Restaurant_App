@@ -44,6 +44,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",
                     bindingResult);
+            redirectAttributes.addFlashAttribute("usernameTaken", false);
             return "redirect:register";
         }
         userRegisterBindingModel.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
@@ -58,33 +59,16 @@ public class UserController {
         return "redirect:login";
     }
 
-    @GetMapping("login")
-    public String login(Model model) {
-        model.addAttribute("notFound", false);
+    @GetMapping("/login")
+    public String login() {
         return "login";
     }
-    @PostMapping("/users/login")
-    public String postLoginUser(@Valid UserLoginBindingModel userLoginBindingModel, BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
-                    bindingResult);
-            return "redirect:login";
-        }
-        if (userService.checkUserExistsInDB(userLoginBindingModel.getUsername())) {
-            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
-            redirectAttributes.addFlashAttribute("notFound", true);
-        }
-        userLoginBindingModel.setPassword(passwordEncoder.encode(userLoginBindingModel.getPassword()));
-        userService.loginUser(userLoginBindingModel);
-        return "redirect:home";
-    }
-    @PostMapping("/users/login-error")
+
+    @PostMapping("/log-error")
     public String failedLogin(@ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
                               RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("notFound", true);
         redirectAttributes.addFlashAttribute("username", username);
+        redirectAttributes.addFlashAttribute("notFound", true);
         return "redirect:login";
     }
 }
