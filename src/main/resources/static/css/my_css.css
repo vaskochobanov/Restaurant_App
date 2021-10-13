@@ -17,6 +17,9 @@ html {
   left: 0;
   z-index: 10;
 }
+.text-brand-admin-reduced {
+  display: none;
+}
 .footer {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -67,12 +70,21 @@ html {
     height: 50px;
     padding: 0;
   }
+  .image-brand-admin {
+    display: none;
+  }
   .navbar-div {
     padding-left: 1rem;
     padding-right: 1rem;
   }
   .text-brand {
     margin-right: 0.1rem;
+  }
+  .text-brand-admin {
+    display: none;
+  }
+  .text-brand-admin-reduced {
+    display: block;
   }
   .sandwich-button {
     margin-left: 0rem;
@@ -99,12 +111,21 @@ html {
     height: 50px;
     padding: 0;
   }
+  .image-brand-admin {
+    display: none;
+  }
   .navbar-div {
     padding-left: 1rem;
     padding-right: 1rem;
   }
   .text-brand {
     margin-right: 0.1rem;
+  }
+  .text-brand-admin {
+    display: none;
+  }
+  .text-brand-admin-reduced {
+    display: block;
   }
   .sandwich-button {
     margin-left: 0rem;
@@ -131,12 +152,21 @@ html {
     height: 50px;
     padding: 0;
   }
+  .image-brand-admin {
+    display: none;
+  }
   .navbar-div {
     padding-left: 1rem;
     padding-right: 1rem;
   }
   .text-brand {
     margin-right: 0.1rem;
+  }
+  .text-brand-admin {
+    display: none;
+  }
+  .text-brand-admin-reduced {
+    display: block;
   }
   .sandwich-button {
     margin-left: 0rem;
