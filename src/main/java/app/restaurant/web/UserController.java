@@ -16,6 +16,7 @@ import javax.validation.Valid;
 public class UserController {
     @GetMapping("/register")
     public String getRegister(Model model) {
+        model.addAttribute("usernameTaken", true);
         if (!model.containsAttribute("userRegisterBindingModel")) {
             model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
         }

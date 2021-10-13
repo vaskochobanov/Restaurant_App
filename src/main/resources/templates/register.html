@@ -57,12 +57,21 @@
 </header>
 <!-- Page Content-->
 <div class="container px-4 px-lg-5">
-    <div
+    <div th:if="${!usernameTaken}"
             class="card text-white bg-secondary my-5 py-4 text-center intro-text"
     >
         <div class="card-body intro-text-content">
             <p class="text-white m-0 intro-text-content-p">
                 Register to our restaurant.
+            </p>
+        </div>
+    </div>
+    <div th:if="${usernameTaken}"
+            class="card text-white bg-secondary my-5 py-4 text-center intro-text"
+    >
+        <div class="card-body intro-text-content">
+            <p class="text-white m-0 intro-text-content-p intro-text-notFound">
+                Username is already taken. Please select another one
             </p>
         </div>
     </div>
