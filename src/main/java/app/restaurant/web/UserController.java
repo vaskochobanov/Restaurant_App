@@ -1,12 +1,15 @@
 package app.restaurant.web;
 
+import app.restaurant.models.bindings.UserLoginBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
 import app.restaurant.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -56,8 +59,32 @@ public class UserController {
     }
 
     @GetMapping("login")
-    public String getLogin(Model model) {
+    public String login(Model model) {
         model.addAttribute("notFound", false);
         return "login";
+    }
+    @PostMapping("/users/login")
+    public String postLoginUser(@Valid UserLoginBindingModel userLoginBindingModel, BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
+                    bindingResult);
+            return "redirect:login";
+        }
+        if (userService.checkUserExistsInDB(userLoginBindingModel.getUsername())) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("notFound", true);
+        }
+        userLoginBindingModel.setPassword(passwordEncoder.encode(userLoginBindingModel.getPassword()));
+        userService.loginUser(userLoginBindingModel);
+        return "redirect:home";
+    }
+    @PostMapping("/users/login-error")
+    public String failedLogin(@ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
+                              RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("notFound", true);
+        redirectAttributes.addFlashAttribute("username", username);
+        return "redirect:login";
     }
 }
