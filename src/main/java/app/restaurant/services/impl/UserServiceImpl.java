@@ -2,6 +2,7 @@ package app.restaurant.services.impl;
 
 import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
+import app.restaurant.models.dtos.UserViewDto;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.repositories.UserRepository;
@@ -15,7 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -77,5 +80,16 @@ public class UserServiceImpl implements UserService {
         userToAdd.setRole(UserRole.valueOf(userAdminRegisterBindingModel.getRole()));
         userRepository.save(userToAdd);
         return false;
+    }
+
+    @Override
+    public List<UserViewDto> getAllUsers() {
+        List<UserViewDto> result = new ArrayList<>();
+        userRepository.findAll().stream().forEach(u -> {
+            UserViewDto current = modelMapper.map(u, UserViewDto.class);
+            current.setRole(u.getRole().name());
+            result.add(current);
+        });
+        return result.stream().sorted(Comparator.comparing(UserViewDto::getRole)).collect(Collectors.toList());
     }
 }

@@ -60,7 +60,8 @@ public class AdminController {
         return "redirect:/home";
     }
     @GetMapping("/edit-user")
-    public String getAdminUserEdit() {
+    public String getAdminUserEdit(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
         return "admin-edit-users";
     }
 }
