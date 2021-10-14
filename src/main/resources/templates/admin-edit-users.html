@@ -63,7 +63,7 @@
 <!-- Page Content-->
 <div class="container px-4 px-lg-5">
     <div
-         class="card text-white bg-secondary my-5 py-4 text-center intro-text"
+            class="card text-white bg-secondary my-5 py-4 text-center intro-text"
     >
         <div class="card-body intro-text-content">
             <p class="text-white m-0 intro-text-content-p">
@@ -84,16 +84,30 @@
         <tr>
             <td>Mark</td>
             <td>Otto</td>
-            <td>@mdo</td>
+            <td>
+                <div class="form-button">
+                    <form method="get" action="/admin/user-edit">
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+                    <form method="get" action="/admin/user-edit" class="form-button-delete">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </td>
         </tr>
         <tr>
             <td>Jacob</td>
             <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
+            <td>
+                <div class="form-button">
+                    <form method="get" action="/admin/user-edit">
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+                    <form method="get" action="/admin/user-edit" class="form-button-delete">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

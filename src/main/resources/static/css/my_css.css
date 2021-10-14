@@ -90,6 +90,12 @@ table tr:last-child td:first-child {
 table tr:last-child td:last-child {
   border-bottom-right-radius: 0.5rem;
 }
+.form-button {
+  display: flex;
+}
+.form-button-delete {
+  margin-left: 0.7rem;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
