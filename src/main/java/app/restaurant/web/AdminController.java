@@ -4,16 +4,15 @@ import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -61,8 +60,9 @@ public class AdminController {
         return "redirect:/home";
     }
     @GetMapping("/edit-user")
-    public String getAdminUserEdit(Model model) {
+    public String getAdminUserEdit(Principal principal, Model model) {
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("currentUser", principal.getName());
         return "admin-edit-users";
     }
     @GetMapping("/user-delete/{id}")
