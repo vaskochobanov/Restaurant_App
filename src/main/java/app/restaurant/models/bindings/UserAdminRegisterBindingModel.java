@@ -3,14 +3,14 @@ package app.restaurant.models.bindings;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class UserRegisterBindingModel {
-
+public class UserAdminRegisterBindingModel {
     private String username;
     private String fullName;
+    private String role;
     private String password;
     private String confirmPassword;
 
-    public UserRegisterBindingModel() {
+    public UserAdminRegisterBindingModel() {
     }
 
     @NotBlank(message = "Username cannot be empty")
@@ -31,6 +31,15 @@ public class UserRegisterBindingModel {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    @NotBlank(message = "You must select role")
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @NotBlank(message = "Password cannot be empty")

@@ -96,7 +96,7 @@
                            aria-describedby="usernameHelpInline" placeholder="Full Name">
                     <small id="fullNameHelpInline" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"
                            class="bg-danger text-light rounded">
-                        Username length must be between 5 and 20 characters.
+                        Name must be between 5 and 20 characters.
                     </small>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                            aria-describedby="passwordHelpInline" placeholder="Password">
                     <small id="passwordHelpInline" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
                            class="bg-danger text-light rounded">
-                        Username length must be between 5 and 20 characters.
+                        Password must be between 5 and 20 characters.
                     </small>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                     <small id="conPassHelpInline" th:if="${#fields.hasErrors('confirmPassword')}"
                            th:errors="*{confirmPassword}"
                            class="bg-danger text-light rounded">
-                        Username length must be between 5 and 20 characters.
+                        Password must be between 5 and 20 characters.
                     </small>
                 </div>
             </div>
