@@ -110,13 +110,15 @@
                     <select name="role" class="form-select select-option" aria-label="Default select example"
                             th:errorclass="bg-danger">
                         <option class="select-option" value="" selected>Open this select menu</option>
-                        <option class="select-option" value="ADMIN">Admin</option>
-                        <option class="select-option" value="WAITER">Waiter</option>
-                        <option class="select-option" value="BARMAN">Barman</option>
-                        <option class="select-option" value="STARTERS">Starters</option>
-                        <option class="select-option" value="CHEF">Chef</option>
-                        <option class="select-option" value="BAKER">Baker</option>
-                        <option class="select-option" value="CUSTOMER">Customer</option>
+                        <option th:each="r : ${roles}" class="select-option" th:value="${r}" th:text="${r}"
+                                th:selected="${r} == *{role}">Admin
+                        </option>
+                        <!--                        <option class="select-option" value="WAITER">Waiter</option>-->
+                        <!--                        <option class="select-option" value="BARMAN">Barman</option>-->
+                        <!--                        <option class="select-option" value="STARTERS">Starters</option>-->
+                        <!--                        <option class="select-option" value="CHEF">Chef</option>-->
+                        <!--                        <option class="select-option" value="BAKER">Baker</option>-->
+                        <!--                        <option class="select-option" value="CUSTOMER">Customer</option>-->
                     </select>
                     <small id="roleSelectHelpInLine" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"
                            class="bg-danger text-light rounded">

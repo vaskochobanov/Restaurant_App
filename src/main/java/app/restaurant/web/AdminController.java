@@ -1,6 +1,7 @@
 package app.restaurant.web;
 
 import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
+import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,6 +29,7 @@ public class AdminController {
 
     @GetMapping("/add-user")
     public String getAdminAddUser(Model model) {
+        model.addAttribute("roles", Arrays.stream(UserRole.values()).map(r -> r.name()).collect(Collectors.toList()));
         if (!model.containsAttribute("userAdminRegisterBindingModel")) {
             model.addAttribute("userAdminRegisterBindingModel", new UserAdminRegisterBindingModel());
             model.addAttribute("usernameTaken", false);
