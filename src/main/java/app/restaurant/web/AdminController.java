@@ -32,6 +32,7 @@ public class AdminController {
         }
         return "admin-add-user";
     }
+
     @PostMapping("/add-user")
     public String postAdminAddUser(@Valid UserAdminRegisterBindingModel userAdminRegisterBindingModel, BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes) {
@@ -54,4 +55,9 @@ public class AdminController {
         }
         return "redirect:/home";
     }
+    @GetMapping("/edit-user")
+    public String getAdminUserEdit() {
+        return "admin-edit-users";
+    }
 }
+

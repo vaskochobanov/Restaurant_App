@@ -25,7 +25,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/users/register", "/users/login").permitAll()
                 .antMatchers("/**").authenticated().and().formLogin().loginProcessingUrl("/users/login")
                 .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/home")
-                .failureForwardUrl("/users/log-error");
+                .failureForwardUrl("/users/log-error").and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .invalidateHttpSession(true).deleteCookies("JSESSIONID");
         http.csrf().disable();
     }
     @Override
