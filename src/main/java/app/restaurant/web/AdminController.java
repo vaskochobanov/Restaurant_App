@@ -1,6 +1,7 @@
 package app.restaurant.web;
 
 import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
+import app.restaurant.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import javax.validation.Valid;
 @RequestMapping("/admin")
 public class AdminController {
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
-    public AdminController(PasswordEncoder passwordEncoder) {
+    public AdminController(PasswordEncoder passwordEncoder, UserService userService) {
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 
     @GetMapping("/add-user")
@@ -41,6 +44,14 @@ public class AdminController {
             return "redirect:add-user";
         }
         userAdminRegisterBindingModel.setPassword(passwordEncoder.encode(userAdminRegisterBindingModel.getPassword()));
-        return null;
+        boolean usernameTaken = userService.adminRegisterUser(userAdminRegisterBindingModel);
+        if (usernameTaken) {
+            redirectAttributes.addFlashAttribute("userAdminRegisterBindingModel", userAdminRegisterBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userAdminRegisterBindingModel",
+                    bindingResult);
+            redirectAttributes.addFlashAttribute("usernameTaken", true);
+            return "redirect:add-user";
+        }
+        return "redirect:/home";
     }
 }

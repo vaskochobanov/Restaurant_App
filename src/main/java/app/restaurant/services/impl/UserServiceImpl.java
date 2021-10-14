@@ -1,5 +1,6 @@
 package app.restaurant.services.impl;
 
+import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
@@ -62,6 +63,18 @@ public class UserServiceImpl implements UserService {
         }
         User userToAdd = modelMapper.map(userRegisterBindingModel, User.class);
         userToAdd.setRole(UserRole.CUSTOMER);
+        userRepository.save(userToAdd);
+        return false;
+    }
+
+    @Override
+    public boolean adminRegisterUser(UserAdminRegisterBindingModel userAdminRegisterBindingModel) {
+        User tryToFind = userRepository.findByUsername(userAdminRegisterBindingModel.getUsername()).orElse(null);
+        if (tryToFind != null) {
+            return true;
+        }
+        User userToAdd = modelMapper.map(userAdminRegisterBindingModel, User.class);
+        userToAdd.setRole(UserRole.valueOf(userAdminRegisterBindingModel.getRole()));
         userRepository.save(userToAdd);
         return false;
     }
