@@ -48,13 +48,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void initUsers() {
-        //Create and store ADMIN user
+        //Create and store some users
         if (userRepository.count() == 0) {
             User admin = new User();
             admin.setUsername("admin");
             admin.setPassword(passwordEncoder.encode("123456"));
             admin.setRole(UserRole.ADMIN);
             userRepository.save(admin);
+            User customer1 = new User();
+            customer1.setUsername("customer1");
+            customer1.setPassword(passwordEncoder.encode("123456"));
+            customer1.setFullName("First Customer");
+            customer1.setRole(UserRole.CUSTOMER);
+            userRepository.save(customer1);
         }
     }
 
@@ -91,5 +97,10 @@ public class UserServiceImpl implements UserService {
             result.add(current);
         });
         return result.stream().sorted(Comparator.comparing(UserViewDto::getRole)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 }

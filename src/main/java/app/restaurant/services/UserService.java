@@ -12,4 +12,5 @@ public interface UserService extends UserDetailsService {
     boolean registerCustomerUser(UserRegisterBindingModel userRegisterBindingModel);
     boolean adminRegisterUser(UserAdminRegisterBindingModel userAdminRegisterBindingModel);
     List<UserViewDto> getAllUsers();
+    void deleteUser(Long id);
 }
