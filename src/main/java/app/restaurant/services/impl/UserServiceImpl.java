@@ -1,5 +1,6 @@
 package app.restaurant.services.impl;
 
+import app.restaurant.models.bindings.UserAdminEditBindingModel;
 import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
 import app.restaurant.models.dtos.UserEditRoleViewDto;
@@ -111,5 +112,12 @@ public class UserServiceImpl implements UserService {
         UserEditRoleViewDto result = modelMapper.map(forEdit, UserEditRoleViewDto.class);
         result.setRole(forEdit.getRole().name());
         return result;
+    }
+
+    @Override
+    public void editUserRole(UserAdminEditBindingModel userAdminEditBindingModel) {
+        User forEdit = userRepository.findById(userAdminEditBindingModel.getId()).orElse(null);
+        forEdit.setRole(UserRole.valueOf(userAdminEditBindingModel.getRole()));
+        userRepository.save(forEdit);
     }
 }

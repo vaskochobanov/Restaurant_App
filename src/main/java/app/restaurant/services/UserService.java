@@ -1,5 +1,6 @@
 package app.restaurant.services;
 
+import app.restaurant.models.bindings.UserAdminEditBindingModel;
 import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
 import app.restaurant.models.dtos.UserEditRoleViewDto;
@@ -15,4 +16,5 @@ public interface UserService extends UserDetailsService {
     List<UserViewDto> getAllUsers();
     void deleteUser(Long id);
     UserEditRoleViewDto getUserById(Long id);
+    void editUserRole(UserAdminEditBindingModel userAdminEditBindingModel);
 }

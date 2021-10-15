@@ -1,5 +1,6 @@
 package app.restaurant.web;
 
+import app.restaurant.models.bindings.UserAdminEditBindingModel;
 import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.services.UserService;
@@ -74,7 +75,21 @@ public class AdminController {
     public String editUser(@PathVariable Long id, Model model) {
         model.addAttribute("roles", Arrays.stream(UserRole.values()).map(r -> r.name()).collect(Collectors.toList()));
         model.addAttribute("userForEdit", userService.getUserById(id));
+        if (!model.containsAttribute("nullError")) {
+        model.addAttribute("nullError", false);
+        }
         return "edit-single-user";
+    }
+    @PostMapping("/user-edit/{id}")
+    public String postEditUser(@PathVariable Long id, UserAdminEditBindingModel userAdminEditBindingModel,
+                               RedirectAttributes redirectAttributes) {
+        if(userAdminEditBindingModel.getRole().isBlank()) {
+            redirectAttributes.addFlashAttribute("nullError", true);
+            return String.format("redirect:/admin/user-edit/%s", id);
+        }
+        userAdminEditBindingModel.setId(id);
+        userService.editUserRole(userAdminEditBindingModel);
+        return "redirect:/admin/edit-user";
     }
 }
 

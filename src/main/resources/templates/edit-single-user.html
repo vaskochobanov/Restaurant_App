@@ -61,7 +61,7 @@
     </nav>
 </header>
 <!-- Page Content-->
-<div class="container px-4 px-lg-5">
+<div th:if="${!nullError}" class="container px-4 px-lg-5">
     <div
             class="card text-white bg-secondary my-5 py-4 text-center intro-text"
     >
@@ -72,9 +72,18 @@
         </div>
     </div>
 </div>
+<div th:if="${nullError}"
+     class="card text-white bg-secondary my-5 py-4 text-center intro-text"
+>
+    <div class="card-body intro-text-content">
+        <p class="text-white m-0 intro-text-content-p intro-text-notFound">
+            Please select role
+        </p>
+    </div>
+</div>
     <!-- Content Row-->
     <div class="form-holder">
-        <form class="register-form" action="/admin/add-user" method="POST">
+        <form class="register-form" th:action="@{/admin/user-edit/{id}(id = ${userForEdit.id})}" th:method="POST">
             <div class="form-group row input-el">
                 <div class="col-sm-10">
                     <select name="role" class="form-select select-option" aria-label="Default select example">
