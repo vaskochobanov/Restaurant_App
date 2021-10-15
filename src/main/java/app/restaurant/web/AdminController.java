@@ -70,5 +70,11 @@ public class AdminController {
         userService.deleteUser(id);
         return "redirect:/admin/edit-user";
     }
+    @GetMapping("/user-edit/{id}")
+    public String editUser(@PathVariable Long id, Model model) {
+        model.addAttribute("roles", Arrays.stream(UserRole.values()).map(r -> r.name()).collect(Collectors.toList()));
+        model.addAttribute("userForEdit", userService.getUserById(id));
+        return "edit-single-user";
+    }
 }
 

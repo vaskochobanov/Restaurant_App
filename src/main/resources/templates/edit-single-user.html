@@ -32,8 +32,8 @@
                         height="60"
                 />
             </a>
-            <a class="navbar-brand text-brand-admin" href="/home">The Restaurant - Edit Users</a>
-            <a class="navbar-brand text-brand-admin-reduced" href="/home">Admin Edit Users</a>
+            <a class="navbar-brand text-brand-admin" href="/home">The Restaurant - Edit User</a>
+            <a class="navbar-brand text-brand-admin-reduced" href="/home">Admin Edit User</a>
             <button
                     class="navbar-toggler sandwich-button"
                     type="button"
@@ -67,51 +67,35 @@
     >
         <div class="card-body intro-text-content">
             <p class="text-white m-0 intro-text-content-p">
-                Edit Users
+                Edit User Role
             </p>
         </div>
     </div>
+</div>
     <!-- Content Row-->
-    <table class="table table-dark table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Username</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="u : ${users}">
-            <td th:text="${u.fullName}">Mark</td>
-            <td th:text="${u.username}">Otto</td>
-            <td>
-                <div class="form-button">
-                    <form th:method="GET" th:action="@{/admin/user-edit/{id}(id = ${u.id})}">
-                        <button type="submit" class="btn btn-warning">Edit</button>
-                    </form>
-                    <form th:method="GET" th:action="@{/admin/user-delete/{id}(id = ${u.id})}"
-                          th:unless="${currentUser.equals(u.username)}" class="form-button-delete">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+    <div class="form-holder">
+        <form class="register-form" action="/admin/add-user" method="POST">
+            <div class="form-group row input-el">
+                <div class="col-sm-10">
+                    <select name="role" class="form-select select-option" aria-label="Default select example">
+                        <option class="select-option" value="" selected>Open this select menu</option>
+                        <option th:each="r : ${roles}" class="select-option" th:value="${r}" th:text="${r}"
+                                th:selected="${r} == ${userForEdit.role}">Admin
+                        </option>
+                        <!--                        <option class="select-option" value="WAITER">Waiter</option>-->
+                        <!--                        <option class="select-option" value="BARMAN">Barman</option>-->
+                        <!--                        <option class="select-option" value="STARTERS">Starters</option>-->
+                        <!--                        <option class="select-option" value="CHEF">Chef</option>-->
+                        <!--                        <option class="select-option" value="BAKER">Baker</option>-->
+                        <!--                        <option class="select-option" value="CUSTOMER">Customer</option>-->
+                    </select>
                 </div>
-            </td>
-        </tr>
-        <!--        <tr>-->
-        <!--            <td>Jacob</td>-->
-        <!--            <td>Thornton</td>-->
-        <!--            <td>-->
-        <!--                <div class="form-button">-->
-        <!--                    <form method="get" action="/admin/user-edit">-->
-        <!--                        <button type="submit" class="btn btn-warning">Edit</button>-->
-        <!--                    </form>-->
-        <!--                    <form method="get" action="/admin/user-edit" class="form-button-delete">-->
-        <!--                        <button type="submit" class="btn btn-danger">Delete</button>-->
-        <!--                    </form>-->
-        <!--                </div>-->
-        <!--            </td>-->
-        <!--        </tr>-->
-        </tbody>
-    </table>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Edit User</button>
+
+
+        </form>
+    </div>
     <!-- Footer-->
     <footer class="py-5 bg-dark footer">
         <div class="container px-4 px-lg-5 footer_container">

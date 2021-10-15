@@ -2,6 +2,7 @@ package app.restaurant.services.impl;
 
 import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
+import app.restaurant.models.dtos.UserEditRoleViewDto;
 import app.restaurant.models.dtos.UserViewDto;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
@@ -102,5 +103,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserEditRoleViewDto getUserById(Long id) {
+        User forEdit = userRepository.findById(id).orElse(null);
+        UserEditRoleViewDto result = modelMapper.map(forEdit, UserEditRoleViewDto.class);
+        result.setRole(forEdit.getRole().name());
+        return result;
     }
 }
