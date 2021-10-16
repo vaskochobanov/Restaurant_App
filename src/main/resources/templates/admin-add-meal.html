@@ -88,7 +88,7 @@
                 <div class="col-sm-10">
                     <select name="type" class="form-select select-option" aria-label="Default select example">
                         <option class="select-option" value="" selected>Open this select menu</option>
-                        <option class="select-option">Admin
+                        <option th:each="t : ${types}" class="select-option" th:value="${t}" th:text="${t}">Admin
                         </option>
                         <!--                        <option class="select-option" value="WAITER">Waiter</option>-->
                         <!--                        <option class="select-option" value="BARMAN">Barman</option>-->
