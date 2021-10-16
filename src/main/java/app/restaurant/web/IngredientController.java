@@ -25,7 +25,6 @@ public class IngredientController {
     public String getAddIngredient(Model model) {
         if (!model.containsAttribute("ingredientAddBindingModel")) {
             model.addAttribute("ingredientAddBindingModel", new IngredientAddBindingModel());
-            model.addAttribute("ingredientExists", false);
         }
         return "admin-add-ingredient";
     }
@@ -36,17 +35,9 @@ public class IngredientController {
             redirectAttributes.addFlashAttribute("ingredientAddBindingModel", ingredientAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.ingredientAddBindingModel",
                     bindingResult);
-            redirectAttributes.addFlashAttribute("ingredientExists", false);
             return "redirect:add";
         }
-        boolean ingredientExists = ingredientService.addIngredient(ingredientAddBindingModel);
-        if (ingredientExists) {
-            redirectAttributes.addFlashAttribute("ingredientAddBindingModel", ingredientAddBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.ingredientAddBindingModel",
-                    bindingResult);
-            redirectAttributes.addFlashAttribute("ingredientExists", true);
-            return "redirect:add";
-        }
+        ingredientService.addIngredient(ingredientAddBindingModel);
         return "redirect:/home";
     }
 }

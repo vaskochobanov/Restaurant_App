@@ -20,15 +20,10 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public boolean addIngredient(IngredientAddBindingModel ingredientAddBindingModel) {
-        Ingredient tryToFind = ingredientRepository.findByName(ingredientAddBindingModel.getName()).orElse(null);
-        if (tryToFind != null) {
-            return true;
-        }
+    public void addIngredient(IngredientAddBindingModel ingredientAddBindingModel) {
         Ingredient toAdd = modelMapper.map(ingredientAddBindingModel, Ingredient.class);
         toAdd.setName(ingredientAddBindingModel.getName().toLowerCase());
         ingredientRepository.save(toAdd);
-        return false;
     }
 
     @Override

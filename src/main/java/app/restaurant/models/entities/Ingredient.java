@@ -35,7 +35,7 @@ public class Ingredient {
         this.imageUrl = imageUrl;
     }
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }

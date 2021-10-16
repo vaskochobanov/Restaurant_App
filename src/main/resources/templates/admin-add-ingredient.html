@@ -62,21 +62,12 @@
 </header>
 <!-- Page Content-->
 <div class="container px-4 px-lg-5">
-    <div th:if="${!ingredientExists}"
+    <div
          class="card text-white bg-secondary my-5 py-4 text-center intro-text"
     >
         <div class="card-body intro-text-content">
             <p class="text-white m-0 intro-text-content-p">
                 Add Ingredient
-            </p>
-        </div>
-    </div>
-    <div th:if="${ingredientExists}"
-         class="card text-white bg-secondary my-5 py-4 text-center intro-text"
-    >
-        <div class="card-body intro-text-content">
-            <p class="text-white m-0 intro-text-content-p intro-text-notFound">
-                Ingredient already exists
             </p>
         </div>
     </div>
