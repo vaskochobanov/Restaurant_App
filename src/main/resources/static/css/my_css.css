@@ -96,6 +96,13 @@ table tr:last-child td:last-child {
 .form-button-delete {
   margin-left: 0.7rem;
 }
+.ingredient-table-row {
+  height: 5rem;
+  overflow: hidden;
+}
+.ingredient-image {
+  height: 100%;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
