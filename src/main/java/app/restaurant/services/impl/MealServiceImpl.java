@@ -35,4 +35,17 @@ public class MealServiceImpl implements MealService {
         mealRepository.save(toAdd);
         return false;
     }
+
+    @Override
+    public void initMeals() {
+        Meal beer = new Meal();
+        beer.setActive(true);
+        beer.setDescription("A 500ml glass of draft beer.");
+        beer.setImageUrl("https://thumbs.dreamstime.com/b/glass-draft-beer-isolated-white-background-171472670.jpg");
+        beer.setIngredients("beer-1");
+        beer.setName("Beer");
+        beer.setPrice(2.49);
+        beer.setType(MealType.DRINK);
+        mealRepository.save(beer);
+    }
 }
