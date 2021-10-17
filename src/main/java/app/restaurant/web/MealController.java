@@ -53,4 +53,9 @@ public class MealController {
         }
         return "redirect:/home";
     }
+    @GetMapping("/edit")
+    public String getEditListMeals(Model model) {
+        model.addAttribute("meals", mealService.getAllMealsSorted());
+        return "admin-edit-meals";
+    }
 }

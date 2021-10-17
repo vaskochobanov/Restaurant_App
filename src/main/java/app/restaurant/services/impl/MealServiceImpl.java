@@ -1,6 +1,7 @@
 package app.restaurant.services.impl;
 
 import app.restaurant.models.bindings.MealAddBindingModel;
+import app.restaurant.models.dtos.MealViewDto;
 import app.restaurant.models.entities.Ingredient;
 import app.restaurant.models.entities.Meal;
 import app.restaurant.models.entities.enums.MealType;
@@ -48,6 +49,21 @@ public class MealServiceImpl implements MealService {
         beer.setPrice(2.49);
         beer.setType(MealType.DRINK);
         mealRepository.save(beer);
+        Meal shopskaSalad = new Meal();
+        shopskaSalad.setActive(false);
+        shopskaSalad.setDescription("A mixture of cucumbers, tomatoes and feta cheese");
+        shopskaSalad.setImageUrl("https://www.wandercooks.com/wp-content/uploads/2019/07/bulgarian-shopska-salad-ft2.jpg");
+        shopskaSalad.setIngredients("cucumbers-0.3,tomatoes-0.2,feta cheese-0.15,olive oil-0.03,salt-0.01");
+        shopskaSalad.setName("Shopska Salad");
+        shopskaSalad.setPrice(8.99);
+        shopskaSalad.setType(MealType.SALAD);
+        mealRepository.save(shopskaSalad);
         }
+    }
+
+    @Override
+    public List<MealViewDto> getAllMealsSorted() {
+        return mealRepository.findAllMealsSorted().stream().map(m -> modelMapper.map(m, MealViewDto.class))
+                .collect(Collectors.toList());
     }
 }

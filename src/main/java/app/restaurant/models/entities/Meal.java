@@ -68,7 +68,7 @@ public class Meal {
         this.description = description;
     }
 
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "image_url", nullable = false, columnDefinition = "TEXT")
     public String getImageUrl() {
         return imageUrl;
     }
