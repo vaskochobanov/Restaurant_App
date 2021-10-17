@@ -109,6 +109,9 @@ table tr:last-child td:last-child {
 .form-label {
   color: white;
 }
+.checked-label {
+  color: white;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
