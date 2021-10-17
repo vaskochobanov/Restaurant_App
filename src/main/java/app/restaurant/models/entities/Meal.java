@@ -17,7 +17,7 @@ public class Meal {
     private String imageUrl;
     private boolean isPromoted;
     private boolean isActive;
-    private List<Ingredient> ingredients;
+    private String ingredients;
 
     public Meal() {
     }
@@ -95,14 +95,12 @@ public class Meal {
         isActive = active;
     }
 
-    @ManyToMany
-    @JoinTable(name = "meals_ingredients", joinColumns = @JoinColumn(name = "meal_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
-    public List<Ingredient> getIngredients() {
+    @Column(name = "ingredients_list", nullable = false, columnDefinition = "TEXT")
+    public String getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
 }
