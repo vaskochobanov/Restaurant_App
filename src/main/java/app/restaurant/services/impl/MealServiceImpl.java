@@ -38,6 +38,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public void initMeals() {
+        if (mealRepository.count() == 0) {
         Meal beer = new Meal();
         beer.setActive(true);
         beer.setDescription("A 500ml glass of draft beer.");
@@ -47,5 +48,6 @@ public class MealServiceImpl implements MealService {
         beer.setPrice(2.49);
         beer.setType(MealType.DRINK);
         mealRepository.save(beer);
+        }
     }
 }

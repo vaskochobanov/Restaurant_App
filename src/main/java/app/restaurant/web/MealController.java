@@ -49,6 +49,7 @@ public class MealController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.mealAddBindingModel",
                     bindingResult);
             redirectAttributes.addFlashAttribute("mealExists", true);
+            return "redirect:add";
         }
         return "redirect:/home";
     }

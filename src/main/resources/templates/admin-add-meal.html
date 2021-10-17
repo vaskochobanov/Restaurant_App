@@ -62,12 +62,21 @@
 </header>
 <!-- Page Content-->
 <div class="container px-4 px-lg-5">
-    <div
-            class="card text-white bg-secondary my-5 py-4 text-center intro-text"
+    <div th:if="${!mealExists}"
+         class="card text-white bg-secondary my-5 py-4 text-center intro-text"
     >
         <div class="card-body intro-text-content">
             <p class="text-white m-0 intro-text-content-p">
                 Add Meal
+            </p>
+        </div>
+    </div>
+    <div th:if="${mealExists}"
+         class="card text-white bg-secondary my-5 py-4 text-center intro-text"
+    >
+        <div class="card-body intro-text-content">
+            <p class="text-white m-0 intro-text-content-p intro-text-notFound">
+                Meal already exists in DB
             </p>
         </div>
     </div>
