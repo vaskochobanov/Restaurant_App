@@ -35,13 +35,13 @@ public class IngredientServiceImpl implements IngredientService {
             Ingredient cucumbers = new Ingredient();
             cucumbers.setBestBefore(LocalDate.of(2021, 11, 11));
             cucumbers.setName("cucumbers");
-            cucumbers.setQuantity(10);
+            cucumbers.setQuantity(10.0);
             cucumbers.setImageUrl("https://cdn.mos.cms.futurecdn.net/EBEXFvqez44hySrWqNs3CZ.jpg");
             ingredientRepository.save(cucumbers);
             Ingredient tomatoes = new Ingredient();
             tomatoes.setBestBefore(LocalDate.of(2021, 11, 11));
-            tomatoes.setName("cucumbers");
-            tomatoes.setQuantity(10);
+            tomatoes.setName("tomatoes");
+            tomatoes.setQuantity(10.0);
             tomatoes.setImageUrl("https://www.vegetamo.it/wp-content/uploads/2018/04/pomodori.jpg");
             ingredientRepository.save(tomatoes);
         }

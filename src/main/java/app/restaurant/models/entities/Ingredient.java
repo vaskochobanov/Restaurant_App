@@ -10,7 +10,7 @@ public class Ingredient {
     private Long id;
     private String imageUrl;
     private String name;
-    private Integer quantity;
+    private Double quantity;
     private LocalDate bestBefore;
 
     public Ingredient() {
@@ -45,11 +45,11 @@ public class Ingredient {
     }
 
     @Column(name = "quantity")
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

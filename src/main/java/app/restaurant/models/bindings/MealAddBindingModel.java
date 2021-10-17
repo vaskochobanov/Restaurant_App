@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 public class MealAddBindingModel {
     private String name;
-    private MealType type;
+    private String type;
     private Double price;
     private String description;
     private String imageUrl;
@@ -30,11 +30,11 @@ public class MealAddBindingModel {
     }
 
     @NotNull(message = "You must select category for the meal")
-    public MealType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(MealType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

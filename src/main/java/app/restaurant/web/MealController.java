@@ -20,6 +20,9 @@ public class MealController {
     @GetMapping("/add")
     public String getAddMeal(Model model) {
         model.addAttribute("types", Arrays.stream(MealType.values()).map(t -> t.name()).collect(Collectors.toList()));
+        if (!model.containsAttribute("mealAddBindingModel")) {
+            model.addAttribute("mealAddBindingModel", new MealAddBindingModel());
+        }
         return "admin-add-meal";
     }
     @PostMapping("/add")
@@ -29,6 +32,7 @@ public class MealController {
             redirectAttributes.addFlashAttribute("mealAddBindingModel", mealAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.mealAddBindingModel",
                     bindingResult);
+            return "redirect:add";
         }
         return "redirect:/home";
     }
