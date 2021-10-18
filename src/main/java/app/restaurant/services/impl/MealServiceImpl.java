@@ -71,4 +71,9 @@ public class MealServiceImpl implements MealService {
     public void deleteMeal(Long id) {
         mealRepository.deleteById(id);
     }
+
+    @Override
+    public MealViewDto getMealById(Long id) {
+        return modelMapper.map(mealRepository.findById(id).orElse(null), MealViewDto.class);
+    }
 }

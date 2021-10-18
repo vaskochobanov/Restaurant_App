@@ -10,4 +10,5 @@ public interface MealService {
     void initMeals();
     List<MealViewDto> getAllMealsSorted();
     void deleteMeal(Long id);
+    MealViewDto getMealById(Long id);
 }

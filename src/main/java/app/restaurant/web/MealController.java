@@ -64,8 +64,9 @@ public class MealController {
         mealService.deleteMeal(id);
         return "redirect:/meals/edit";
     }
-    @GetMapping("/single-edit/{id")
-    public String getSingleMealEdit() {
-        
+    @GetMapping("/single-edit/{id}")
+    public String getSingleMealEdit(@PathVariable Long id, Model model) {
+        model.addAttribute("mealForEdit", mealService.getMealById(id));
+        return "edit-single-meal";
     }
 }
