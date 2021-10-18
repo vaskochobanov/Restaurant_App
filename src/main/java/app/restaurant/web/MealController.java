@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -57,5 +58,14 @@ public class MealController {
     public String getEditListMeals(Model model) {
         model.addAttribute("meals", mealService.getAllMealsSorted());
         return "admin-edit-meals";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteMeal(@PathVariable Long id) {
+        mealService.deleteMeal(id);
+        return "redirect:/meals/edit";
+    }
+    @GetMapping("/single-edit/{id")
+    public String getSingleMealEdit() {
+        
     }
 }

@@ -9,4 +9,5 @@ public interface MealService {
     boolean addMeal(MealAddBindingModel mealAddBindingModel);
     void initMeals();
     List<MealViewDto> getAllMealsSorted();
+    void deleteMeal(Long id);
 }

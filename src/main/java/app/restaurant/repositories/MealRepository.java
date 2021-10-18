@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface MealRepository extends JpaRepository<Meal, Long> {
     Optional<Meal> findByName(String name);
-    @Query("select m from Meal m order by m.active, m.type")
+    @Query("select m from Meal m order by m.active desc, m.type")
     List<Meal> findAllMealsSorted();
 }

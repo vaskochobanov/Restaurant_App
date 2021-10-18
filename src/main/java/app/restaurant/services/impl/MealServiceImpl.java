@@ -66,4 +66,9 @@ public class MealServiceImpl implements MealService {
         return mealRepository.findAllMealsSorted().stream().map(m -> modelMapper.map(m, MealViewDto.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteMeal(Long id) {
+        mealRepository.deleteById(id);
+    }
 }

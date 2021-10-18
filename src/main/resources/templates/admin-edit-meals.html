@@ -90,10 +90,10 @@
             <td th:text="${m.promoted}">Otto</td>
             <td>
                 <div class="form-button">
-                    <form th:method="GET" th:action="@{/meals/meal-edit/{id}(id = ${m.id})}">
+                    <form th:method="GET" th:action="@{/meals/single-edit/{id}(id = ${m.id})}">
                         <button type="submit" class="btn btn-warning">Edit</button>
                     </form>
-                    <form th:method="GET" th:action="@{/meals/meal-delete/{id}(id = ${m.id})}"
+                    <form th:method="GET" th:action="@{/meals/delete/{id}(id = ${m.id})}"
                            class="form-button-delete">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
