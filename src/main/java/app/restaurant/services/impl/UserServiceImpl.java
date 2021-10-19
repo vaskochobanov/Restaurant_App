@@ -5,6 +5,7 @@ import app.restaurant.models.bindings.UserAdminRegisterBindingModel;
 import app.restaurant.models.bindings.UserRegisterBindingModel;
 import app.restaurant.models.dtos.UserEditRoleViewDto;
 import app.restaurant.models.dtos.UserViewDto;
+import app.restaurant.models.dtos.WaiterViewDto;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.repositories.UserRepository;
@@ -63,6 +64,18 @@ public class UserServiceImpl implements UserService {
             customer1.setFullName("First Customer");
             customer1.setRole(UserRole.CUSTOMER);
             userRepository.save(customer1);
+            User waiter1 = new User();
+            waiter1.setUsername("waiter1");
+            waiter1.setPassword(passwordEncoder.encode("123456"));
+            waiter1.setFullName("First Waiter");
+            waiter1.setRole(UserRole.WAITER);
+            userRepository.save(waiter1);
+            User waiter2 = new User();
+            waiter2.setUsername("waiter2");
+            waiter2.setPassword(passwordEncoder.encode("123456"));
+            waiter2.setFullName("Second Waiter");
+            waiter2.setRole(UserRole.WAITER);
+            userRepository.save(waiter2);
         }
     }
 
@@ -119,5 +132,15 @@ public class UserServiceImpl implements UserService {
         User forEdit = userRepository.findById(userAdminEditBindingModel.getId()).orElse(null);
         forEdit.setRole(UserRole.valueOf(userAdminEditBindingModel.getRole()));
         userRepository.save(forEdit);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
+
+    @Override
+    public List<WaiterViewDto> getAllWaiters() {
+        return null;
     }
 }
