@@ -1,6 +1,7 @@
 package app.restaurant.web;
 
 import app.restaurant.models.bindings.MealAddBindingModel;
+import app.restaurant.models.bindings.MealEditBindingModel;
 import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.services.MealService;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,7 @@ public class MealController {
         }
         return "admin-add-meal";
     }
+
     @PostMapping("/add")
     public String postAddMeal(@Valid MealAddBindingModel mealAddBindingModel, BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
@@ -54,19 +56,49 @@ public class MealController {
         }
         return "redirect:/home";
     }
+
     @GetMapping("/edit")
     public String getEditListMeals(Model model) {
         model.addAttribute("meals", mealService.getAllMealsSorted());
         return "admin-edit-meals";
     }
+
     @GetMapping("/delete/{id}")
     public String deleteMeal(@PathVariable Long id) {
         mealService.deleteMeal(id);
         return "redirect:/meals/edit";
     }
+
     @GetMapping("/single-edit/{id}")
     public String getSingleMealEdit(@PathVariable Long id, Model model) {
         model.addAttribute("mealForEdit", mealService.getMealById(id));
+        if (!model.containsAttribute("hasErrors")) {
+            model.addAttribute("hasErrors", false);
+        }
+        if (!model.containsAttribute("priceNotValid")) {
+            model.addAttribute("priceNotValid", false);
+        }
+        if (!model.containsAttribute("ingredientsNotValid")) {
+            model.addAttribute("ingredientsNotValid", false);
+        }
         return "edit-single-meal";
+    }
+
+    @PostMapping("/single-edit/{id}")
+    public String postEditMeal(@PathVariable Long id, MealEditBindingModel mealEditBindingModel,
+                               RedirectAttributes redirectAttributes) {
+        if (mealEditBindingModel.getPrice() > 0 && mealEditBindingModel.getIngredients().length() > 2) {
+            mealEditBindingModel.setId(id);
+            mealService.editMeal(mealEditBindingModel);
+            return "redirect:/meals/edit";
+        }
+        if (mealEditBindingModel.getPrice() <= 0) {
+            redirectAttributes.addFlashAttribute("priceNotValid", true);
+        }
+        if (mealEditBindingModel.getIngredients().length() < 3) {
+            redirectAttributes.addFlashAttribute("ingredientsNotValid", true);
+        }
+        redirectAttributes.addFlashAttribute("hasErrors", true);
+        return String.format("redirect:/meals/single-edit/%s", id);
     }
 }

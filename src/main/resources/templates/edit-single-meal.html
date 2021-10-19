@@ -61,7 +61,7 @@
     </nav>
 </header>
 <!-- Page Content-->
-<div class="container px-4 px-lg-5">
+<div class="container px-4 px-lg-5" th:unless="${hasErrors}">
     <div
             class="card text-white bg-secondary my-5 py-4 text-center intro-text"
     >
@@ -70,6 +70,24 @@
                 Edit User Role
             </p>
         </div>
+    </div>
+</div>
+<div th:if="${priceNotValid}"
+     class="card text-white bg-secondary my-5 py-4 text-center intro-text"
+>
+    <div class="card-body intro-text-content">
+        <p class="text-white m-0 intro-text-content-p intro-text-notFound">
+            Price is not valid
+        </p>
+    </div>
+</div>
+<div th:if="${ingredientsNotValid}"
+     class="card text-white bg-secondary my-5 py-4 text-center intro-text"
+>
+    <div class="card-body intro-text-content">
+        <p class="text-white m-0 intro-text-content-p intro-text-notFound">
+            Ingredients format is not valid
+        </p>
     </div>
 </div>
 <!-- Content Row-->

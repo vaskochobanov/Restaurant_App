@@ -1,6 +1,7 @@
 package app.restaurant.services.impl;
 
 import app.restaurant.models.bindings.MealAddBindingModel;
+import app.restaurant.models.bindings.MealEditBindingModel;
 import app.restaurant.models.dtos.MealViewDto;
 import app.restaurant.models.entities.Ingredient;
 import app.restaurant.models.entities.Meal;
@@ -75,5 +76,15 @@ public class MealServiceImpl implements MealService {
     @Override
     public MealViewDto getMealById(Long id) {
         return modelMapper.map(mealRepository.findById(id).orElse(null), MealViewDto.class);
+    }
+
+    @Override
+    public void editMeal(MealEditBindingModel mealEditBindingModel) {
+        Meal toEdit = mealRepository.findById(mealEditBindingModel.getId()).orElse(null);
+        toEdit.setPrice(mealEditBindingModel.getPrice());
+        toEdit.setIngredients(mealEditBindingModel.getIngredients());
+        toEdit.setActive(mealEditBindingModel.isActive());
+        toEdit.setPromoted(mealEditBindingModel.isPromoted());
+        mealRepository.save(toEdit);
     }
 }
