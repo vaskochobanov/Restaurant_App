@@ -59,6 +59,16 @@ public class MealServiceImpl implements MealService {
         shopskaSalad.setPrice(8.99);
         shopskaSalad.setType(MealType.SALAD);
         mealRepository.save(shopskaSalad);
+        Meal pizza = new Meal();
+        pizza.setActive(true);
+        pizza.setDescription("A classic italian pizza.");
+        pizza.setImageUrl("https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg");
+        pizza.setIngredients("flour-0.1,yeast-0.005,tomato sauce-0.1,ham-0.2,mozzarella-0.1");
+        pizza.setName("Pizza");
+        pizza.setPrice(10.99);
+        pizza.setPromoted(true);
+        pizza.setType(MealType.MAIN_DISH);
+        mealRepository.save(pizza);
         }
     }
 

@@ -1,6 +1,7 @@
 package app.restaurant.services.impl;
 
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
+import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.dtos.OrderTypeViewDto;
 import app.restaurant.models.entities.OrderType;
 import app.restaurant.repositories.OrderTypeRepository;
@@ -45,5 +46,18 @@ public class OrderTypeServiceImpl implements OrderTypeService {
     @Override
     public void deleteTable(Long id) {
         orderTypeRepository.deleteById(id);
+    }
+
+    @Override
+    public OrderTypeViewDto getTableById(Long id) {
+        return orderTypeRepository.findById(id).map(t -> modelMapper.map(t, OrderTypeViewDto.class)).orElse(null);
+    }
+
+    @Override
+    public void editTable(OrderTypeEditBindingModel orderTypeEditBindingModel) {
+        OrderType toEdit = orderTypeRepository.findById(orderTypeEditBindingModel.getId()).orElse(null);
+        toEdit.setActive(orderTypeEditBindingModel.isActive());
+        toEdit.setWaiter(userService.getUserByUsername(orderTypeEditBindingModel.getWaiterName()));
+        orderTypeRepository.save(toEdit);
     }
 }

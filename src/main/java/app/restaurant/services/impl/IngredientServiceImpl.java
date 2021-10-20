@@ -62,6 +62,30 @@ public class IngredientServiceImpl implements IngredientService {
             salt.setName("salt");
             salt.setQuantity(5.0);
             ingredientRepository.save(salt);
+            Ingredient flour = new Ingredient();
+            flour.setBestBefore(LocalDate.of(2022, 10, 20));
+            flour.setImageUrl("https://www.e-fresco.io/pub/media/catalog/product/u/2/u21d2f12fc6a44ebca4ed87518c148325h.jpg");
+            flour.setName("flour");
+            flour.setQuantity(10.0);
+            ingredientRepository.save(flour);
+            Ingredient yeast = new Ingredient();
+            yeast.setBestBefore(LocalDate.of(2024, 10, 20));
+            yeast.setImageUrl("https://www.thespruceeats.com/thmb/3NSkXqEuwMbGDj8Qcx-WscC0Ogo=/1837x1378/smart/filters:no_upscale()/Freshanddriedyeast-GettyImages-126372759-59286bbd3df78cbe7ea02b40.jpg");
+            yeast.setName("yeast");
+            yeast.setQuantity(0.5);
+            ingredientRepository.save(yeast);
+            Ingredient ham = new Ingredient();
+            ham.setBestBefore(LocalDate.of(2021, 12, 20));
+            ham.setImageUrl("https://imagesvc.meredithcorp.io/v3/mm/image?q=85&c=sc&poi=face&w=2000&h=1000&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F19%2F2018%2F02%2F13%2Ffield-image-ham-slices-hero-2000.jpg");
+            ham.setName("ham");
+            ham.setQuantity(10.0);
+            ingredientRepository.save(ham);
+            Ingredient mozzarella = new Ingredient();
+            mozzarella.setBestBefore(LocalDate.of(2022, 3, 20));
+            mozzarella.setImageUrl("https://www.alphafoodie.com/wp-content/uploads/2020/08/Mozzarella-cheese.jpeg");
+            mozzarella.setName("mozzarella");
+            mozzarella.setQuantity(10.0);
+            ingredientRepository.save(mozzarella);
         }
     }
 

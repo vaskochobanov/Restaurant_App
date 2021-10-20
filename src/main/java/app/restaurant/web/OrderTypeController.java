@@ -1,6 +1,7 @@
 package app.restaurant.web;
 
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
+import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.services.OrderTypeService;
 import app.restaurant.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -65,7 +66,23 @@ public class OrderTypeController {
         return "redirect:/tables/edit";
     }
     @GetMapping("/single-edit/{id}")
-    public String getEditSingleTable(@PathVariable Long id) {
-        return null;
+    public String getEditSingleTable(@PathVariable Long id, Model model) {
+        model.addAttribute("tableToEdit", orderTypeService.getTableById(id));
+        model.addAttribute("waiters", userService.getAllWaiters());
+        if (!model.containsAttribute("hasErrors")) {
+            model.addAttribute("hasErrors", false);
+        }
+        return "edit-single-table";
+    }
+    @PostMapping("/single-edit/{id}")
+    public String postEditSingleTable(@PathVariable Long id, OrderTypeEditBindingModel orderTypeEditBindingModel,
+                                      RedirectAttributes redirectAttributes) {
+        if (orderTypeEditBindingModel.getWaiterName().isBlank()) {
+            redirectAttributes.addFlashAttribute("hasErrors", true);
+            return String.format("redirect:/tables/single-edit/%s", id);
+        }
+        orderTypeEditBindingModel.setId(id);
+        orderTypeService.editTable(orderTypeEditBindingModel);
+        return "redirect:/tables/edit";
     }
 }
