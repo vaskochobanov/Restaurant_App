@@ -2,6 +2,7 @@ package app.restaurant.web;
 
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.services.OrderTypeService;
+import app.restaurant.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,13 +17,16 @@ import javax.validation.Valid;
 @RequestMapping("/tables")
 public class OrderTypeController {
     private final OrderTypeService orderTypeService;
+    private final UserService userService;
 
-    public OrderTypeController(OrderTypeService orderTypeService) {
+    public OrderTypeController(OrderTypeService orderTypeService, UserService userService) {
         this.orderTypeService = orderTypeService;
+        this.userService = userService;
     }
 
     @GetMapping("/add")
     public String getAddTable(Model model) {
+        model.addAttribute("waiters", userService.getAllWaiters());
         if (!model.containsAttribute("orderTypeAddBindingModel")) {
             model.addAttribute("orderTypeAddBindingModel", new OrderTypeAddBindingModel());
             model.addAttribute("orderTypeExists", false);

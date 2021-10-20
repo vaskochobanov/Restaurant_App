@@ -141,6 +141,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<WaiterViewDto> getAllWaiters() {
-        return null;
+        return userRepository.findAllWaiters().stream().map(u -> modelMapper.map(u, WaiterViewDto.class))
+                .collect(Collectors.toList());
     }
 }
