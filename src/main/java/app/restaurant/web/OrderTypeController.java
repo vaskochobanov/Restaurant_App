@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -57,5 +58,14 @@ public class OrderTypeController {
     public String getEditTables(Model model) {
         model.addAttribute("tables", orderTypeService.getAllTables());
         return "admin-edit-tables";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteTable(@PathVariable Long id) {
+        orderTypeService.deleteTable(id);
+        return "redirect:/tables/edit";
+    }
+    @GetMapping("/single-edit/{id}")
+    public String getEditSingleTable(@PathVariable Long id) {
+        return null;
     }
 }

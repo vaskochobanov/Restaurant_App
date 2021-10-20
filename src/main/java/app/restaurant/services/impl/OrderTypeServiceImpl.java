@@ -41,4 +41,9 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         return orderTypeRepository.findAllTablesSortedByName().stream().map(t -> modelMapper.map(t, OrderTypeViewDto.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteTable(Long id) {
+        orderTypeRepository.deleteById(id);
+    }
 }

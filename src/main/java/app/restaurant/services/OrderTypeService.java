@@ -8,4 +8,5 @@ import java.util.List;
 public interface OrderTypeService {
     boolean addOrderType(OrderTypeAddBindingModel orderTypeAddBindingModel);
     List<OrderTypeViewDto> getAllTables();
+    void deleteTable(Long id);
 }
