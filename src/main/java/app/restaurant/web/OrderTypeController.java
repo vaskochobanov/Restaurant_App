@@ -53,4 +53,9 @@ public class OrderTypeController {
         }
         return "redirect:/home";
     }
+    @GetMapping("/edit")
+    public String getEditTables(Model model) {
+        model.addAttribute("tables", orderTypeService.getAllTables());
+        return "admin-edit-tables";
+    }
 }

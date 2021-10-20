@@ -32,8 +32,8 @@
                         height="60"
                 />
             </a>
-            <a class="navbar-brand text-brand-admin" href="/home">The Restaurant - Edit Meals</a>
-            <a class="navbar-brand text-brand-admin-reduced" href="/home">Admin Edit Meals</a>
+            <a class="navbar-brand text-brand-admin" href="/home">The Restaurant - Edit Tables</a>
+            <a class="navbar-brand text-brand-admin-reduced" href="/home">Admin Edit Tables</a>
             <button
                     class="navbar-toggler sandwich-button"
                     type="button"
@@ -67,7 +67,7 @@
     >
         <div class="card-body intro-text-content">
             <p class="text-white m-0 intro-text-content-p">
-                Edit Meals
+                Edit Tables
             </p>
         </div>
     </div>
@@ -76,27 +76,24 @@
         <thead>
         <tr>
             <th scope="col">Name</th>
-            <th scope="col">Price</th>
             <th scope="col">Active</th>
-            <th scope="col">Promoted</th>
+            <th scope="col">Waiter</th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="m : ${meals}">
-            <td th:text="${m.name}">Mark</td>
-            <td th:text="${m.price}">Otto</td>
-            <td th:text="${m.active}" th:if="${m.active}" class="table-cell-color-green">Otto</td>
-            <td th:text="${m.active}" th:if="${!m.active}" class="table-cell-color-red">Otto</td>
-            <td th:text="${m.promoted}" th:if="${m.promoted}" class="table-cell-color-green">Otto</td>
-            <td th:text="${m.promoted}" th:if="${!m.promoted}" class="table-cell-color-red">Otto</td>
+        <tr th:each="t : ${tables}">
+            <td th:text="${t.name}">Mark</td>
+            <td th:text="${t.active}" th:if="${t.active}" class="table-cell-color-green">Otto</td>
+            <td th:text="${t.active}" th:if="${!t.active}" class="table-cell-color-red">Otto</td>
+            <td th:text="${t.waiter.fullName}">Mark</td>
             <td>
                 <div class="form-button">
-                    <form th:method="GET" th:action="@{/meals/single-edit/{id}(id = ${m.id})}">
+                    <form th:method="GET" th:action="@{/tables/single-edit/{id}(id = ${t.id})}">
                         <button type="submit" class="btn btn-warning">Edit</button>
                     </form>
-                    <form th:method="GET" th:action="@{/meals/delete/{id}(id = ${m.id})}"
-                           class="form-button-delete">
+                    <form th:method="GET" th:action="@{/tables/delete/{id}(id = ${t.id})}"
+                          class="form-button-delete">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>

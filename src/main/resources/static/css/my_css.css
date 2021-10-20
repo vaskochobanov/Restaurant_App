@@ -112,6 +112,12 @@ table tr:last-child td:last-child {
 .checked-label {
   color: white;
 }
+.table-cell-color-green {
+  color: green;
+}
+.table-cell-color-red {
+  color: coral;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
