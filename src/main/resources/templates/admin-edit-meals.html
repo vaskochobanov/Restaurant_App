@@ -73,7 +73,7 @@
     </div>
     <div class="input-group input-group-lg filter-field">
         <span class="input-group-text" id="inputGroup-sizing-lg">Filter Meals</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        <input id=filterField type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
     </div>
     <!-- Content Row-->
     <table class="table table-dark table-striped">
@@ -86,8 +86,8 @@
             <th scope="col"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="m : ${meals}">
+        <tbody id="tableBody">
+        <!-- <tr th:each="m : ${meals}">
             <td th:text="${m.name}">Mark</td>
             <td th:text="${m.price}">Otto</td>
             <td th:text="${m.active}" th:if="${m.active}" class="table-cell-color-green">Otto</td>
@@ -105,21 +105,7 @@
                     </form>
                 </div>
             </td>
-        </tr>
-        <!--        <tr>-->
-        <!--            <td>Jacob</td>-->
-        <!--            <td>Thornton</td>-->
-        <!--            <td>-->
-        <!--                <div class="form-button">-->
-        <!--                    <form method="get" action="/admin/user-edit">-->
-        <!--                        <button type="submit" class="btn btn-warning">Edit</button>-->
-        <!--                    </form>-->
-        <!--                    <form method="get" action="/admin/user-edit" class="form-button-delete">-->
-        <!--                        <button type="submit" class="btn btn-danger">Delete</button>-->
-        <!--                    </form>-->
-        <!--                </div>-->
-        <!--            </td>-->
-        <!--        </tr>-->
+        </tr> -->
         </tbody>
     </table>
     <!-- Footer-->
@@ -134,5 +120,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="/js/scripts.js"></script>
+    <script src="/js/filter-meals.js"></script>
 </body>
 </html>
