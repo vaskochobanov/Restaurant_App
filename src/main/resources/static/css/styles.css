@@ -7278,7 +7278,7 @@ textarea.form-control-lg {
 
 .my-5 {
   margin-top: 3rem;
-  margin-bottom: 3rem !important;
+  margin-bottom: 3rem;
 }
 
 .my-auto {
@@ -7443,8 +7443,8 @@ textarea.form-control-lg {
 }
 
 .px-4 {
-  padding-right: 1.5rem !important;
-  padding-left: 1.5rem !important;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 .px-5 {

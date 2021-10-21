@@ -31,6 +31,7 @@ html {
 .intro-text {
   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity));
   margin-top: 6rem;
+  margin-bottom: 0.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -43,6 +44,9 @@ html {
 }
 .intro-text-content-p {
   font-size: 1.5rem;
+}
+.filter-field {
+  margin-bottom: 1rem;
 }
 .login-text {
   color: coral;
@@ -150,6 +154,11 @@ table tr:last-child td:last-child {
   .card-wrapper {
     padding-bottom: 3.5rem;
   }
+  .main-content {
+    padding-bottom: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   .form-holder {
     width: 100%;
     margin-left: auto;
@@ -160,6 +169,13 @@ table tr:last-child td:last-child {
   }
   .register-form {
     padding-bottom: 4.5rem;
+  }
+  .form-button {
+    display: grid;
+  }
+  .form-button-delete {
+    margin-left: 0rem;
+    padding-top: 0.5rem;
   }
 }
 @media (max-width: 400px) {
@@ -194,6 +210,11 @@ table tr:last-child td:last-child {
   .card-wrapper {
     padding-bottom: 3.5rem;
   }
+  .main-content {
+    padding-bottom: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   .form-holder {
     width: 100%;
     margin-left: auto;
@@ -204,6 +225,13 @@ table tr:last-child td:last-child {
   }
   .register-form {
     padding-bottom: 4.5rem;
+  }
+  .form-button {
+    display: grid;
+  }
+  .form-button-delete {
+    margin-left: 0rem;
+    padding-top: 0.5rem;
   }
 }
 @media (max-width: 450px) {
