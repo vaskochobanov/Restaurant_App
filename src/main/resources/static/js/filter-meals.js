@@ -74,4 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       createRow(m);
       });
     });
+    window.addEventListener("pageshow", (event) => {
+      filterField.value = "";
+    });
 });
