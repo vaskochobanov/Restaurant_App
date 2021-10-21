@@ -71,21 +71,36 @@
             </p>
         </div>
     </div>
+    <div class="input-group input-group-lg filter-field">
+        <span class="input-group-text filter-label" id="inputGroup-sizing-lg">Filter Ingredients</span>
+        <input id=filterField type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-lg">
+    </div>
     <!-- Content Row-->
     <table class="table table-dark table-striped">
         <thead>
         <tr>
+            <th scope="col"></th>
             <th scope="col">Name</th>
             <th scope="col">Quantity</th>
             <th scope="col">BestBefore</th>
             <th scope="col"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="i : ${ingredients}" th:object="${i}">
-            <td><div class="ingredient-table-row"><img class="ingredient-image" th:src="*{imageUrl}"></div></td>
-            <td><div class="ingredient-table-row" th:text="*{name}"></div></td>
-            <td><div class="ingredient-table-row" th:text="*{bestBefore}"></div></td>
+        <tbody id="tableBody">
+        <!-- <tr th:each="i : ${ingredients}" th:object="${i}">
+            <td>
+                <div class="ingredient-table-row"><img class="ingredient-image" th:src="*{imageUrl}"></div>
+            </td>
+            <td>
+                <div class="ingredient-table-row" th:text="*{name}"></div>
+            </td>
+            <td>
+                <div class="ingredient-table-row" th:text="*{quantity}"></div>
+            </td>
+            <td>
+                <div class="ingredient-table-row" th:text="*{bestBefore}"></div>
+            </td>
             <td>
                 <div class="form-button">
                     <form th:method="GET" th:action="@{/ingredients/delete/{id}(id = ${i.id})}"
@@ -94,21 +109,7 @@
                     </form>
                 </div>
             </td>
-        </tr>
-        <!--        <tr>-->
-        <!--            <td>Jacob</td>-->
-        <!--            <td>Thornton</td>-->
-        <!--            <td>-->
-        <!--                <div class="form-button">-->
-        <!--                    <form method="get" action="/admin/user-edit">-->
-        <!--                        <button type="submit" class="btn btn-warning">Edit</button>-->
-        <!--                    </form>-->
-        <!--                    <form method="get" action="/admin/user-edit" class="form-button-delete">-->
-        <!--                        <button type="submit" class="btn btn-danger">Delete</button>-->
-        <!--                    </form>-->
-        <!--                </div>-->
-        <!--            </td>-->
-        <!--        </tr>-->
+        </tr> -->
         </tbody>
     </table>
     <!-- Footer-->
@@ -123,5 +124,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="/js/scripts.js"></script>
+    <script src="/js/filter-ingredients.js"></script>
 </body>
 </html>
