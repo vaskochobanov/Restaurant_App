@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let strigifiedResponce = JSON.stringify(data);
       let mealsArr = JSON.parse(strigifiedResponce);
       let filteredArr = [...mealsArr];
-      filterField.addEventListener("change", (event) => {
+      filterField.addEventListener("input", (event) => {
           tableBody.innerHTML = "";
         filteredArr = mealsArr.filter((m) =>
           m.name.includes(event.target.value)
