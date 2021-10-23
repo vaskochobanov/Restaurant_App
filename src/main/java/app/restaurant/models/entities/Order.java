@@ -9,7 +9,7 @@ public class Order {
     private Long id;
     private boolean isOpen;
     private OrderType orderType;
-    private List<Meal> mealList;
+    private List<MealPreparation> mealList;
 
     public Order() {
     }
@@ -46,11 +46,11 @@ public class Order {
     @ManyToMany
     @JoinTable(name = "orders_meals", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "meal_id", referencedColumnName = "id"))
-    public List<Meal> getMealList() {
+    public List<MealPreparation> getMealList() {
         return mealList;
     }
 
-    public void setMealList(List<Meal> mealList) {
+    public void setMealList(List<MealPreparation> mealList) {
         this.mealList = mealList;
     }
 }

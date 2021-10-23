@@ -33,7 +33,8 @@ public class OrderServiceImpl implements OrderService {
         meals.add(mealService.getMealByName("Orange Juice"));
         meals.add(mealService.getMealByName("Coca Cola"));
         meals.add(mealService.getMealByName("Beer"));
-        onlyDrinks.setMealList(meals);
+        //onlyDrinks.setMealList(meals);
+        //todo
         orderRepository.save(onlyDrinks);
     }
 }
