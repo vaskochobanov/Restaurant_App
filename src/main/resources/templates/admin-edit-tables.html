@@ -71,6 +71,10 @@
             </p>
         </div>
     </div>
+    <div class="input-group input-group-lg filter-field">
+        <span class="input-group-text filter-label" id="inputGroup-sizing-lg">Filter Users</span>
+        <input id=filterField type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+    </div>
     <!-- Content Row-->
     <table class="table table-dark table-striped">
         <thead>
@@ -81,8 +85,8 @@
             <th scope="col"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="t : ${tables}">
+        <tbody id="tableBody">
+        <!-- <tr th:each="t : ${tables}">
             <td th:text="${t.name}">Mark</td>
             <td th:text="${t.active}" th:if="${t.active}" class="table-cell-color-green">Otto</td>
             <td th:text="${t.active}" th:if="${!t.active}" class="table-cell-color-red">Otto</td>
@@ -98,7 +102,7 @@
                     </form>
                 </div>
             </td>
-        </tr>
+        </tr> -->
         <!--        <tr>-->
         <!--            <td>Jacob</td>-->
         <!--            <td>Thornton</td>-->
@@ -127,5 +131,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="/js/scripts.js"></script>
+    <script src="/js/filter-tables.js"></script>
 </body>
 </html>
