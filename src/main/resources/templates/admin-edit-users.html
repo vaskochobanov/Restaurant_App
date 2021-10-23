@@ -84,8 +84,8 @@
             <th scope="col"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="u : ${users}">
+        <tbody id="tableBody">
+        <!-- <tr th:each="u : ${users}">
             <td th:text="${u.fullName}">Mark</td>
             <td th:text="${u.username}">Otto</td>
             <td>
@@ -99,7 +99,7 @@
                     </form>
                 </div>
             </td>
-        </tr>
+        </tr> -->
         <!--        <tr>-->
         <!--            <td>Jacob</td>-->
         <!--            <td>Thornton</td>-->
@@ -128,5 +128,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="/js/scripts.js"></script>
+    <script src="/js/filter-users.js"></script>
 </body>
 </html>

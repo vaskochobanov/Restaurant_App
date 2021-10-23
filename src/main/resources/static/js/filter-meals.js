@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
       filterField.addEventListener("input", (event) => {
           tableBody.innerHTML = "";
         filteredArr = mealsArr.filter((m) =>
-          m.name.toLowerCase().includes(event.target.value)
+          m.name.toLowerCase().includes(event.target.value.toLowerCase())
         );
         filteredArr.forEach(m => createRow(m));
     });
