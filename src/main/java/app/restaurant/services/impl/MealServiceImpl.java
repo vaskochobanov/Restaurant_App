@@ -69,6 +69,26 @@ public class MealServiceImpl implements MealService {
         pizza.setPromoted(true);
         pizza.setType(MealType.MAIN_DISH);
         mealRepository.save(pizza);
+        Meal orangeJuice = new Meal();
+        orangeJuice.setActive(true);
+        orangeJuice.setDescription("A glass of freshly squeezed orange juice.");
+        orangeJuice.setImageUrl("https://greenletes.com/wp-content/uploads/2018/05/orange-juice-1024x1024.png");
+        orangeJuice.setIngredients("oranges-0.5");
+        orangeJuice.setName("Orange Juice");
+        orangeJuice.setPrice(4.99);
+        orangeJuice.setPromoted(false);
+        orangeJuice.setType(MealType.DRINK);
+        mealRepository.save(orangeJuice);
+        Meal cola = new Meal();
+        cola.setActive(true);
+        cola.setDescription("A can of classic Coca Cola");
+        cola.setImageUrl("https://cdncloudcart.com/16398/products/images/39404/gazirana-napitka-coca-cola-ken-330-ml-image_5ea2cc6235fb6_800x800.png?1587731937");
+        cola.setIngredients("cola-0.3");
+        cola.setName("Coca Cola");
+        cola.setPrice(1.50);
+        cola.setPromoted(false);
+        cola.setType(MealType.DRINK);
+        mealRepository.save(cola);
         }
     }
 

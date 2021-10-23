@@ -86,6 +86,23 @@ public class IngredientServiceImpl implements IngredientService {
             mozzarella.setName("mozzarella");
             mozzarella.setQuantity(10.0);
             ingredientRepository.save(mozzarella);
+            Ingredient beer = new Ingredient();
+            beer.setBestBefore(LocalDate.of(2022, 10, 23));
+            beer.setImageUrl("https://thumbs.dreamstime.com/b/glass-draft-beer-isolated-white-background-171472670.jpg");
+            beer.setName("Beer");
+            beer.setQuantity(200.0);
+            ingredientRepository.save(beer);
+            Ingredient oranges = new Ingredient();
+            oranges.setBestBefore(LocalDate.of(2022, 10, 23));
+            oranges.setImageUrl("https://produits.bienmanger.com/33285-0w470h470_Organic_Fresh_Oranges_From_Italy_New_Hall.jpg");
+            oranges.setName("Oranges");
+            oranges.setQuantity(100.0);
+            Ingredient cola = new Ingredient();
+            cola.setBestBefore(LocalDate.of(2023, 10, 23));
+            cola.setImageUrl("https://cdncloudcart.com/16398/products/images/39404/gazirana-napitka-coca-cola-ken-330-ml-image_5ea2cc6235fb6_800x800.png?1587731937");
+            cola.setName("Coca Cola");
+            cola.setQuantity(100.0);
+            ingredientRepository.save(cola);
         }
     }
 
