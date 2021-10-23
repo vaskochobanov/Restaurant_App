@@ -60,4 +60,25 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         toEdit.setWaiter(userService.getUserByUsername(orderTypeEditBindingModel.getWaiterName()));
         orderTypeRepository.save(toEdit);
     }
+
+    @Override
+    public OrderType getTableByName(String name) {
+        return orderTypeRepository.findByName(name).orElse(null);
+    }
+
+    @Override
+    public void initTables() {
+        OrderType online = new OrderType();
+        online.setActive(true);
+        online.setName("online");
+        orderTypeRepository.save(online);
+        OrderType t1 = new OrderType();
+        t1.setActive(true);
+        t1.setName("t1");
+        orderTypeRepository.save(t1);
+        OrderType t2 = new OrderType();
+        t2.setActive(true);
+        t2.setName("t2");
+        orderTypeRepository.save(t2);
+    }
 }

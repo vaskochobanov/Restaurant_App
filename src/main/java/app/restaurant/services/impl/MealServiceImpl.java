@@ -117,4 +117,9 @@ public class MealServiceImpl implements MealService {
         toEdit.setPromoted(mealEditBindingModel.isPromoted());
         mealRepository.save(toEdit);
     }
+
+    @Override
+    public Meal getMealByName(String name) {
+        return mealRepository.findByName(name).orElse(null);
+    }
 }
