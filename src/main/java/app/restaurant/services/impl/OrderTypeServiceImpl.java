@@ -68,6 +68,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
     @Override
     public void initTables() {
+        if (orderTypeRepository.count() == 0) {
         OrderType online = new OrderType();
         online.setActive(true);
         online.setName("online");
@@ -80,5 +81,6 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         t2.setActive(true);
         t2.setName("t2");
         orderTypeRepository.save(t2);
+        }
     }
 }

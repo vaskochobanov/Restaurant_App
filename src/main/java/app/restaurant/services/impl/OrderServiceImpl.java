@@ -1,6 +1,7 @@
 package app.restaurant.services.impl;
 
 import app.restaurant.models.entities.Meal;
+import app.restaurant.models.entities.MealPreparation;
 import app.restaurant.models.entities.Order;
 import app.restaurant.repositories.OrderRepository;
 import app.restaurant.services.MealService;
@@ -25,16 +26,31 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void initOrders() {
+        if (orderRepository.count() == 0) {
         Order onlyDrinks = new Order();
         onlyDrinks.setOpen(true);
         onlyDrinks.setOrderType(orderTypeService.getTableByName("t1"));
-        List<Meal> meals = new ArrayList<>();
-        meals.add(mealService.getMealByName("Beer"));
-        meals.add(mealService.getMealByName("Orange Juice"));
-        meals.add(mealService.getMealByName("Coca Cola"));
-        meals.add(mealService.getMealByName("Beer"));
-        //onlyDrinks.setMealList(meals);
-        //todo
+        List<MealPreparation> mealsList = new ArrayList<>();
+        MealPreparation beer = new MealPreparation();
+        beer.setCount(2);
+        beer.setPrepared(false);
+        beer.setMeal(mealService.getMealByName("Beer"));
+        beer.setNotEnoughIngredients(false);
+        mealsList.add(beer);
+        MealPreparation orangeJuice = new MealPreparation();
+        orangeJuice.setCount(1);
+        orangeJuice.setPrepared(false);
+        orangeJuice.setMeal(mealService.getMealByName("Orange Juice"));
+        orangeJuice.setNotEnoughIngredients(false);
+        mealsList.add(orangeJuice);
+        MealPreparation cola = new MealPreparation();
+        cola.setCount(1);
+        cola.setPrepared(false);
+        cola.setMeal(mealService.getMealByName("Coca Cola"));
+        cola.setNotEnoughIngredients(false);
+        mealsList.add(cola);
+        onlyDrinks.setMealList(mealsList);
         orderRepository.save(onlyDrinks);
+        }
     }
 }

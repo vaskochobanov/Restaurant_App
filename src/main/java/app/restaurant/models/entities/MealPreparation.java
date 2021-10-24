@@ -9,6 +9,7 @@ public class MealPreparation {
     private Meal meal;
     private Integer count;
     private boolean isPrepared;
+    private boolean notEnoughIngredients;
 
     public MealPreparation() {
     }
@@ -49,5 +50,14 @@ public class MealPreparation {
 
     public void setPrepared(boolean prepared) {
         isPrepared = prepared;
+    }
+
+    @Column(name = "not_enough_ingredients", nullable = false)
+    public boolean isNotEnoughIngredients() {
+        return notEnoughIngredients;
+    }
+
+    public void setNotEnoughIngredients(boolean notEnoughIngredients) {
+        this.notEnoughIngredients = notEnoughIngredients;
     }
 }
