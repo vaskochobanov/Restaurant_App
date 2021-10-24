@@ -6,7 +6,7 @@ public class OrderTypeViewDto {
     private Long id;
     private String name;
     private boolean isActive;
-    private User waiter;
+    private UserViewDto waiter;
 
     public OrderTypeViewDto() {
     }
@@ -35,11 +35,11 @@ public class OrderTypeViewDto {
         isActive = active;
     }
 
-    public User getWaiter() {
+    public UserViewDto getWaiter() {
         return waiter;
     }
 
-    public void setWaiter(User waiter) {
+    public void setWaiter(UserViewDto waiter) {
         this.waiter = waiter;
     }
 }

@@ -80,6 +80,9 @@ html {
 .select-option {
   color: #636c72;
 }
+.main-content {
+  padding-bottom: 3rem;
+}
 .table {
   font-size: 1.2rem;
 }
