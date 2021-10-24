@@ -83,6 +83,9 @@ html {
 .main-content {
   padding-bottom: 3rem;
 }
+.barman-main-content {
+  margin-top: 5rem;
+}
 .table {
   font-size: 1.2rem;
 }
