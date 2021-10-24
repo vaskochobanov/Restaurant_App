@@ -10,6 +10,7 @@ public class MealPreparation {
     private Integer count;
     private boolean isPrepared;
     private boolean notEnoughIngredients;
+    private Order order;
 
     public MealPreparation() {
     }
@@ -24,7 +25,7 @@ public class MealPreparation {
         this.id = id;
     }
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "meal_id", referencedColumnName = "id")
     public Meal getMeal() {
         return meal;
@@ -59,5 +60,15 @@ public class MealPreparation {
 
     public void setNotEnoughIngredients(boolean notEnoughIngredients) {
         this.notEnoughIngredients = notEnoughIngredients;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

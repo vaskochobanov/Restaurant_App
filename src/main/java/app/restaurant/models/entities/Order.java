@@ -33,7 +33,7 @@ public class Order {
         isOpen = open;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "order_type_id", referencedColumnName = "id")
     public OrderType getOrderType() {
         return orderType;
@@ -43,9 +43,7 @@ public class Order {
         this.orderType = orderType;
     }
 
-    @ManyToMany
-    @JoinTable(name = "orders_meals", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "meal_id", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "order", targetEntity = MealPreparation.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<MealPreparation> getMealList() {
         return mealList;
     }
