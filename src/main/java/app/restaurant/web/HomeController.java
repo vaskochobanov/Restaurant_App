@@ -20,6 +20,7 @@ public class HomeController {
         List<String> roles = authentication.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toList());
         String role = roles.get(0);
         if (role.equals("ROLE_ADMIN")) {
+            //todo admin must know which products are getting low
             return "home-admin";
         }
         else if (role.equals("ROLE_BARMAN")) {

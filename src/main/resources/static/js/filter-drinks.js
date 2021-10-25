@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let form = document.createElement("form");
     mealCardBody.appendChild(form);
     form.method = "POST";
-    form.action = `/meals/prepare/${el.id}`;
+    form.action = `/prep/${el.id}`;
     let submitButton = document.createElement("button");
     form.appendChild(submitButton);
     submitButton.type = "submit";
@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
       filteredArr.forEach((m) => {
         createRow(m);
       });
+    window.addEventListener("pageshow", (event) => {
+      filterField.value = "";
     });
-  window.addEventListener("pageshow", (event) => {
-    filterField.value = "";
   });
 });
