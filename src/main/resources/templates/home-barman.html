@@ -62,15 +62,22 @@
 </header>
 <!-- Page Content-->
 <div class="container px-4 px-lg-5 main-content barman-main-content">
-    <div class="card">
+    <div class="input-group input-group-lg filter-field">
+        <span class="input-group-text filter-label" id="inputGroup-sizing-lg">Filter Meals</span>
+        <input id=filterField type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+    </div>
+    <div id="mainContent">
+
+    </div>
+    <!-- <div class="card meal-preparation">
         <div class="card-body">
             <h5 class="card-title">Beer x2</h5>
             <p class="card-text">beer 0.5</p>
-            <form method="get">
+            <form method="POST" action="/meals/prepare/">
                 <button type="submit" class="btn btn-success">Prepare</button>
             </form>
         </div>
-    </div>
+    </div> -->
 </div>
 <!-- Footer-->
 <footer class="py-5 bg-dark footer">
@@ -84,5 +91,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="/js/scripts.js"></script>
+<script src="/js/filter-drinks.js"></script>
 </body>
 </html>

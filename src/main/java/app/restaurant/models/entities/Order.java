@@ -9,7 +9,6 @@ public class Order {
     private Long id;
     private boolean isOpen;
     private OrderType orderType;
-    private List<MealPreparation> mealList;
 
     public Order() {
     }
@@ -41,14 +40,5 @@ public class Order {
 
     public void setOrderType(OrderType orderType) {
         this.orderType = orderType;
-    }
-
-    @OneToMany(mappedBy = "order", targetEntity = MealPreparation.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<MealPreparation> getMealList() {
-        return mealList;
-    }
-
-    public void setMealList(List<MealPreparation> mealList) {
-        this.mealList = mealList;
     }
 }

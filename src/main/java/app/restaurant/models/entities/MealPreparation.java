@@ -62,7 +62,7 @@ public class MealPreparation {
         this.notEnoughIngredients = notEnoughIngredients;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     public Order getOrder() {
         return order;

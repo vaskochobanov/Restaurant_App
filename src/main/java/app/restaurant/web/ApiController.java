@@ -1,13 +1,7 @@
 package app.restaurant.web;
 
-import app.restaurant.models.dtos.IngredientViewDto;
-import app.restaurant.models.dtos.MealViewDto;
-import app.restaurant.models.dtos.OrderTypeViewDto;
-import app.restaurant.models.dtos.UserViewDto;
-import app.restaurant.services.IngredientService;
-import app.restaurant.services.MealService;
-import app.restaurant.services.OrderTypeService;
-import app.restaurant.services.UserService;
+import app.restaurant.models.dtos.*;
+import app.restaurant.services.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +16,16 @@ public class ApiController {
     private final IngredientService ingredientService;
     private final UserService userService;
     private final OrderTypeService orderTypeService;
+    private final MealPreparationService mealPreparationService;
+
 
     public ApiController(MealService mealService, IngredientService ingredientService, UserService userService,
-                         OrderTypeService orderTypeService) {
+                         OrderTypeService orderTypeService, MealPreparationService mealPreparationService) {
         this.mealService = mealService;
         this.ingredientService = ingredientService;
         this.userService = userService;
         this.orderTypeService = orderTypeService;
+        this.mealPreparationService = mealPreparationService;
     }
 
     @GetMapping("/meals")
@@ -46,5 +43,9 @@ public class ApiController {
     @GetMapping("/tables")
     public ResponseEntity<List<OrderTypeViewDto>> loadAllTables() {
         return ResponseEntity.status(200).body(orderTypeService.getAllTables());
+    }
+    @GetMapping("/drinks")
+    public ResponseEntity<List<MealPreparationViewDto>> loadAllDrinks() {
+        return ResponseEntity.status(200).body(mealPreparationService.getDrinks());
     }
 }
