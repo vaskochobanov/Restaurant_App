@@ -33,7 +33,7 @@ public class MealPreparationServiceImpl implements MealPreparationService {
 
     @Override
     @Transactional
-    public void initMailPreparations(Order order) {
+    public void initDrinkMailPreparations(Order order) {
         MealPreparation beer = new MealPreparation();
         beer.setCount(2);
         beer.setPrepared(false);
@@ -58,10 +58,43 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     }
 
     @Override
+    public void initSaladMailPreparations(Order order) {
+        MealPreparation shopska = new MealPreparation();
+        shopska.setCount(1);
+        shopska.setPrepared(false);
+        shopska.setMeal(mealService.getMealByName("Shopska Salad"));
+        shopska.setNotEnoughIngredients(false);
+        shopska.setOrder(order);
+        mealPreparationRepository.save(shopska);
+        MealPreparation french = new MealPreparation();
+        french.setCount(1);
+        french.setMeal(mealService.getMealByName("French Salad"));
+        french.setNotEnoughIngredients(false);
+        french.setPrepared(false);
+        french.setOrder(order);
+        mealPreparationRepository.save(french);
+    }
+
+    @Override
     public List<MealPreparationViewDto> getDrinks() {
         List<MealPreparationViewDto> result = new ArrayList<>();
         mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
             if (mp.getMeal().getType().name().equals("DRINK") && !mp.isPrepared()) {
+                MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
+                current.setMealName(mp.getMeal().getName());
+                current.setMealIngredients(mp.getMeal().getIngredients());
+                current.setOrderId(mp.getOrder().getId());
+                result.add(current);
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public List<MealPreparationViewDto> getSalads() {
+        List<MealPreparationViewDto> result = new ArrayList<>();
+        mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
+            if (mp.getMeal().getType().name().equals("SALAD") && !mp.isPrepared()) {
                 MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
                 current.setMealName(mp.getMeal().getName());
                 current.setMealIngredients(mp.getMeal().getIngredients());

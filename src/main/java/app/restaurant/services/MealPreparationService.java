@@ -7,7 +7,9 @@ import java.util.List;
 
 
 public interface MealPreparationService {
-    void initMailPreparations(Order order);
+    void initDrinkMailPreparations(Order order);
+    void initSaladMailPreparations(Order order);
     List<MealPreparationViewDto> getDrinks();
+    List<MealPreparationViewDto> getSalads();
     void prepareMeal(Long id);
 }

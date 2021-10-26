@@ -48,4 +48,8 @@ public class ApiController {
     public ResponseEntity<List<MealPreparationViewDto>> loadAllDrinks() {
         return ResponseEntity.status(200).body(mealPreparationService.getDrinks());
     }
+    @GetMapping("/salads")
+    public ResponseEntity<List<MealPreparationViewDto>> loadAllSalads() {
+        return ResponseEntity.status(200).body(mealPreparationService.getSalads());
+    }
 }

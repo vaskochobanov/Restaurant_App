@@ -51,7 +51,7 @@ public class MealServiceImpl implements MealService {
         beer.setType(MealType.DRINK);
         mealRepository.save(beer);
         Meal shopskaSalad = new Meal();
-        shopskaSalad.setActive(false);
+        shopskaSalad.setActive(true);
         shopskaSalad.setDescription("A mixture of cucumbers, tomatoes and feta cheese");
         shopskaSalad.setImageUrl("https://www.wandercooks.com/wp-content/uploads/2019/07/bulgarian-shopska-salad-ft2.jpg");
         shopskaSalad.setIngredients("cucumbers-0.3,tomatoes-0.2,feta cheese-0.15,olive oil-0.03,salt-0.01");
@@ -89,6 +89,16 @@ public class MealServiceImpl implements MealService {
         cola.setPromoted(false);
         cola.setType(MealType.DRINK);
         mealRepository.save(cola);
+        Meal frenchSalad = new Meal();
+        frenchSalad.setActive(true);
+        frenchSalad.setDescription("French salad");
+        frenchSalad.setImageUrl("https://recepti.gotvach.bg/files/lib/400x296/ruska-salata-forma.jpg");
+        frenchSalad.setIngredients("potatoes-0.1,carrots-0.05,corn-0.05,ham-0.05,mayonnaise-0.1");
+        frenchSalad.setName("French Salad");
+        frenchSalad.setPrice(7.50);
+        frenchSalad.setPromoted(false);
+        frenchSalad.setType(MealType.SALAD);
+        mealRepository.save(frenchSalad);
         }
     }
 

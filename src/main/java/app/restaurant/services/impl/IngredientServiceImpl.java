@@ -103,6 +103,30 @@ public class IngredientServiceImpl implements IngredientService {
             cola.setName("coca cola");
             cola.setQuantity(100.0);
             ingredientRepository.save(cola);
+            Ingredient potatoes = new Ingredient();
+            potatoes.setBestBefore(LocalDate.of(2022, 12, 26));
+            potatoes.setImageUrl("https://media.istockphoto.com/photos/three-potatoes-picture-id157430678?k=20&m=157430678&s=612x612&w=0&h=dfYLuPYwA50ojI90hZ4jCgKZd5TGnqf24UCVBszoZIA=");
+            potatoes.setName("potatoes");
+            potatoes.setQuantity(100.0);
+            ingredientRepository.save(potatoes);
+            Ingredient carrots = new Ingredient();
+            carrots.setBestBefore(LocalDate.of(2021, 12, 26));
+            carrots.setImageUrl("https://www.eatthis.com/wp-content/uploads/sites/4/2021/07/bunch-carrots.jpg?fit=1200%2C879&ssl=1");
+            carrots.setName("carrots");
+            carrots.setQuantity(50.0);
+            ingredientRepository.save(carrots);
+            Ingredient corn = new Ingredient();
+            corn.setBestBefore(LocalDate.of(2023, 10, 26));
+            corn.setImageUrl("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/tinned-sweet-corn-royalty-free-image-1602860110.jpg?crop=1.00xw:1.00xh;0,0&resize=640:*");
+            corn.setName("corn");
+            corn.setQuantity(10.0);
+            ingredientRepository.save(corn);
+            Ingredient mayo = new Ingredient();
+            mayo.setBestBefore(LocalDate.of(2021, 12, 26));
+            mayo.setImageUrl("data:image/jpeg;base64,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");
+            mayo.setName("mayonnaise");
+            mayo.setQuantity(20.0);
+            ingredientRepository.save(mayo);
         }
     }
 
