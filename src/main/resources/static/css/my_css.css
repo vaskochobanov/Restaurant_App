@@ -89,6 +89,7 @@ html {
 .meal-preparation {
   background-color: rgb(33, 37, 41);
   color: white;
+  margin-bottom: 1rem;
 }
 .table {
   font-size: 1.2rem;
