@@ -9,4 +9,5 @@ import java.util.List;
 public interface MealPreparationService {
     void initMailPreparations(Order order);
     List<MealPreparationViewDto> getDrinks();
+    void prepareMeal(Long id);
 }

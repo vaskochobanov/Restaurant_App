@@ -1,9 +1,11 @@
 package app.restaurant.services.impl;
 
 import app.restaurant.models.dtos.MealPreparationViewDto;
+import app.restaurant.models.entities.Ingredient;
 import app.restaurant.models.entities.MealPreparation;
 import app.restaurant.models.entities.Order;
 import app.restaurant.repositories.MealPreparationRepository;
+import app.restaurant.services.IngredientService;
 import app.restaurant.services.MealPreparationService;
 import app.restaurant.services.MealService;
 import org.modelmapper.ModelMapper;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -18,12 +21,14 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     private final MealPreparationRepository mealPreparationRepository;
     private final MealService mealService;
     private final ModelMapper modelMapper;
+    private final IngredientService ingredientService;
 
     public MealPreparationServiceImpl(MealPreparationRepository mealPreparationRepository, MealService mealService,
-                                      ModelMapper modelMapper) {
+                                      ModelMapper modelMapper, IngredientService ingredientService) {
         this.mealPreparationRepository = mealPreparationRepository;
         this.mealService = mealService;
         this.modelMapper = modelMapper;
+        this.ingredientService = ingredientService;
     }
 
     @Override
@@ -56,7 +61,7 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     public List<MealPreparationViewDto> getDrinks() {
         List<MealPreparationViewDto> result = new ArrayList<>();
         mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
-            if (mp.getMeal().getType().name().equals("DRINK")) {
+            if (mp.getMeal().getType().name().equals("DRINK") && !mp.isPrepared()) {
                 MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
                 current.setMealName(mp.getMeal().getName());
                 current.setMealIngredients(mp.getMeal().getIngredients());
@@ -65,5 +70,37 @@ public class MealPreparationServiceImpl implements MealPreparationService {
             }
         });
         return result;
+    }
+
+    @Override
+    public void prepareMeal(Long id) throws NullPointerException {
+        MealPreparation forPrepare = mealPreparationRepository.findById(id).orElse(null);
+        Arrays.stream(forPrepare.getMeal().getIngredients().split(",")).forEach(i -> {
+            //in this array in position 0 is ingredient name and on position 1 is quantity for this meal
+            String[] currentIngredientArr = i.split("-");
+            String currentIngredientName = currentIngredientArr[0];
+            Double currentIngredientQuantity = Double.parseDouble(currentIngredientArr[1]);
+            Double quantityNeeded = forPrepare.getCount() * currentIngredientQuantity;
+            while (quantityNeeded > 0) {
+                Ingredient currentIngredient = ingredientService.getIngredientByName(currentIngredientName);
+                if (currentIngredient != null) {
+                    if (quantityNeeded < currentIngredient.getQuantity()) {
+                        currentIngredient.setQuantity(currentIngredient.getQuantity() - quantityNeeded);
+                        ingredientService.updateIngredient(currentIngredient);
+                        quantityNeeded = 0.0;
+                    }
+                    else {
+                        quantityNeeded -= currentIngredient.getQuantity();
+                        ingredientService.deleteIngredient(currentIngredient.getId());
+                    }
+                }
+                else {
+                    forPrepare.setNotEnoughIngredients(true);
+                    throw new NullPointerException("Ingredient does not exist in storage");
+                }
+            }
+            forPrepare.setPrepared(true);
+            mealPreparationRepository.save(forPrepare);
+        });
     }
 }

@@ -89,7 +89,7 @@ public class IngredientServiceImpl implements IngredientService {
             Ingredient beer = new Ingredient();
             beer.setBestBefore(LocalDate.of(2022, 10, 23));
             beer.setImageUrl("https://thumbs.dreamstime.com/b/glass-draft-beer-isolated-white-background-171472670.jpg");
-            beer.setName("Beer");
+            beer.setName("beer");
             beer.setQuantity(200.0);
             ingredientRepository.save(beer);
             Ingredient oranges = new Ingredient();
@@ -100,7 +100,7 @@ public class IngredientServiceImpl implements IngredientService {
             Ingredient cola = new Ingredient();
             cola.setBestBefore(LocalDate.of(2023, 10, 23));
             cola.setImageUrl("https://cdncloudcart.com/16398/products/images/39404/gazirana-napitka-coca-cola-ken-330-ml-image_5ea2cc6235fb6_800x800.png?1587731937");
-            cola.setName("Coca Cola");
+            cola.setName("coca cola");
             cola.setQuantity(100.0);
             ingredientRepository.save(cola);
         }
@@ -115,5 +115,15 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public void deleteIngredient(Long id) {
         ingredientRepository.deleteById(id);
+    }
+
+    @Override
+    public Ingredient getIngredientByName(String name) {
+        return ingredientRepository.findByName(name).orElse(null);
+    }
+
+    @Override
+    public void updateIngredient(Ingredient ingredient) {
+        ingredientRepository.save(ingredient);
     }
 }
