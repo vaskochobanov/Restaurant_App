@@ -52,4 +52,8 @@ public class ApiController {
     public ResponseEntity<List<MealPreparationViewDto>> loadAllSalads() {
         return ResponseEntity.status(200).body(mealPreparationService.getSalads());
     }
+    @GetMapping("/main-dish")
+    public ResponseEntity<List<MealPreparationViewDto>> loadAllMainDishes() {
+        return ResponseEntity.status(200).body(null);
+    }
 }

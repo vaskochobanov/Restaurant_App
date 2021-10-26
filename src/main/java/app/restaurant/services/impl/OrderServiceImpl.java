@@ -34,6 +34,10 @@ public class OrderServiceImpl implements OrderService {
         onlySalads.setOpen(true);
         onlySalads.setOrderType(orderTypeService.getTableByName("t2"));
         mealPreparationService.initSaladMailPreparations(orderRepository.save(onlySalads));
+        Order onlyMainDishes = new Order();
+        onlyMainDishes.setOpen(true);
+        onlyMainDishes.setOrderType(orderTypeService.getTableByName("t1"));
+        mealPreparationService.initMainDishesMailPreparations(orderRepository.save(onlyMainDishes));
         }
     }
 }

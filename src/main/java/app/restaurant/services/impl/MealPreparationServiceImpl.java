@@ -76,6 +76,11 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     }
 
     @Override
+    public void initMainDishesMailPreparations(Order order) {
+
+    }
+
+    @Override
     public List<MealPreparationViewDto> getDrinks() {
         List<MealPreparationViewDto> result = new ArrayList<>();
         mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
@@ -103,6 +108,11 @@ public class MealPreparationServiceImpl implements MealPreparationService {
             }
         });
         return result;
+    }
+
+    @Override
+    public List<MealPreparationViewDto> getMainDishes() {
+        return null;
     }
 
     @Override

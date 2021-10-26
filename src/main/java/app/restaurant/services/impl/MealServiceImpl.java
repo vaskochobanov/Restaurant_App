@@ -99,6 +99,16 @@ public class MealServiceImpl implements MealService {
         frenchSalad.setPromoted(false);
         frenchSalad.setType(MealType.SALAD);
         mealRepository.save(frenchSalad);
+        Meal risotto = new Meal();
+        risotto.setActive(true);
+        risotto.setDescription("Imperial rice with frozen vegetables with butter and soy sauce");
+        risotto.setImageUrl("https://www.acouplecooks.com/wp-content/uploads/2021/03/Mushroom-Risotto-055.jpg");
+        risotto.setIngredients("rice-0.1,frozen vegetables-0.1,butter-0.03,soy sauce-0.01");
+        risotto.setName("Risotto");
+        risotto.setPrice(7.99);
+        risotto.setPromoted(false);
+        risotto.setType(MealType.MAIN_DISH);
+        mealRepository.save(risotto);
         }
     }
 

@@ -127,6 +127,30 @@ public class IngredientServiceImpl implements IngredientService {
             mayo.setName("mayonnaise");
             mayo.setQuantity(20.0);
             ingredientRepository.save(mayo);
+            Ingredient rice = new Ingredient();
+            rice.setBestBefore(LocalDate.of(2025, 10,26));
+            rice.setImageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzLWYdcyEb_sGp_KDs9i3UerLqTGyjI9dslw&usqp=CAU");
+            rice.setName("rice");
+            rice.setQuantity(20.0);
+            ingredientRepository.save(rice);
+            Ingredient frozenVegetables = new Ingredient();
+            frozenVegetables.setBestBefore(LocalDate.of(2025, 10,26));
+            frozenVegetables.setImageUrl("https://media.healthyfood.com/wp-content/uploads/2020/05/10-ways-with-frozen-vegetables-iStock-182197343-500x409.jpg");
+            frozenVegetables.setName("frozen vegetables");
+            frozenVegetables.setQuantity(20.0);
+            ingredientRepository.save(frozenVegetables);
+            Ingredient butter = new Ingredient();
+            butter.setBestBefore(LocalDate.of(2021, 12, 26));
+            butter.setImageUrl("https://www.kirbysproduce.com/wp-content/uploads/2020/04/butter.jpg");
+            butter.setName("butter");
+            butter.setQuantity(10.0);
+            ingredientRepository.save(butter);
+            Ingredient soySauce = new Ingredient();
+            soySauce.setBestBefore(LocalDate.of(2025, 10, 26));
+            soySauce.setImageUrl("https://www.asianfoodlovers.com/media/catalog/product/cache/8/image/750x750/9df78eab33525d08d6e5fb8d27136e95/8/2/8295_7.jpg");
+            soySauce.setName("soy sauce");
+            soySauce.setQuantity(5.0);
+            ingredientRepository.save(soySauce);
         }
     }
 
