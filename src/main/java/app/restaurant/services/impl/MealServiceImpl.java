@@ -119,6 +119,26 @@ public class MealServiceImpl implements MealService {
         banica.setPromoted(false);
         banica.setType(MealType.MAIN_DISH);
         mealRepository.save(banica);
+        Meal fruitSalad = new Meal();
+        fruitSalad.setActive(true);
+        fruitSalad.setDescription("A mixture of oranges, bananas, kiwi and strawberries, garnered with cream");
+        fruitSalad.setImageUrl("https://cdn.healthyrecipes101.com/wp-content/uploads/2019/11/How-long-will-a-fruit-salad-last-in-the-fridge.jpg");
+        fruitSalad.setIngredients("bananas-0.1,oranges-0.1,kiwi-0.05,strawberries-0.05,cream-0.05");
+        fruitSalad.setName("Fruit Salad");
+        fruitSalad.setPrice(7.99);
+        fruitSalad.setPromoted(false);
+        fruitSalad.setType(MealType.DESSERT);
+        mealRepository.save(fruitSalad);
+        Meal brownie = new Meal();
+        brownie.setActive(true);
+        brownie.setDescription("A classic brownie with a lot of chocolate");
+        brownie.setImageUrl("https://preppykitchen.com/wp-content/uploads/2019/10/Brownie-Recipe-Square-1200px-preppy-kitchen.jpg");
+        brownie.setIngredients("flour-0.1,chocolate-0.1,eggs-1,butter-0.05");
+        brownie.setName("Brownie");
+        brownie.setPrice(4.99);
+        brownie.setPromoted(false);
+        brownie.setType(MealType.DESSERT);
+        mealRepository.save(brownie);
         }
     }
 

@@ -32,6 +32,9 @@ public class HomeController {
         else if (role.equals("ROLE_CHEF")) {
             return "home-chef";
         }
+        else if (role.equals("ROLE_BAKER")) {
+            return "home-baker";
+        }
         return null;
     }
 }

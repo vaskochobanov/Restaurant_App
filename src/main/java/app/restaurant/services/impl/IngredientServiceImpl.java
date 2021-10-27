@@ -169,6 +169,36 @@ public class IngredientServiceImpl implements IngredientService {
             yogurt.setName("yogurt");
             yogurt.setQuantity(20.0);
             ingredientRepository.save(yogurt);
+            Ingredient bananas = new Ingredient();
+            bananas.setBestBefore(LocalDate.of(2021, 12, 27));
+            bananas.setImageUrl("https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg");
+            bananas.setName("bananas");
+            bananas.setQuantity(100.0);
+            ingredientRepository.save(bananas);
+            Ingredient kiwi = new Ingredient();
+            kiwi.setBestBefore(LocalDate.of(2021, 12, 27));
+            kiwi.setImageUrl("https://static.libertyprim.com/files/familles/kiwi-large.jpg?1569271790");
+            kiwi.setName("kiwi");
+            kiwi.setQuantity(50.0);
+            ingredientRepository.save(kiwi);
+            Ingredient strawberries = new Ingredient();
+            strawberries.setBestBefore(LocalDate.of(2021,12, 27));
+            strawberries.setImageUrl("https://www.naturespride.eu/media/tz2n1miw/aardbeien-productfoto.jpg?anchor=center&mode=crop&width=560&height=560&rnd=132442055056230000");
+            strawberries.setName("strawberries");
+            strawberries.setQuantity(10.0);
+            ingredientRepository.save(strawberries);
+            Ingredient cream = new Ingredient();
+            cream.setBestBefore(LocalDate.of(2022, 10,27));
+            cream.setImageUrl("https://www.puckarabia.com/globalassets/new-products-pictures/packshots/resized/6-whipped-cream-spray-en.png?preset=product640");
+            cream.setName("cream");
+            cream.setQuantity(5.0);
+            ingredientRepository.save(cream);
+            Ingredient chocolate = new Ingredient();
+            chocolate.setBestBefore(LocalDate.of(2024, 10, 27));
+            chocolate.setImageUrl("https://chocolatecoveredkatie.com/wp-content/uploads/2020/08/Homemade-Chocolate-Bars.jpg");
+            chocolate.setName("chocolate");
+            chocolate.setQuantity(10.0);
+            ingredientRepository.save(chocolate);
         }
     }
 

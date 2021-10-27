@@ -33,7 +33,7 @@ public class MealPreparationServiceImpl implements MealPreparationService {
 
     @Override
     @Transactional
-    public void initDrinkMailPreparations(Order order) {
+    public void initDrinkMealPreparations(Order order) {
         MealPreparation beer = new MealPreparation();
         beer.setCount(2);
         beer.setPrepared(false);
@@ -58,7 +58,7 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     }
 
     @Override
-    public void initSaladMailPreparations(Order order) {
+    public void initSaladMealPreparations(Order order) {
         MealPreparation shopska = new MealPreparation();
         shopska.setCount(1);
         shopska.setPrepared(false);
@@ -76,7 +76,7 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     }
 
     @Override
-    public void initMainDishesMailPreparations(Order order) {
+    public void initMainDishesMealPreparations(Order order) {
         MealPreparation risotto = new MealPreparation();
         risotto.setCount(1);
         risotto.setPrepared(false);
@@ -91,6 +91,24 @@ public class MealPreparationServiceImpl implements MealPreparationService {
         banica.setNotEnoughIngredients(false);
         banica.setOrder(order);
         mealPreparationRepository.save(banica);
+    }
+
+    @Override
+    public void initDessertsMealPreparations(Order order) {
+        MealPreparation fruitSalad = new MealPreparation();
+        fruitSalad.setCount(1);
+        fruitSalad.setPrepared(false);
+        fruitSalad.setMeal(mealService.getMealByName("Fruit Salad"));
+        fruitSalad.setNotEnoughIngredients(false);
+        fruitSalad.setOrder(order);
+        mealPreparationRepository.save(fruitSalad);
+        MealPreparation brownie = new MealPreparation();
+        brownie.setCount(2);
+        brownie.setPrepared(false);
+        brownie.setMeal(mealService.getMealByName("Brownie"));
+        brownie.setNotEnoughIngredients(false);
+        brownie.setOrder(order);
+        mealPreparationRepository.save(brownie);
     }
 
     @Override
@@ -128,6 +146,21 @@ public class MealPreparationServiceImpl implements MealPreparationService {
         List<MealPreparationViewDto> result = new ArrayList<>();
         mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
             if (mp.getMeal().getType().name().equals("MAIN_DISH") && !mp.isPrepared()) {
+                MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
+                current.setMealName(mp.getMeal().getName());
+                current.setMealIngredients(mp.getMeal().getIngredients());
+                current.setOrderId(mp.getOrder().getId());
+                result.add(current);
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public List<MealPreparationViewDto> getDesserts() {
+        List<MealPreparationViewDto> result = new ArrayList<>();
+        mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
+            if (mp.getMeal().getType().name().equals("DESSERT") && !mp.isPrepared()) {
                 MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
                 current.setMealName(mp.getMeal().getName());
                 current.setMealIngredients(mp.getMeal().getIngredients());

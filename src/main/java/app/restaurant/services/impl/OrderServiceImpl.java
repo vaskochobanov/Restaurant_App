@@ -29,15 +29,19 @@ public class OrderServiceImpl implements OrderService {
         Order onlyDrinks = new Order();
         onlyDrinks.setOpen(true);
         onlyDrinks.setOrderType(orderTypeService.getTableByName("t1"));
-        mealPreparationService.initDrinkMailPreparations(orderRepository.save(onlyDrinks));
+        mealPreparationService.initDrinkMealPreparations(orderRepository.save(onlyDrinks));
         Order onlySalads = new Order();
         onlySalads.setOpen(true);
         onlySalads.setOrderType(orderTypeService.getTableByName("t2"));
-        mealPreparationService.initSaladMailPreparations(orderRepository.save(onlySalads));
+        mealPreparationService.initSaladMealPreparations(orderRepository.save(onlySalads));
         Order onlyMainDishes = new Order();
         onlyMainDishes.setOpen(true);
         onlyMainDishes.setOrderType(orderTypeService.getTableByName("t1"));
-        mealPreparationService.initMainDishesMailPreparations(orderRepository.save(onlyMainDishes));
+        mealPreparationService.initMainDishesMealPreparations(orderRepository.save(onlyMainDishes));
+        Order onlyDesserts = new Order();
+        onlyDesserts.setOpen(true);
+        onlyDesserts.setOrderType(orderTypeService.getTableByName("t2"));
+        mealPreparationService.initDessertsMealPreparations(orderRepository.save(onlyDesserts));
         }
     }
 }
