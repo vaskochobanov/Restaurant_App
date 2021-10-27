@@ -151,6 +151,24 @@ public class IngredientServiceImpl implements IngredientService {
             soySauce.setName("soy sauce");
             soySauce.setQuantity(5.0);
             ingredientRepository.save(soySauce);
+            Ingredient kori = new Ingredient();
+            kori.setBestBefore(LocalDate.of(2022, 3, 27));
+            kori.setImageUrl("https://www.culinarytourism.bg/cache/com_zoo/images/raztochvane_na_kori_72b61b514ccd93738c9c8302f5a06c89.jpg");
+            kori.setName("kori");
+            kori.setQuantity(20.0);
+            ingredientRepository.save(kori);
+            Ingredient eggs = new Ingredient();
+            eggs.setBestBefore(LocalDate.of(2021, 11, 27));
+            eggs.setImageUrl("https://zora-donchevobg.com/wp-content/uploads/2018/07/food-eggs.2e16d0ba.fill-735x490-min.jpg");
+            eggs.setName("eggs");
+            eggs.setQuantity(100.0);
+            ingredientRepository.save(eggs);
+            Ingredient yogurt = new Ingredient();
+            yogurt.setBestBefore(LocalDate.of(2021, 11, 27));
+            yogurt.setImageUrl("https://www.yogurtinnutrition.com/wp-content/uploads/2017/06/do-you-know-what-the-most-nutrient-dense-snack-is-1024x512.jpg");
+            yogurt.setName("yogurt");
+            yogurt.setQuantity(20.0);
+            ingredientRepository.save(yogurt);
         }
     }
 

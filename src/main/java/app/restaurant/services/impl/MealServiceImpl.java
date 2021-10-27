@@ -109,6 +109,16 @@ public class MealServiceImpl implements MealService {
         risotto.setPromoted(false);
         risotto.setType(MealType.MAIN_DISH);
         mealRepository.save(risotto);
+        Meal banica = new Meal();
+        banica.setActive(true);
+        banica.setDescription("Tradiotional balcanic dish");
+        banica.setImageUrl("https://i.ytimg.com/vi/VT4I-VSODRE/maxresdefault.jpg");
+        banica.setIngredients("kori-0.3,feta cheese-0.05,yogurt-0.1,eggs-2");
+        banica.setName("Banica");
+        banica.setPrice(4.99);
+        banica.setPromoted(false);
+        banica.setType(MealType.MAIN_DISH);
+        mealRepository.save(banica);
         }
     }
 

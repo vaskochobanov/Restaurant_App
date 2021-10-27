@@ -89,6 +89,12 @@ public class UserServiceImpl implements UserService {
             starters1.setFullName("First SaladMaker");
             starters1.setRole(UserRole.STARTERS);
             userRepository.save(starters1);
+            User chef1 = new User();
+            chef1.setUsername("chef1");
+            chef1.setPassword(passwordEncoder.encode("123456"));
+            chef1.setFullName("First Chef");
+            chef1.setRole(UserRole.CHEF);
+            userRepository.save(chef1);
         }
     }
 

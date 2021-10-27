@@ -77,7 +77,20 @@ public class MealPreparationServiceImpl implements MealPreparationService {
 
     @Override
     public void initMainDishesMailPreparations(Order order) {
-
+        MealPreparation risotto = new MealPreparation();
+        risotto.setCount(1);
+        risotto.setPrepared(false);
+        risotto.setMeal(mealService.getMealByName("Risotto"));
+        risotto.setNotEnoughIngredients(false);
+        risotto.setOrder(order);
+        mealPreparationRepository.save(risotto);
+        MealPreparation banica = new MealPreparation();
+        banica.setCount(1);
+        banica.setPrepared(false);
+        banica.setMeal(mealService.getMealByName("Banica"));
+        banica.setNotEnoughIngredients(false);
+        banica.setOrder(order);
+        mealPreparationRepository.save(banica);
     }
 
     @Override
@@ -112,7 +125,17 @@ public class MealPreparationServiceImpl implements MealPreparationService {
 
     @Override
     public List<MealPreparationViewDto> getMainDishes() {
-        return null;
+        List<MealPreparationViewDto> result = new ArrayList<>();
+        mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
+            if (mp.getMeal().getType().name().equals("MAIN_DISH") && !mp.isPrepared()) {
+                MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
+                current.setMealName(mp.getMeal().getName());
+                current.setMealIngredients(mp.getMeal().getIngredients());
+                current.setOrderId(mp.getOrder().getId());
+                result.add(current);
+            }
+        });
+        return result;
     }
 
     @Override

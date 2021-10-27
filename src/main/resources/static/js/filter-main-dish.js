@@ -1,41 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
     let filterField = document.getElementById("filterField");
-    let tableBody = document.getElementById("tableBody");
+    let contentBody = document.getElementById("mainContent");
     let createRow = (el) => {
-      let newTR = document.createElement("tr");
-      let tdFullName = document.createElement("td");
-      newTR.appendChild(tdFullName);
-      tdFullName.innerText = el.fullName;
-      let tdUsername = document.createElement("td");
-      newTR.appendChild(tdUsername);
-      tdUsername.innerText = el.username;
-      let tdButtons = document.createElement("td");
-      let formButton = document.createElement("div");
-      formButton.classList.add("form-button");
-      tdButtons.appendChild(formButton);
-      let formEdit = document.createElement("form");
-      formButton.appendChild(formEdit);
-      formEdit.method = "GET";
-      formEdit.action = `/admin/user-edit/${el.id}`;
-      let editButton = document.createElement("button");
-      formEdit.appendChild(editButton);
-      editButton.innerText = "Edit";
-      editButton.type = "submit";
-      editButton.classList.add("btn");
-      editButton.classList.add("btn-warning");
-      let formDelete = document.createElement("form");
-      formButton.appendChild(formDelete);
-      formDelete.method = "GET";
-      formDelete.action = `/admin/user-delete/${el.id}`;
-      let deleteButton = document.createElement("button");
-      formDelete.appendChild(deleteButton);
-      formDelete.classList.add("form-button-delete");
-      deleteButton.innerText = "Delete";
-      deleteButton.type = "submit";
-      deleteButton.classList.add("btn");
-      deleteButton.classList.add("btn-danger");
-      newTR.appendChild(tdButtons);
-      tableBody.appendChild(newTR);
+      let mealCard = document.createElement("div");
+      contentBody.appendChild(mealCard);
+      mealCard.classList.add("card", "meal-preparation");
+      let mealCardBody = document.createElement("div");
+      mealCard.appendChild(mealCardBody);
+      mealCardBody.classList.add("card-body");
+      let mealCount = document.createElement("h5");
+      mealCardBody.appendChild(mealCount);
+      mealCount.classList.add("card-title");
+      mealCount.innerText = `${el.mealName} x${el.count}`;
+      let ingredientsArr = el.mealIngredients.split(",");
+      ingredientsArr.forEach((i) => {
+        let mealIngredients = document.createElement("p");
+        mealCardBody.appendChild(mealIngredients);
+        mealIngredients.classList.add("card-text");
+        mealIngredients.innerText = i;
+      });
+      let form = document.createElement("form");
+      mealCardBody.appendChild(form);
+      form.method = "POST";
+      form.action = `/prep/${el.id}`;
+      let submitButton = document.createElement("button");
+      form.appendChild(submitButton);
+      submitButton.type = "submit";
+      submitButton.classList.add("btn", "btn-success");
+      submitButton.innerText = "Prepare";
     };
     fetch("http://localhost:8080/api/main-dish", {
       headers: {
@@ -48,18 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
         let mealsArr = JSON.parse(strigifiedResponce);
         let filteredArr = [...mealsArr];
         filterField.addEventListener("input", (event) => {
-          tableBody.innerHTML = "";
+          contentBody.innerHTML = "";
           filteredArr = mealsArr.filter((m) =>
-            m.fullName.toLowerCase().includes(event.target.value.toLowerCase())
+            m.mealName.toLowerCase().includes(event.target.value.toLowerCase())
           );
           filteredArr.forEach((m) => createRow(m));
         });
         filteredArr.forEach((m) => {
           createRow(m);
         });
+      window.addEventListener("pageshow", (event) => {
+        filterField.value = "";
       });
-    window.addEventListener("pageshow", (event) => {
-      filterField.value = "";
     });
   });
   
