@@ -27,6 +27,6 @@ public class AppInit implements CommandLineRunner {
         ingredientService.initIngredients();
         mealService.initMeals();
         orderTypeService.initTables();
-        orderService.initOrders();
+        //orderService.initOrders();
     }
 }
