@@ -170,6 +170,12 @@ table tr:last-child td:last-child {
 .waiter-order-meals {
   margin-bottom: 0;
 }
+.waiter-meal-done {
+  color: green;
+}
+.waiter-meal-preparing {
+  color: coral;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
