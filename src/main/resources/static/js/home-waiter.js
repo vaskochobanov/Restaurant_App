@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    let filterField = document.getElementById("filterField");
     let waiterId = document.getElementById("waiterId");
     let mainContent = document.getElementById("mainContent");
     let createRow = (el) => {
@@ -10,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
         h5TableName.classList.add("card-header");
         let divCardBody = document.createElement("div");
         divCardBody.classList.add("card-body");
-        if (el.isFree) {
+        h5TableName.innerText = el.name;
+        if (el.free) {
             h5TableName.classList.add("table-name-free");
             outterDiv.appendChild(divCardBody);
             let newOrderForm = document.createElement("form");
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 divListMeals.appendChild(mealP);
                 mealP.innerText = m.mealName;
                 mealP.classList.add("card-text", "waiter-order-meals");
-                if (m.isPrepared) {
+                if (m.prepared) {
                     mealP.classList.add("waiter-meal-done");
                 }
                 else {
@@ -67,8 +69,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
-        h5TableName.innerText = el.name;
 
     };
-    
+    fetch(`http://localhost:8080/api/waiter-home/${waiterId.value}`, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then(res => res.json()).then(data => {
+        let strigifiedResponce = JSON.stringify(data);
+        let waiterData = JSON.parse(strigifiedResponce);
+        let filteredArr = [...waiterData];
+        filterField.addEventListener("input", (event) => {
+            mainContent.innerHTML = "";
+            filteredArr = waiterData.filter((m) =>
+              m.name.toLowerCase().includes(event.target.value.toLowerCase())
+            );
+            filteredArr.forEach((m) => createRow(m));
+          });
+          filteredArr.forEach((m) => {
+            createRow(m);
+          });
+        window.addEventListener("pageshow", (event) => {
+          filterField.value = "";
+        });
+    })
 })
