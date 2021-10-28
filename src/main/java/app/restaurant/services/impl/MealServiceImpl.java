@@ -3,16 +3,17 @@ package app.restaurant.services.impl;
 import app.restaurant.models.bindings.MealAddBindingModel;
 import app.restaurant.models.bindings.MealEditBindingModel;
 import app.restaurant.models.dtos.MealViewDto;
+import app.restaurant.models.dtos.MealWaiterViewDto;
 import app.restaurant.models.entities.Ingredient;
 import app.restaurant.models.entities.Meal;
 import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.repositories.MealRepository;
+import app.restaurant.services.IngredientService;
 import app.restaurant.services.MealService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,10 +21,12 @@ import java.util.stream.Collectors;
 public class MealServiceImpl implements MealService {
     private final MealRepository mealRepository;
     private final ModelMapper modelMapper;
+    private final IngredientService ingredientService;
 
-    public MealServiceImpl(MealRepository mealRepository, ModelMapper modelMapper) {
+    public MealServiceImpl(MealRepository mealRepository, ModelMapper modelMapper, IngredientService ingredientService) {
         this.mealRepository = mealRepository;
         this.modelMapper = modelMapper;
+        this.ingredientService = ingredientService;
     }
 
     @Override
@@ -171,5 +174,58 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal getMealByName(String name) {
         return mealRepository.findByName(name).orElse(null);
+    }
+
+    @Override
+    public List<MealWaiterViewDto> getAllActiveMeals() {
+        List<MealWaiterViewDto> result = new ArrayList<>();
+        mealRepository.findAllActiveMeals().stream().forEach(m -> {
+            if (m.getType().name().equals("DRINK") && isPossibleToPrepare(m)) {
+                MealWaiterViewDto current = modelMapper.map(m, MealWaiterViewDto.class);
+                current.setType(m.getType().name());
+                result.add(current);
+            }
+        });
+        mealRepository.findAllActiveMeals().stream().forEach(m -> {
+            if (m.getType().name().equals("SALAD") && isPossibleToPrepare(m)) {
+                MealWaiterViewDto current = modelMapper.map(m, MealWaiterViewDto.class);
+                current.setType(m.getType().name());
+                result.add(current);
+            }
+        });
+        mealRepository.findAllActiveMeals().stream().forEach(m -> {
+            if (m.getType().name().equals("MAIN_DISH") && isPossibleToPrepare(m)) {
+                MealWaiterViewDto current = modelMapper.map(m, MealWaiterViewDto.class);
+                current.setType(m.getType().name());
+                result.add(current);
+            }
+        });
+        mealRepository.findAllActiveMeals().stream().forEach(m -> {
+            if (m.getType().name().equals("DESSERT") && isPossibleToPrepare(m)) {
+                MealWaiterViewDto current = modelMapper.map(m, MealWaiterViewDto.class);
+                current.setType(m.getType().name());
+                result.add(current);
+            }
+        });
+        return result;
+    }
+    private boolean isPossibleToPrepare(Meal meal) {
+        boolean result = true;
+        String[] ingredientsArr = meal.getIngredients().split(",");
+        for (String parsed : ingredientsArr) {
+            String[] parsedArr = parsed.split("-");
+            String ingredientName = parsedArr[0];
+            Double ingredientQuantity = Double.parseDouble(parsedArr[1]);
+            Ingredient toCheck = ingredientService.getIngredientByName(ingredientName);
+            if (toCheck == null) {
+                result = false;
+                break;
+            }
+            if (toCheck.getQuantity() <= ingredientQuantity * 10) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }

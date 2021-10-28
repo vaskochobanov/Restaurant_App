@@ -66,4 +66,8 @@ public class ApiController {
     public ResponseEntity<List<OrderTypeWaiterViewDto>> loadAllForWaiter(@PathVariable Long id) {
         return ResponseEntity.status(200).body(orderTypeService.getTablesByWaiter(id));
     }
+    @GetMapping("/waiter-menu")
+    public ResponseEntity<List<MealWaiterViewDto>> loadWaiterMenu() {
+        return ResponseEntity.status(200).body(mealService.getAllActiveMeals());
+    }
 }

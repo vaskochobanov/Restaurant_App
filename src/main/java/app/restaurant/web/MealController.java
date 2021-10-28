@@ -4,6 +4,9 @@ import app.restaurant.models.bindings.MealAddBindingModel;
 import app.restaurant.models.bindings.MealEditBindingModel;
 import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.services.MealService;
+import app.restaurant.services.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +24,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/meals")
 public class MealController {
     private final MealService mealService;
+    private final UserService userService;
 
-    public MealController(MealService mealService) {
+    public MealController(MealService mealService, UserService userService) {
         this.mealService = mealService;
+        this.userService = userService;
     }
 
     @GetMapping("/add")
@@ -100,5 +105,12 @@ public class MealController {
         }
         redirectAttributes.addFlashAttribute("hasErrors", true);
         return String.format("redirect:/meals/single-edit/%s", id);
+    }
+    @GetMapping("/meals-menu/{id}")
+    public String getMenu(@PathVariable Long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("waiterId", userService.getIdByUsername(authentication.getName()));
+        model.addAttribute("tableId", id);
+        return "waiter-menu";
     }
 }

@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
             h5TableName.classList.add("table-name-free");
             outterDiv.appendChild(divCardBody);
             let newOrderForm = document.createElement("form");
-            newOrderForm.method = "POST";
+            newOrderForm.method = "GET";
+            newOrderForm.action = `/meals/meals-menu/${el.id}`;
             divCardBody.appendChild(newOrderForm);
             let newOrderButton = document.createElement("button");
             newOrderForm.appendChild(newOrderButton);
