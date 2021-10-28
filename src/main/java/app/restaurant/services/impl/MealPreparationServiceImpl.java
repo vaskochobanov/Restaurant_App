@@ -4,6 +4,7 @@ import app.restaurant.models.dtos.MealPreparationViewDto;
 import app.restaurant.models.entities.Ingredient;
 import app.restaurant.models.entities.MealPreparation;
 import app.restaurant.models.entities.Order;
+import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.repositories.MealPreparationRepository;
 import app.restaurant.services.IngredientService;
 import app.restaurant.services.MealPreparationService;
@@ -112,55 +113,10 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     }
 
     @Override
-    public List<MealPreparationViewDto> getDrinks() {
+    public List<MealPreparationViewDto> getMeals(MealType mealType) {
         List<MealPreparationViewDto> result = new ArrayList<>();
         mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
-            if (mp.getMeal().getType().name().equals("DRINK") && !mp.isPrepared()) {
-                MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
-                current.setMealName(mp.getMeal().getName());
-                current.setMealIngredients(mp.getMeal().getIngredients());
-                current.setOrderId(mp.getOrder().getId());
-                result.add(current);
-            }
-        });
-        return result;
-    }
-
-    @Override
-    public List<MealPreparationViewDto> getSalads() {
-        List<MealPreparationViewDto> result = new ArrayList<>();
-        mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
-            if (mp.getMeal().getType().name().equals("SALAD") && !mp.isPrepared()) {
-                MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
-                current.setMealName(mp.getMeal().getName());
-                current.setMealIngredients(mp.getMeal().getIngredients());
-                current.setOrderId(mp.getOrder().getId());
-                result.add(current);
-            }
-        });
-        return result;
-    }
-
-    @Override
-    public List<MealPreparationViewDto> getMainDishes() {
-        List<MealPreparationViewDto> result = new ArrayList<>();
-        mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
-            if (mp.getMeal().getType().name().equals("MAIN_DISH") && !mp.isPrepared()) {
-                MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
-                current.setMealName(mp.getMeal().getName());
-                current.setMealIngredients(mp.getMeal().getIngredients());
-                current.setOrderId(mp.getOrder().getId());
-                result.add(current);
-            }
-        });
-        return result;
-    }
-
-    @Override
-    public List<MealPreparationViewDto> getDesserts() {
-        List<MealPreparationViewDto> result = new ArrayList<>();
-        mealPreparationRepository.findMealsFromOpenOrders().stream().forEach(mp -> {
-            if (mp.getMeal().getType().name().equals("DESSERT") && !mp.isPrepared()) {
+            if (mp.getMeal().getType().name().equals(mealType.name()) && !mp.isPrepared()) {
                 MealPreparationViewDto current = modelMapper.map(mp, MealPreparationViewDto.class);
                 current.setMealName(mp.getMeal().getName());
                 current.setMealIngredients(mp.getMeal().getIngredients());
