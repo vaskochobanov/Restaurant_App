@@ -21,4 +21,5 @@ public interface UserService extends UserDetailsService {
     void editUserRole(UserAdminEditBindingModel userAdminEditBindingModel);
     User getUserByUsername(String username);
     List<WaiterViewDto> getAllWaiters();
+    Long getIdByUsername(String username);
 }

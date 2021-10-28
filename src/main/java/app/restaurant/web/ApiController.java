@@ -5,6 +5,7 @@ import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.services.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,5 +61,9 @@ public class ApiController {
     @GetMapping("/desserts")
     public ResponseEntity<List<MealPreparationViewDto>> loadAllDesserts() {
         return ResponseEntity.status(200).body(mealPreparationService.getMeals(MealType.DESSERT));
+    }
+    @GetMapping("/waiter-home/{id}")
+    public ResponseEntity<List<OrderTypeWaiterViewDto>> loadAllForWaiter(@PathVariable Long id) {
+        return ResponseEntity.status(200).body(orderTypeService.getTablesByWaiter(id));
     }
 }

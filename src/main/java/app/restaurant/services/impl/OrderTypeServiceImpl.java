@@ -3,9 +3,13 @@ package app.restaurant.services.impl;
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.dtos.OrderTypeViewDto;
+import app.restaurant.models.dtos.OrderTypeWaiterViewDto;
 import app.restaurant.models.dtos.UserViewDto;
+import app.restaurant.models.entities.Order;
 import app.restaurant.models.entities.OrderType;
 import app.restaurant.repositories.OrderTypeRepository;
+import app.restaurant.services.MealPreparationService;
+import app.restaurant.services.OrderService;
 import app.restaurant.services.OrderTypeService;
 import app.restaurant.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -13,18 +17,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderTypeServiceImpl implements OrderTypeService {
     private final OrderTypeRepository orderTypeRepository;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final OrderService orderService;
+    private final MealPreparationService mealPreparationService;
 
-    public OrderTypeServiceImpl(OrderTypeRepository orderTypeRepository, ModelMapper modelMapper, UserService userService) {
+    public OrderTypeServiceImpl(OrderTypeRepository orderTypeRepository, ModelMapper modelMapper, UserService userService,
+                                OrderService orderService, MealPreparationService mealPreparationService) {
         this.orderTypeRepository = orderTypeRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.orderService = orderService;
+        this.mealPreparationService = mealPreparationService;
     }
 
     @Override
@@ -92,5 +100,26 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         t2.setWaiter(userService.getUserByUsername("waiter2"));
         orderTypeRepository.save(t2);
         }
+    }
+
+    @Override
+    public List<OrderTypeWaiterViewDto> getTablesByWaiter(Long waiterId) {
+        List<OrderTypeWaiterViewDto> result = new ArrayList<>();
+        orderTypeRepository.findTablesByWaiterId(waiterId).stream().forEach(ot -> {
+            OrderTypeWaiterViewDto current = modelMapper.map(ot, OrderTypeWaiterViewDto.class);
+            Order isAny = orderService.getOpenOrderByTableId(ot.getId());
+            if (isAny == null) {
+                current.setFree(true);
+                current.setSum(0.0);
+                current.setListMeals(new ArrayList<>());
+            }
+            else {
+                current.setFree(false);
+                current.setSum(mealPreparationService.getSumOfOrderId(isAny.getId()));
+                current.setListMeals(mealPreparationService.getMealPreparationsbyOrderId(isAny.getId()));
+            }
+            result.add(current);
+        });
+        return result;
     }
 }

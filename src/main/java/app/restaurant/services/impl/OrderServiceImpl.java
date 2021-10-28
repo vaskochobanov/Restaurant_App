@@ -12,36 +12,38 @@ import javax.transaction.Transactional;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final OrderTypeService orderTypeService;
-    private final MealPreparationService mealPreparationService;
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderTypeService orderTypeService,
-                            MealPreparationService mealPreparationService) {
+    public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.orderTypeService = orderTypeService;
-        this.mealPreparationService = mealPreparationService;
+//        this.orderTypeService = orderTypeService;
+//        this.mealPreparationService = mealPreparationService;
     }
 
+//    @Override
+//    @Transactional
+//    public void initOrders() {
+//        if (orderRepository.count() == 0) {
+//        Order onlyDrinks = new Order();
+//        onlyDrinks.setOpen(true);
+//        onlyDrinks.setOrderType(orderTypeService.getTableByName("t1"));
+//        mealPreparationService.initDrinkMealPreparations(orderRepository.save(onlyDrinks));
+//        Order onlySalads = new Order();
+//        onlySalads.setOpen(true);
+//        onlySalads.setOrderType(orderTypeService.getTableByName("t2"));
+//        mealPreparationService.initSaladMealPreparations(orderRepository.save(onlySalads));
+//        Order onlyMainDishes = new Order();
+//        onlyMainDishes.setOpen(true);
+//        onlyMainDishes.setOrderType(orderTypeService.getTableByName("t1"));
+//        mealPreparationService.initMainDishesMealPreparations(orderRepository.save(onlyMainDishes));
+//        Order onlyDesserts = new Order();
+//        onlyDesserts.setOpen(true);
+//        onlyDesserts.setOrderType(orderTypeService.getTableByName("t2"));
+//        mealPreparationService.initDessertsMealPreparations(orderRepository.save(onlyDesserts));
+//        }
+//    }
+
     @Override
-    @Transactional
-    public void initOrders() {
-        if (orderRepository.count() == 0) {
-        Order onlyDrinks = new Order();
-        onlyDrinks.setOpen(true);
-        onlyDrinks.setOrderType(orderTypeService.getTableByName("t1"));
-        mealPreparationService.initDrinkMealPreparations(orderRepository.save(onlyDrinks));
-        Order onlySalads = new Order();
-        onlySalads.setOpen(true);
-        onlySalads.setOrderType(orderTypeService.getTableByName("t2"));
-        mealPreparationService.initSaladMealPreparations(orderRepository.save(onlySalads));
-        Order onlyMainDishes = new Order();
-        onlyMainDishes.setOpen(true);
-        onlyMainDishes.setOrderType(orderTypeService.getTableByName("t1"));
-        mealPreparationService.initMainDishesMealPreparations(orderRepository.save(onlyMainDishes));
-        Order onlyDesserts = new Order();
-        onlyDesserts.setOpen(true);
-        onlyDesserts.setOrderType(orderTypeService.getTableByName("t2"));
-        mealPreparationService.initDessertsMealPreparations(orderRepository.save(onlyDesserts));
-        }
+    public Order getOpenOrderByTableId(Long tableId) {
+        return orderRepository.findOpenOrderByTableId(tableId).orElse(null);
     }
 }

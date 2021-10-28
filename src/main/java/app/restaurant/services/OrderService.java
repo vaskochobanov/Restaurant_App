@@ -6,5 +6,6 @@ import app.restaurant.models.entities.Order;
 import java.util.List;
 
 public interface OrderService {
-    void initOrders();
+    //void initOrders();
+    Order getOpenOrderByTableId(Long tableId);
 }

@@ -1,8 +1,10 @@
 package app.restaurant.web;
 
+import app.restaurant.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -10,12 +12,18 @@ import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
+    private final UserService userService;
+
+    public HomeController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/")
     public String getIndex() {
         return "index";
     }
     @GetMapping("/home")
-    public String getHome() {
+    public String getHome(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = authentication.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toList());
         String role = roles.get(0);
@@ -36,6 +44,7 @@ public class HomeController {
             return "home-baker";
         }
         else if (role.equals("ROLE_WAITER")) {
+            model.addAttribute("waiterId", userService.getIdByUsername(authentication.getName()));
             return "home-waiter";
         }
         return null;

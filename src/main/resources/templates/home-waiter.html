@@ -64,7 +64,9 @@
 <div class="container px-4 px-lg-5 main-content barman-main-content">
     <div class="input-group input-group-lg filter-field">
         <span class="input-group-text filter-label" id="inputGroup-sizing-lg">Filter Tables</span>
-        <input id=filterField type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        <input id=filterField type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-lg">
+        <input type="hidden" id="waiterId" th:value="${waiterId}">
     </div>
     <div id="mainContent">
         <div class="card table-waiter">
@@ -78,23 +80,23 @@
         <div class="card table-waiter">
             <h5 class="card-header table-name-occupied">t1</h5>
             <div class="waiter-grid-container">
-            <div class="card-body waiter-table-divs">
-                <h5 class="card-title table-check">21.99 $</h5>
-                <form class="waiter-end-button" method="POST" action="">
-                    <button type="submit" class="btn btn-danger">End Order</button>
-                </form>
-                <form class="waiter-edit-button" method="POST" action="">
-                    <button type="submit" class="btn btn-warning">Edit Order</button>
-                </form>
-            </div>
-            <div class="waiter-table-divs">
-                <p class="card-text waiter-order-meals">Beer</p>
-                <p class="card-text waiter-order-meals">Banica</p>
-                <p class="card-text waiter-order-meals">Fruit Salad</p>
-                <p class="card-text waiter-order-meals">Beer</p>
-                <p class="card-text waiter-order-meals">Banica</p>
-                <p class="card-text waiter-order-meals">Fruit Salad</p>
-            </div>
+                <div class="card-body waiter-table-divs">
+                    <h5 class="card-title table-check">21.99 $</h5>
+                    <form class="waiter-end-button" method="POST" action="">
+                        <button type="submit" class="btn btn-danger">End Order</button>
+                    </form>
+                    <form class="waiter-edit-button" method="POST" action="">
+                        <button type="submit" class="btn btn-warning">Edit Order</button>
+                    </form>
+                </div>
+                <div class="waiter-table-divs">
+                    <p class="card-text waiter-order-meals">Beer</p>
+                    <p class="card-text waiter-order-meals">Banica</p>
+                    <p class="card-text waiter-order-meals">Fruit Salad</p>
+                    <p class="card-text waiter-order-meals">Beer</p>
+                    <p class="card-text waiter-order-meals">Banica</p>
+                    <p class="card-text waiter-order-meals">Fruit Salad</p>
+                </div>
             </div>
         </div>
     </div>

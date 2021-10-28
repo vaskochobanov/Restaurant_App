@@ -3,6 +3,7 @@ package app.restaurant.services;
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.dtos.OrderTypeViewDto;
+import app.restaurant.models.dtos.OrderTypeWaiterViewDto;
 import app.restaurant.models.entities.OrderType;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface OrderTypeService {
     void editTable(OrderTypeEditBindingModel orderTypeEditBindingModel);
     OrderType getTableByName(String name);
     void initTables();
+    List<OrderTypeWaiterViewDto> getTablesByWaiter(Long waiterId);
 }

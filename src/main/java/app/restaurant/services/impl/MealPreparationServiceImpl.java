@@ -1,6 +1,7 @@
 package app.restaurant.services.impl;
 
 import app.restaurant.models.dtos.MealPreparationViewDto;
+import app.restaurant.models.dtos.MealPreparationWaiterViewDto;
 import app.restaurant.models.entities.Ingredient;
 import app.restaurant.models.entities.MealPreparation;
 import app.restaurant.models.entities.Order;
@@ -16,6 +17,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class MealPreparationServiceImpl implements MealPreparationService {
@@ -157,5 +159,21 @@ public class MealPreparationServiceImpl implements MealPreparationService {
             forPrepare.setPrepared(true);
             mealPreparationRepository.save(forPrepare);
         });
+    }
+
+    @Override
+    public List<MealPreparationWaiterViewDto> getMealPreparationsbyOrderId(Long orderId) {
+        List<MealPreparationWaiterViewDto> result = new ArrayList<>();
+        mealPreparationRepository.findAllByOrderId(orderId).stream().forEach(mp -> {
+            MealPreparationWaiterViewDto current = modelMapper.map(mp, MealPreparationWaiterViewDto.class);
+            current.setOrderId(mp.getOrder().getId());
+            result.add(current);
+        });
+        return result;
+    }
+
+    @Override
+    public Double getSumOfOrderId(Long orderId) {
+        return mealPreparationRepository.findSumOfMealsInOrder(orderId);
     }
 }

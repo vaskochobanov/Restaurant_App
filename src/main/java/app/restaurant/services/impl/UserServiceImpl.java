@@ -169,4 +169,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAllWaiters().stream().map(u -> modelMapper.map(u, WaiterViewDto.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Long getIdByUsername(String username) {
+        return userRepository.findIdByUsername(username);
+    }
 }
