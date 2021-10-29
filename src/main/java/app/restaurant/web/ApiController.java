@@ -3,12 +3,12 @@ package app.restaurant.web;
 import app.restaurant.models.dtos.*;
 import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.services.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -69,5 +69,9 @@ public class ApiController {
     @GetMapping("/waiter-menu")
     public ResponseEntity<List<MealWaiterViewDto>> loadWaiterMenu() {
         return ResponseEntity.status(200).body(mealService.getAllActiveMeals());
+    }
+    @PostMapping("/new-order")
+    public void postWaiterAddNewOrder(@RequestBody String stringOrder) {
+
     }
 }
