@@ -126,6 +126,6 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
     @Override
     public void createNewOrderFromWaiters(WaiterAddOrderBindingModel[] mealsArr) {
-        System.out.println();
+        
     }
 }

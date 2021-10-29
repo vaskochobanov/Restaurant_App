@@ -1,6 +1,7 @@
 package app.restaurant.services.impl;
 
 import app.restaurant.models.entities.Order;
+import app.restaurant.models.entities.OrderType;
 import app.restaurant.repositories.OrderRepository;
 import app.restaurant.services.MealPreparationService;
 import app.restaurant.services.OrderService;
@@ -45,5 +46,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getOpenOrderByTableId(Long tableId) {
         return orderRepository.findOpenOrderByTableId(tableId).orElse(null);
+    }
+
+    @Override
+    public Order createNewOrderFromWaiter(OrderType table) {
+        Order toAdd = new Order();
+        toAdd.setOpen(true);
+        toAdd.setOrderType(table);
+        return orderRepository.save(toAdd);
     }
 }
