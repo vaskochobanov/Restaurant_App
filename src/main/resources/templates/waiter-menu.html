@@ -67,17 +67,22 @@
         <input id=filterField type="text" class="form-control" aria-label="Sizing example input"
                aria-describedby="inputGroup-sizing-lg">
         <input type="hidden" id="waiterId" th:value="${waiterId}">
-        <input type="hidden" id="tableId" th:value="${waiterId}">
+        <input type="hidden" id="tableId" th:value="${tableId}">
     </div>
     <div id="mainContent">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header waiter-menu">
                 Featured
             </div>
-            <div class="card-body">
+            <div class="card-body waiter-menu">
                 <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <p class="card-text waiter-order-meals">With supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text waiter-order-meals">With supporting text below as a natural lead-in to additional content.</p>
+                <div class="menu-buttons-holder">
+                    <button type="button" class="btn btn-danger menu-buttons">-</button>
+                    <input type="text" class="form-control menu-meal-count">
+                    <button type="button" class="btn btn-success menu-buttons">+</button>
+                </div>
             </div>
         </div>
     </div>

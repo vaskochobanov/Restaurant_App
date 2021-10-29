@@ -176,6 +176,29 @@ table tr:last-child td:last-child {
 .waiter-meal-preparing {
   color: coral;
 }
+.waiter-menu {
+  background-color: rgb(33, 37, 41);
+  color: white;
+}
+.waiter-order-meals {
+  margin-bottom: 0.5rem;
+}
+.menu-buttons-holder {
+  display: flex;
+  margin-top: 1.5rem;
+}
+.menu-buttons {
+  min-width: 38px;
+  font-size: 1.5rem;
+  width: 3rem;
+}
+.menu-meal-count {
+  width: 5rem;
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  text-align: center;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
