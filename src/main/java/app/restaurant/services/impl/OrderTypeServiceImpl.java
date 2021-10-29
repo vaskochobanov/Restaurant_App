@@ -2,6 +2,7 @@ package app.restaurant.services.impl;
 
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
+import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
 import app.restaurant.models.dtos.OrderTypeViewDto;
 import app.restaurant.models.dtos.OrderTypeWaiterViewDto;
 import app.restaurant.models.dtos.UserViewDto;
@@ -121,5 +122,10 @@ public class OrderTypeServiceImpl implements OrderTypeService {
             result.add(current);
         });
         return result;
+    }
+
+    @Override
+    public void createNewOrderFromWaiters(WaiterAddOrderBindingModel[] mealsArr) {
+        System.out.println();
     }
 }

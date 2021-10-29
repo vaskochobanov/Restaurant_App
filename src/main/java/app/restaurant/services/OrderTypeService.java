@@ -2,6 +2,7 @@ package app.restaurant.services;
 
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
+import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
 import app.restaurant.models.dtos.OrderTypeViewDto;
 import app.restaurant.models.dtos.OrderTypeWaiterViewDto;
 import app.restaurant.models.entities.OrderType;
@@ -17,4 +18,5 @@ public interface OrderTypeService {
     OrderType getTableByName(String name);
     void initTables();
     List<OrderTypeWaiterViewDto> getTablesByWaiter(Long waiterId);
+    void createNewOrderFromWaiters(WaiterAddOrderBindingModel[] mealsArr);
 }

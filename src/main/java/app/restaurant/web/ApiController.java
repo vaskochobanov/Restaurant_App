@@ -1,14 +1,13 @@
 package app.restaurant.web;
 
+import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
 import app.restaurant.models.dtos.*;
 import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.services.*;
-import org.springframework.http.HttpStatus;
+import com.google.gson.Gson;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,15 +18,17 @@ public class ApiController {
     private final UserService userService;
     private final OrderTypeService orderTypeService;
     private final MealPreparationService mealPreparationService;
+    private final Gson gson;
 
 
     public ApiController(MealService mealService, IngredientService ingredientService, UserService userService,
-                         OrderTypeService orderTypeService, MealPreparationService mealPreparationService) {
+                         OrderTypeService orderTypeService, MealPreparationService mealPreparationService, Gson gson) {
         this.mealService = mealService;
         this.ingredientService = ingredientService;
         this.userService = userService;
         this.orderTypeService = orderTypeService;
         this.mealPreparationService = mealPreparationService;
+        this.gson = gson;
     }
 
     @GetMapping("/meals")
@@ -72,6 +73,6 @@ public class ApiController {
     }
     @PostMapping("/new-order")
     public void postWaiterAddNewOrder(@RequestBody String stringOrder) {
-
+        orderTypeService.createNewOrderFromWaiters(gson.fromJson(stringOrder, WaiterAddOrderBindingModel[].class));
     }
 }

@@ -98,8 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
           for (let i = 0; i < inputFieldsArr.length; i++) {
               if (Number(inputFieldsArr[i].value)) {
                   let current = {
-                      mealId: mealIdsArr[i].value,
-                      quantity: Number(inputFieldsArr[i].value)
+                      mealId: Number(mealIdsArr[i].value),
+                      quantity: Number(inputFieldsArr[i].value),
+                      waiterId: Number(waiterId.value),
+                      tableId: Number(tableId.value)
                   };
                   resultOrder.push(current);
               }
