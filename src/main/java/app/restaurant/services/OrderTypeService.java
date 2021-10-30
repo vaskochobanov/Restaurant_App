@@ -19,4 +19,5 @@ public interface OrderTypeService {
     void initTables();
     List<OrderTypeWaiterViewDto> getTablesByWaiter(Long waiterId);
     void createNewOrderFromWaiters(WaiterAddOrderBindingModel[] mealsArr);
+    void closeOrderOnTable(String tableName);
 }

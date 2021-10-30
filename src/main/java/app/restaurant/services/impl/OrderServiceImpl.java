@@ -55,4 +55,14 @@ public class OrderServiceImpl implements OrderService {
         toAdd.setOrderType(table);
         return orderRepository.save(toAdd);
     }
+
+    @Override
+    public Order getOpenOrderByTableName(String tableName) {
+        return orderRepository.findOpenOrderByTableName(tableName).orElse(null);
+    }
+
+    @Override
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
+    }
 }

@@ -135,4 +135,11 @@ public class OrderTypeServiceImpl implements OrderTypeService {
             mealPreparationService.createNewMealPreparationFromWaiter(order, mi.getMealId(), mi.getQuantity());
         });
     }
+
+    @Override
+    public void closeOrderOnTable(String tableName) {
+        Order toClose = orderService.getOpenOrderByTableName(tableName);
+        toClose.setOpen(false);
+        orderService.saveOrder(toClose);
+    }
 }

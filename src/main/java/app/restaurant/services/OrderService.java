@@ -10,4 +10,6 @@ public interface OrderService {
     //void initOrders();
     Order getOpenOrderByTableId(Long tableId);
     Order createNewOrderFromWaiter(OrderType tabble);
+    Order getOpenOrderByTableName(String tableName);
+    void saveOrder(Order order);
 }

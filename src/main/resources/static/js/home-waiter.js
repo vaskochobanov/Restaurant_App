@@ -39,12 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
             let endForm = document.createElement("form");
             divCardBody.appendChild(endForm);
             endForm.classList.add("waiter-end-button");
-            endForm.method = "POST";
+            endForm.method = "GET";
+            endForm.action = "/home"
             let endButton = document.createElement("button");
             endForm.appendChild(endButton);
             endButton.type = "submit";
             endButton.classList.add("btn", "btn-danger");
             endButton.innerText = "End Order";
+            endButton.addEventListener("click", () => {
+                fetch("http://localhost:8080/api/close-order", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(el.name)
+                })
+            })
             let editOrderForm = document.createElement("form");
             divCardBody.appendChild(editOrderForm);
             editOrderForm.classList.add("waiter-edit-button");

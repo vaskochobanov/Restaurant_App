@@ -75,4 +75,8 @@ public class ApiController {
     public void postWaiterAddNewOrder(@RequestBody String stringOrder) {
         orderTypeService.createNewOrderFromWaiters(gson.fromJson(stringOrder, WaiterAddOrderBindingModel[].class));
     }
+    @PostMapping("/close-order")
+    public void postWaiterCloseOrder(@RequestBody String data) {
+        orderTypeService.closeOrderOnTable(gson.fromJson(data, String.class));
+    }
 }

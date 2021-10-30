@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select o from Order o where o.open = true and o.orderType.id = ?1")
     Optional<Order> findOpenOrderByTableId(Long tableId);
+    @Query("select o from Order o where o.open = true and o.orderType.name = ?1")
+    Optional<Order> findOpenOrderByTableName(String tableName);
 }
