@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let waiterId = document.getElementById("waiterId");
   let tabbleId = document.getElementById("tabbleId");
   let mainContent = document.getElementById("mainContent");
-  let createRow = (el) => {
+  let createRow = (el, order) => {
     let divWrappingCard = document.createElement("div");
     mainContent.appendChild(divWrappingCard);
     divWrappingCard.classList.add("card");
@@ -44,6 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
     mealsCount.type = "text";
     mealsCount.classList.add("form-control", "menu-meal-count");
     mealsCount.value = "0";
+    order.forEach(om => {
+        if (om.mealName === el.name) {
+            mealsCount.value = om.count
+        }
+    });
     let mealHiddenId = document.createElement("input");
     divMealButtonsHolder.appendChild(mealHiddenId);
     mealHiddenId.type = "hidden";
@@ -70,52 +75,54 @@ document.addEventListener("DOMContentLoaded", () => {
       let strigifiedResponce = JSON.stringify(data);
       let mealsArr = JSON.parse(strigifiedResponce);
       let filteredArr = [...mealsArr];
-      filterField.addEventListener("input", (event) => {
-        mainContent.innerHTML = "";
-        filteredArr = mealsArr.filter((m) =>
-          m.name.toLowerCase().includes(event.target.value.toLowerCase())
-        );
-        filteredArr.forEach((m) => createRow(m));
-      });
-      filteredArr.forEach((m) => {
-        createRow(m);
-      });
-      let placeOrderButton = document.createElement("button");
-      placeOrderButton.type = "submit";
-      placeOrderButton.id = "placeOrder";
-      placeOrderButton.classList.add("btn", "btn-success", "btn-place-order");
-      placeOrderButton.innerText = "Place Order";
-      let formNewOrder = document.createElement("form");
-      formNewOrder.appendChild(placeOrderButton);
-      mainContent.appendChild(formNewOrder);
-      formNewOrder.method = "GET";
-      formNewOrder.action = "/home";
-      formNewOrder.classList.add("form-place-order");
-      placeOrderButton.addEventListener("click", () => {
-        let inputFieldsArr = document.getElementsByClassName("menu-meal-count");
-        let mealIdsArr = document.getElementsByClassName("mealHiddenId");
-        let resultOrder = [];
-        for (let i = 0; i < inputFieldsArr.length; i++) {
-          if (Number(inputFieldsArr[i].value)) {
-            let current = {
-              mealId: Number(mealIdsArr[i].value),
-              quantity: Number(inputFieldsArr[i].value),
-              waiterId: Number(waiterId.value),
-              tableId: Number(tableId.value),
-            };
-            resultOrder.push(current);
-          }
-        }
-        fetch("http://localhost:8080/api/new-order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(resultOrder),
-        });
-      });
-      window.addEventListener("pageshow", (event) => {
-        filterField.value = "";
+      fetch(`http://localhost:8080/api/edit-order/${tableId.value}`).then(ret => ret.json()).then(mealsPreps => {
+          filterField.addEventListener("input", (event) => {
+            mainContent.innerHTML = "";
+            filteredArr = mealsArr.filter((m) =>
+              m.name.toLowerCase().includes(event.target.value.toLowerCase())
+            );
+            filteredArr.forEach((m) => createRow(m, mealsPreps));
+          });
+          filteredArr.forEach((m) => {
+            createRow(m, mealsPreps);
+          });
+          let placeOrderButton = document.createElement("button");
+          placeOrderButton.type = "submit";
+          placeOrderButton.id = "placeOrder";
+          placeOrderButton.classList.add("btn", "btn-success", "btn-place-order");
+          placeOrderButton.innerText = "Place Order";
+          let formNewOrder = document.createElement("form");
+          formNewOrder.appendChild(placeOrderButton);
+          mainContent.appendChild(formNewOrder);
+          formNewOrder.method = "GET";
+          formNewOrder.action = "/home";
+          formNewOrder.classList.add("form-place-order");
+          placeOrderButton.addEventListener("click", () => {
+            let inputFieldsArr = document.getElementsByClassName("menu-meal-count");
+            let mealIdsArr = document.getElementsByClassName("mealHiddenId");
+            let resultOrder = [];
+            for (let i = 0; i < inputFieldsArr.length; i++) {
+              if (Number(inputFieldsArr[i].value)) {
+                let current = {
+                  mealId: Number(mealIdsArr[i].value),
+                  quantity: Number(inputFieldsArr[i].value),
+                  waiterId: Number(waiterId.value),
+                  tableId: Number(tableId.value),
+                };
+                resultOrder.push(current);
+              }
+            }
+            fetch("http://localhost:8080/api/new-order", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(resultOrder),
+            });
+          });
+          window.addEventListener("pageshow", (event) => {
+            filterField.value = "";
+          });
       });
     });
 });

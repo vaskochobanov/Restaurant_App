@@ -58,7 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let editOrderForm = document.createElement("form");
             divCardBody.appendChild(editOrderForm);
             editOrderForm.classList.add("waiter-edit-button");
-            editOrderForm.method = "POST";
+            editOrderForm.method = "GET";
+            editOrderForm.action = `/tables/edit-order/${el.id}`;
             let editButton = document.createElement("button");
             editOrderForm.appendChild(editButton);
             editButton.type = "submit";

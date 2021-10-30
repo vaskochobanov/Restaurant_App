@@ -79,4 +79,8 @@ public class ApiController {
     public void postWaiterCloseOrder(@RequestBody String data) {
         orderTypeService.closeOrderOnTable(gson.fromJson(data, String.class));
     }
+    @GetMapping("/edit-order/{id}")
+    public ResponseEntity<List<WaiterMealsInOrder>> getMealsInOrder(@PathVariable Long id) {
+        return ResponseEntity.status(200).body(orderTypeService.getAllMealsInOrderForTableId(id));
+    }
 }

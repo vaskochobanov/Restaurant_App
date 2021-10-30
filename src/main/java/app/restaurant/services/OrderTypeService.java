@@ -5,6 +5,7 @@ import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
 import app.restaurant.models.dtos.OrderTypeViewDto;
 import app.restaurant.models.dtos.OrderTypeWaiterViewDto;
+import app.restaurant.models.dtos.WaiterMealsInOrder;
 import app.restaurant.models.entities.OrderType;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface OrderTypeService {
     List<OrderTypeWaiterViewDto> getTablesByWaiter(Long waiterId);
     void createNewOrderFromWaiters(WaiterAddOrderBindingModel[] mealsArr);
     void closeOrderOnTable(String tableName);
+    List<WaiterMealsInOrder> getAllMealsInOrderForTableId(Long tableId);
 }

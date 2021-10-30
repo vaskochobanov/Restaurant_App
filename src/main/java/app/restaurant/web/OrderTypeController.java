@@ -4,6 +4,8 @@ import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.services.OrderTypeService;
 import app.restaurant.services.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -84,5 +86,12 @@ public class OrderTypeController {
         orderTypeEditBindingModel.setId(id);
         orderTypeService.editTable(orderTypeEditBindingModel);
         return "redirect:/tables/edit";
+    }
+    @GetMapping("/edit-order/{id}")
+    public String editOrder(@PathVariable Long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("waiterId", userService.getIdByUsername(authentication.getName()));
+        model.addAttribute("tableId", id);
+        return "edit-order";
     }
 }

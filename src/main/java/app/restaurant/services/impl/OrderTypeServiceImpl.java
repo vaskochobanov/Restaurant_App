@@ -3,9 +3,7 @@ package app.restaurant.services.impl;
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
-import app.restaurant.models.dtos.OrderTypeViewDto;
-import app.restaurant.models.dtos.OrderTypeWaiterViewDto;
-import app.restaurant.models.dtos.UserViewDto;
+import app.restaurant.models.dtos.*;
 import app.restaurant.models.entities.Order;
 import app.restaurant.models.entities.OrderType;
 import app.restaurant.repositories.OrderTypeRepository;
@@ -19,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderTypeServiceImpl implements OrderTypeService {
@@ -141,5 +140,12 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         Order toClose = orderService.getOpenOrderByTableName(tableName);
         toClose.setOpen(false);
         orderService.saveOrder(toClose);
+    }
+
+    @Override
+    public List<WaiterMealsInOrder> getAllMealsInOrderForTableId(Long tableId) {
+        Order toEdit = orderService.getOpenOrderByTableId(tableId);
+        List<MealPreparationWaiterViewDto> listMeals = mealPreparationService.getMealPreparationsbyOrderId(toEdit.getId());
+        return listMeals.stream().map(mp -> modelMapper.map(mp, WaiterMealsInOrder.class)).collect(Collectors.toList());
     }
 }
