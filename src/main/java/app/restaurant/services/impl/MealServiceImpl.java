@@ -86,7 +86,7 @@ public class MealServiceImpl implements MealService {
         cola.setActive(true);
         cola.setDescription("A can of classic Coca Cola");
         cola.setImageUrl("https://cdncloudcart.com/16398/products/images/39404/gazirana-napitka-coca-cola-ken-330-ml-image_5ea2cc6235fb6_800x800.png?1587731937");
-        cola.setIngredients("cola-0.3");
+        cola.setIngredients("coca cola-0.3");
         cola.setName("Coca Cola");
         cola.setPrice(1.50);
         cola.setPromoted(false);

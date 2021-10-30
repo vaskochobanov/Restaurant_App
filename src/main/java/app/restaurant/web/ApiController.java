@@ -83,4 +83,8 @@ public class ApiController {
     public ResponseEntity<List<WaiterMealsInOrder>> getMealsInOrder(@PathVariable Long id) {
         return ResponseEntity.status(200).body(orderTypeService.getAllMealsInOrderForTableId(id));
     }
+    @PostMapping("/edit-order/{id}")
+    public void postWaiterEditOrder(@PathVariable Long id, @RequestBody String data) {
+        orderTypeService.editOrder(id, gson.fromJson(data, WaiterAddOrderBindingModel[].class));
+    }
 }

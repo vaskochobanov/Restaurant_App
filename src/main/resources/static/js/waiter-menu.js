@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   let filterField = document.getElementById("filterField");
   let waiterId = document.getElementById("waiterId");
-  let tabbleId = document.getElementById("tabbleId");
+  let tableId = document.getElementById("tableId");
   let mainContent = document.getElementById("mainContent");
   let createRow = (el) => {
     let divWrappingCard = document.createElement("div");

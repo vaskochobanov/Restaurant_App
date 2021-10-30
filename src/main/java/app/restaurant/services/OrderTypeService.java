@@ -22,4 +22,5 @@ public interface OrderTypeService {
     void createNewOrderFromWaiters(WaiterAddOrderBindingModel[] mealsArr);
     void closeOrderOnTable(String tableName);
     List<WaiterMealsInOrder> getAllMealsInOrderForTableId(Long tableId);
+    void editOrder(Long tableId, WaiterAddOrderBindingModel[] mealsArr);
 }

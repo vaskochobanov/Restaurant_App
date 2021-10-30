@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   let filterField = document.getElementById("filterField");
   let waiterId = document.getElementById("waiterId");
-  let tabbleId = document.getElementById("tabbleId");
+  let tableId = document.getElementById("tableId");
   let mainContent = document.getElementById("mainContent");
   let createRow = (el, order) => {
     let divWrappingCard = document.createElement("div");
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
           placeOrderButton.type = "submit";
           placeOrderButton.id = "placeOrder";
           placeOrderButton.classList.add("btn", "btn-success", "btn-place-order");
-          placeOrderButton.innerText = "Place Order";
+          placeOrderButton.innerText = "Edit Order";
           let formNewOrder = document.createElement("form");
           formNewOrder.appendChild(placeOrderButton);
           mainContent.appendChild(formNewOrder);
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 resultOrder.push(current);
               }
             }
-            fetch("http://localhost:8080/api/new-order", {
+            fetch(`http://localhost:8080/api/edit-order/${tableId.value}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

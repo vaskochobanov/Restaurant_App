@@ -12,4 +12,5 @@ public interface OrderService {
     Order createNewOrderFromWaiter(OrderType tabble);
     Order getOpenOrderByTableName(String tableName);
     void saveOrder(Order order);
+    void deleteOrderById(Long orderId);
 }

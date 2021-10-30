@@ -188,4 +188,9 @@ public class MealPreparationServiceImpl implements MealPreparationService {
         toAdd.setOrder(order);
         mealPreparationRepository.save(toAdd);
     }
+
+    @Override
+    public void deleteMealPreparationById(Long mealId) {
+        mealPreparationRepository.deleteById(mealId);
+    }
 }

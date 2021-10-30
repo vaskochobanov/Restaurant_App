@@ -148,4 +148,14 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         List<MealPreparationWaiterViewDto> listMeals = mealPreparationService.getMealPreparationsbyOrderId(toEdit.getId());
         return listMeals.stream().map(mp -> modelMapper.map(mp, WaiterMealsInOrder.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public void editOrder(Long tableId, WaiterAddOrderBindingModel[] mealsArr) {
+        Order orderToEdit = orderService.getOpenOrderByTableId(tableId);
+        mealPreparationService.getMealPreparationsbyOrderId(orderToEdit.getId()).stream().forEach(mp -> {
+            mealPreparationService.deleteMealPreparationById(mp.getId());
+        });
+        orderService.deleteOrderById(orderToEdit.getId());
+        this.createNewOrderFromWaiters(mealsArr);
+    }
 }

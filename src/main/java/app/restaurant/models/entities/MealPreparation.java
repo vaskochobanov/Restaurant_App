@@ -25,7 +25,7 @@ public class MealPreparation {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "meal_id", referencedColumnName = "id")
     public Meal getMeal() {
         return meal;

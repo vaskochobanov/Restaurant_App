@@ -19,4 +19,5 @@ public interface MealPreparationService {
     List<MealPreparationWaiterViewDto> getMealPreparationsbyOrderId(Long orderId);
     Double getSumOfOrderId(Long orderId);
     void createNewMealPreparationFromWaiter(Order order, Long mealId, Integer count);
+    void deleteMealPreparationById(Long mealId);
 }
