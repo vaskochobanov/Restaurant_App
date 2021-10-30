@@ -17,4 +17,5 @@ public interface MealService {
     void editMeal(MealEditBindingModel mealEditBindingModel);
     Meal getMealByName(String name);
     List<MealWaiterViewDto> getAllActiveMeals();
+    Meal mealById(Long id);
 }

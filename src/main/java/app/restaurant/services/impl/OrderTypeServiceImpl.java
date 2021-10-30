@@ -17,6 +17,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -107,6 +108,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
     public List<OrderTypeWaiterViewDto> getTablesByWaiter(Long waiterId) {
         List<OrderTypeWaiterViewDto> result = new ArrayList<>();
         orderTypeRepository.findTablesByWaiterId(waiterId).stream().forEach(ot -> {
+            if (!ot.getName().equals("online")) {
             OrderTypeWaiterViewDto current = modelMapper.map(ot, OrderTypeWaiterViewDto.class);
             Order isAny = orderService.getOpenOrderByTableId(ot.getId());
             if (isAny == null) {
@@ -120,12 +122,17 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 current.setListMeals(mealPreparationService.getMealPreparationsbyOrderId(isAny.getId()));
             }
             result.add(current);
+            }
         });
         return result;
     }
 
     @Override
     public void createNewOrderFromWaiters(WaiterAddOrderBindingModel[] mealsArr) {
-        
+        OrderType table = orderTypeRepository.findById(mealsArr[0].getTableId()).orElse(null);
+        Order order = orderService.createNewOrderFromWaiter(table);
+        Arrays.stream(mealsArr).forEach(mi -> {
+            mealPreparationService.createNewMealPreparationFromWaiter(order, mi.getMealId(), mi.getQuantity());
+        });
     }
 }

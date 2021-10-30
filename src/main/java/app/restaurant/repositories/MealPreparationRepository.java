@@ -13,6 +13,6 @@ public interface MealPreparationRepository extends JpaRepository<MealPreparation
     List<MealPreparation> findMealsFromOpenOrders();
     @Query("select mp from MealPreparation mp where mp.order.open = true and mp.order.id = ?1")
     List<MealPreparation> findAllByOrderId(Long orderId);
-    @Query("select sum(mp.meal.price) from MealPreparation mp where mp.order.open = true and mp.order.id = ?1")
+    @Query("select sum(mp.meal.price * mp.count) from MealPreparation mp where mp.order.open = true and mp.order.id = ?1")
     Double findSumOfMealsInOrder(Long orderId);
 }

@@ -3,6 +3,7 @@ package app.restaurant.services.impl;
 import app.restaurant.models.dtos.MealPreparationViewDto;
 import app.restaurant.models.dtos.MealPreparationWaiterViewDto;
 import app.restaurant.models.entities.Ingredient;
+import app.restaurant.models.entities.Meal;
 import app.restaurant.models.entities.MealPreparation;
 import app.restaurant.models.entities.Order;
 import app.restaurant.models.entities.enums.MealType;
@@ -174,5 +175,17 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     @Override
     public Double getSumOfOrderId(Long orderId) {
         return mealPreparationRepository.findSumOfMealsInOrder(orderId);
+    }
+
+    @Override
+    public void createNewMealPreparationFromWaiter(Order order, Long mealId, Integer count) {
+        Meal meal = mealService.mealById(mealId);
+        MealPreparation toAdd = new MealPreparation();
+        toAdd.setCount(count);
+        toAdd.setMeal(meal);
+        toAdd.setNotEnoughIngredients(false);
+        toAdd.setPrepared(false);
+        toAdd.setOrder(order);
+        mealPreparationRepository.save(toAdd);
     }
 }

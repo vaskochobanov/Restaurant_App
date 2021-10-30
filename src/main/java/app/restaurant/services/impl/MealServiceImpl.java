@@ -209,6 +209,12 @@ public class MealServiceImpl implements MealService {
         });
         return result;
     }
+
+    @Override
+    public Meal mealById(Long id) {
+        return mealRepository.findById(id).orElse(null);
+    }
+
     private boolean isPossibleToPrepare(Meal meal) {
         boolean result = true;
         String[] ingredientsArr = meal.getIngredients().split(",");

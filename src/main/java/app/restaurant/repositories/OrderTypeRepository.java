@@ -13,6 +13,6 @@ public interface OrderTypeRepository extends JpaRepository<OrderType, Long> {
     Optional<OrderType> findByName(String name);
     @Query("select o from OrderType o order by o.name")
     List<OrderType> findAllTablesSortedByName();
-    @Query("select o from OrderType o where o.waiter.id = ?1")
+    @Query("select o from OrderType o where o.waiter.id = ?1 and o.active = true")
     List<OrderType> findTablesByWaiterId(Long waiterId);
 }
