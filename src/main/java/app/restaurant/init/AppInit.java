@@ -9,16 +9,16 @@ public class AppInit implements CommandLineRunner {
     private final UserService userService;
     private final IngredientService ingredientService;
     private final MealService mealService;
-    //private final OrderTypeService orderTypeService;
+    private final OrderTypeService orderTypeService;
     //private final OrderService orderService;
 
-    public AppInit(UserService userService, IngredientService ingredientService, MealService mealService) {
-                   //OrderTypeService orderTypeService, OrderService orderService) {
+    public AppInit(UserService userService, IngredientService ingredientService, MealService mealService, OrderTypeService orderTypeService) {
         this.userService = userService;
         this.ingredientService = ingredientService;
         this.mealService = mealService;
         //this.orderTypeService = orderTypeService;
         //this.orderService = orderService;
+        this.orderTypeService = orderTypeService;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class AppInit implements CommandLineRunner {
         userService.initUsers();
         ingredientService.initIngredients();
         mealService.initMeals();
-        //orderTypeService.initTables();
+        orderTypeService.initTables();
         //orderService.initOrders();
     }
 }

@@ -9,6 +9,7 @@ public class Order {
     private Long id;
     private boolean isOpen;
     private OrderType orderType;
+    private User onlineUser;
 
     public Order() {
     }
@@ -40,5 +41,15 @@ public class Order {
 
     public void setOrderType(OrderType orderType) {
         this.orderType = orderType;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "online_user_id", referencedColumnName = "id")
+    public User getOnlineUser() {
+        return onlineUser;
+    }
+
+    public void setOnlineUser(User onlineUser) {
+        this.onlineUser = onlineUser;
     }
 }
