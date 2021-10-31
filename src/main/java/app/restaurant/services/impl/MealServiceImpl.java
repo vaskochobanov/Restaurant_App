@@ -2,6 +2,7 @@ package app.restaurant.services.impl;
 
 import app.restaurant.models.bindings.MealAddBindingModel;
 import app.restaurant.models.bindings.MealEditBindingModel;
+import app.restaurant.models.dtos.MealHomePageViewDto;
 import app.restaurant.models.dtos.MealViewDto;
 import app.restaurant.models.dtos.MealWaiterViewDto;
 import app.restaurant.models.entities.Ingredient;
@@ -55,6 +56,7 @@ public class MealServiceImpl implements MealService {
         mealRepository.save(beer);
         Meal shopskaSalad = new Meal();
         shopskaSalad.setActive(true);
+        shopskaSalad.setPromoted(true);
         shopskaSalad.setDescription("A mixture of cucumbers, tomatoes and feta cheese");
         shopskaSalad.setImageUrl("https://www.wandercooks.com/wp-content/uploads/2019/07/bulgarian-shopska-salad-ft2.jpg");
         shopskaSalad.setIngredients("cucumbers-0.3,tomatoes-0.2,feta cheese-0.15,olive oil-0.03,salt-0.01");
@@ -139,7 +141,7 @@ public class MealServiceImpl implements MealService {
         brownie.setIngredients("flour-0.1,chocolate-0.1,eggs-1,butter-0.05");
         brownie.setName("Brownie");
         brownie.setPrice(4.99);
-        brownie.setPromoted(false);
+        brownie.setPromoted(true);
         brownie.setType(MealType.DESSERT);
         mealRepository.save(brownie);
         }
@@ -213,6 +215,12 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal mealById(Long id) {
         return mealRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public MealHomePageViewDto getPromotedDish(String dishType) {
+        return mealRepository.findPromotedMeals().stream().filter(m -> m.getType().name().equals(dishType))
+                .map(meal -> modelMapper.map(meal, MealHomePageViewDto.class)).collect(Collectors.toList()).get(0);
     }
 
     private boolean isPossibleToPrepare(Meal meal) {

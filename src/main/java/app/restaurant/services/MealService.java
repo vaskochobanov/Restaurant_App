@@ -2,6 +2,7 @@ package app.restaurant.services;
 
 import app.restaurant.models.bindings.MealAddBindingModel;
 import app.restaurant.models.bindings.MealEditBindingModel;
+import app.restaurant.models.dtos.MealHomePageViewDto;
 import app.restaurant.models.dtos.MealViewDto;
 import app.restaurant.models.dtos.MealWaiterViewDto;
 import app.restaurant.models.entities.Meal;
@@ -18,4 +19,5 @@ public interface MealService {
     Meal getMealByName(String name);
     List<MealWaiterViewDto> getAllActiveMeals();
     Meal mealById(Long id);
+    MealHomePageViewDto getPromotedDish(String dishType);
 }

@@ -1,5 +1,6 @@
 package app.restaurant.web;
 
+import app.restaurant.services.MealService;
 import app.restaurant.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,13 +14,18 @@ import java.util.stream.Collectors;
 @Controller
 public class HomeController {
     private final UserService userService;
+    private final MealService mealService;
 
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService, MealService mealService) {
         this.userService = userService;
+        this.mealService = mealService;
     }
 
     @GetMapping("/")
-    public String getIndex() {
+    public String getIndex(Model model) {
+        model.addAttribute("promSalad", mealService.getPromotedDish("SALAD"));
+        model.addAttribute("promMainDish", mealService.getPromotedDish("MAIN_DISH"));
+        model.addAttribute("promDessert", mealService.getPromotedDish("DESSERT"));
         return "index";
     }
     @GetMapping("/home")

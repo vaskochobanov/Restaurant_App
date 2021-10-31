@@ -80,29 +80,29 @@
     <!-- Content Row-->
     <div class="card-group card-wrapper">
         <div class="card cards">
-            <img src="/img/meatballs-tomato-sauce1.jpg" class="card-img-top" alt="...">
+            <img th:src="${promSalad.imageUrl}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                <h5 class="card-title" th:text="${promSalad.name}">Card title</h5>
+                <p class="card-text" th:text="${promSalad.description}">This is a wider card with supporting text below
+                    as a natural lead-in to additional
                     content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
         <div class="card cards">
-            <img src="/img/meatballs-tomato-sauce1.jpg" class="card-img-top" alt="...">
+            <img th:src="${promMainDish.imageUrl}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <h5 class="card-title" th:text="${promMainDish.name}">Card title</h5>
+                <p class="card-text" th:text="${promMainDish.description}">This card has supporting text below as a
+                    natural lead-in to additional content.</p>
             </div>
         </div>
         <div class="card cards">
-            <img src="/img/meatballs-tomato-sauce1.jpg" class="card-img-top" alt="...">
+            <img th:src="${promDessert.imageUrl}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                <h5 class="card-title" th:text="${promDessert.name}">Card title</h5>
+                <p class="card-text" th:text="${promDessert.description}">This is a wider card with supporting text
+                    below as a natural lead-in to additional
                     content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
     </div>

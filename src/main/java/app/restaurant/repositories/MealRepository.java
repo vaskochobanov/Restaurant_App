@@ -15,4 +15,6 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
     List<Meal> findAllMealsSorted();
     @Query("select m from Meal m where m.active = true")
     List<Meal> findAllActiveMeals();
+    @Query("select m from Meal m where m.promoted = true")
+    List<Meal> findPromotedMeals();
 }
