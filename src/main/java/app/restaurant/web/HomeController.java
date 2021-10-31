@@ -1,6 +1,7 @@
 package app.restaurant.web;
 
 import app.restaurant.services.MealService;
+import app.restaurant.services.OrderTypeService;
 import app.restaurant.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,10 +16,12 @@ import java.util.stream.Collectors;
 public class HomeController {
     private final UserService userService;
     private final MealService mealService;
+    private final OrderTypeService orderTypeService;
 
-    public HomeController(UserService userService, MealService mealService) {
+    public HomeController(UserService userService, MealService mealService, OrderTypeService orderTypeService) {
         this.userService = userService;
         this.mealService = mealService;
+        this.orderTypeService = orderTypeService;
     }
 
     @GetMapping("/")
@@ -53,6 +56,10 @@ public class HomeController {
             model.addAttribute("waiterId", userService.getIdByUsername(authentication.getName()));
             return "home-waiter";
         }
-        return null;
+        else if (role.equals("ROLE_CUSTOMER")) {
+            model.addAttribute("customerId", userService.getIdByUsername(authentication.getName()));
+            model.addAttribute("tableId", orderTypeService.getTableIdByName("online"));
+        }
+        return "home-customer";
     }
 }

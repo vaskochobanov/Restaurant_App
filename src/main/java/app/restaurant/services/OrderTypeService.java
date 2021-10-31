@@ -23,4 +23,5 @@ public interface OrderTypeService {
     void closeOrderOnTable(String tableName);
     List<WaiterMealsInOrder> getAllMealsInOrderForTableId(Long tableId);
     void editOrder(Long tableId, WaiterAddOrderBindingModel[] mealsArr);
+    Long getTableIdByName(String tableName);
 }

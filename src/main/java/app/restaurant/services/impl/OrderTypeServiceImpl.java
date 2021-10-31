@@ -158,4 +158,10 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         orderService.deleteOrderById(orderToEdit.getId());
         this.createNewOrderFromWaiters(mealsArr);
     }
+
+    @Override
+    public Long getTableIdByName(String tableName) {
+        OrderType result = orderTypeRepository.findByName(tableName).orElse(null);
+        return result.getId();
+    }
 }

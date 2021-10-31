@@ -206,6 +206,9 @@ table tr:last-child td:last-child {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.cust-logout {
+  border: none;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
