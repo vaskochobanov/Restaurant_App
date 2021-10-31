@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentNumber--;
       mealsCount.value = currentNumber;
       totalSum -= el.price;
-      totalSumEl.innerText = `Total Sum: ${totalSum} $`;
+      totalSumEl.innerText = `Total Sum: ${totalSum.toFixed(2)} $`;
     });
     let mealsCount = document.createElement("input");
     divMealButtonsHolder.appendChild(mealsCount);
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentNumber++;
       mealsCount.value = currentNumber;
       totalSum += el.price;
-      totalSumEl.innerText = `Total Sum: ${totalSum} $`;
+      totalSumEl.innerText = `Total Sum: ${totalSum.toFixed(2)} $`;
     });
   };
   fetch("http://localhost:8080/api/waiter-menu", {

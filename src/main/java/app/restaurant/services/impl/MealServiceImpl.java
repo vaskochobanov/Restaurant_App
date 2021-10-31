@@ -48,7 +48,7 @@ public class MealServiceImpl implements MealService {
         Meal beer = new Meal();
         beer.setActive(true);
         beer.setDescription("A 500ml glass of draft beer.");
-        beer.setImageUrl("https://thumbs.dreamstime.com/b/glass-draft-beer-isolated-white-background-171472670.jpg");
+        beer.setImageUrl("/img/beer.jpg");
         beer.setIngredients("beer-0.5");
         beer.setName("Beer");
         beer.setPrice(2.49);
@@ -58,7 +58,7 @@ public class MealServiceImpl implements MealService {
         shopskaSalad.setActive(true);
         shopskaSalad.setPromoted(true);
         shopskaSalad.setDescription("A mixture of cucumbers, tomatoes and feta cheese");
-        shopskaSalad.setImageUrl("https://www.wandercooks.com/wp-content/uploads/2019/07/bulgarian-shopska-salad-ft2.jpg");
+        shopskaSalad.setImageUrl("/img/shopska.jpg");
         shopskaSalad.setIngredients("cucumbers-0.3,tomatoes-0.2,feta cheese-0.15,olive oil-0.03,salt-0.01");
         shopskaSalad.setName("Shopska Salad");
         shopskaSalad.setPrice(8.99);
@@ -87,7 +87,7 @@ public class MealServiceImpl implements MealService {
         Meal cola = new Meal();
         cola.setActive(true);
         cola.setDescription("A can of classic Coca Cola");
-        cola.setImageUrl("https://cdncloudcart.com/16398/products/images/39404/gazirana-napitka-coca-cola-ken-330-ml-image_5ea2cc6235fb6_800x800.png?1587731937");
+        cola.setImageUrl("/img/cola.jpg");
         cola.setIngredients("coca cola-0.3");
         cola.setName("Coca Cola");
         cola.setPrice(1.50);
@@ -97,7 +97,7 @@ public class MealServiceImpl implements MealService {
         Meal frenchSalad = new Meal();
         frenchSalad.setActive(true);
         frenchSalad.setDescription("French salad");
-        frenchSalad.setImageUrl("https://recepti.gotvach.bg/files/lib/400x296/ruska-salata-forma.jpg");
+        frenchSalad.setImageUrl("/img/french_salad.jpg");
         frenchSalad.setIngredients("potatoes-0.1,carrots-0.05,corn-0.05,ham-0.05,mayonnaise-0.1");
         frenchSalad.setName("French Salad");
         frenchSalad.setPrice(7.50);
@@ -107,7 +107,7 @@ public class MealServiceImpl implements MealService {
         Meal risotto = new Meal();
         risotto.setActive(true);
         risotto.setDescription("Imperial rice with frozen vegetables with butter and soy sauce");
-        risotto.setImageUrl("https://www.acouplecooks.com/wp-content/uploads/2021/03/Mushroom-Risotto-055.jpg");
+        risotto.setImageUrl("/img/risotto.jpg");
         risotto.setIngredients("rice-0.1,frozen vegetables-0.1,butter-0.03,soy sauce-0.01");
         risotto.setName("Risotto");
         risotto.setPrice(7.99);
@@ -117,7 +117,7 @@ public class MealServiceImpl implements MealService {
         Meal banica = new Meal();
         banica.setActive(true);
         banica.setDescription("Tradiotional balcanic dish");
-        banica.setImageUrl("https://i.ytimg.com/vi/VT4I-VSODRE/maxresdefault.jpg");
+        banica.setImageUrl("/img/banica.jpg");
         banica.setIngredients("kori-0.3,feta cheese-0.05,yogurt-0.1,eggs-2");
         banica.setName("Banica");
         banica.setPrice(4.99);
@@ -137,7 +137,7 @@ public class MealServiceImpl implements MealService {
         Meal brownie = new Meal();
         brownie.setActive(true);
         brownie.setDescription("A classic brownie with a lot of chocolate");
-        brownie.setImageUrl("https://preppykitchen.com/wp-content/uploads/2019/10/Brownie-Recipe-Square-1200px-preppy-kitchen.jpg");
+        brownie.setImageUrl("/img/brownie.jpg");
         brownie.setIngredients("flour-0.1,chocolate-0.1,eggs-1,butter-0.05");
         brownie.setName("Brownie");
         brownie.setPrice(4.99);
