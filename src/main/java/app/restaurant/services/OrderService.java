@@ -15,4 +15,5 @@ public interface OrderService {
     void saveOrder(Order order);
     void deleteOrderById(Long orderId);
     Order createNewOrderFromCustomer(OrderType online, User onlineUser);
+    Long getOrderIdByCustomerId(Long customerId);
 }

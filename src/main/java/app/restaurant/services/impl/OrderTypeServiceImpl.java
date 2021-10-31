@@ -171,5 +171,9 @@ public class OrderTypeServiceImpl implements OrderTypeService {
     public void createNewOrderFromCustomer(CustomerAddOrderBindingModel[] mealsArr) {
         OrderType online = orderTypeRepository.findByName("online").orElse(null);
         User onlineUser = userService.getOnlineUserById(mealsArr[0].getCustomerId());
+        Order onlineOrder = orderService.createNewOrderFromCustomer(online, onlineUser);
+        Arrays.stream(mealsArr).forEach(mi -> {
+            mealPreparationService.createNewMealPreparationFromWaiter(onlineOrder, mi.getMealId(), mi.getQuantity());
+        });
     }
 }

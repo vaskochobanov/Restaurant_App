@@ -74,6 +74,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createNewOrderFromCustomer(OrderType online, User onlineUser) {
-        return null;
+        Order onlineToAdd = new Order();
+        onlineToAdd.setOpen(true);
+        onlineToAdd.setOrderType(online);
+        onlineToAdd.setOnlineUser(onlineUser);
+        return orderRepository.save(onlineToAdd);
+    }
+
+    @Override
+    public Long getOrderIdByCustomerId(Long customerId) {
+        return orderRepository.findOrderByCustomerId(customerId).orElse(null);
     }
 }

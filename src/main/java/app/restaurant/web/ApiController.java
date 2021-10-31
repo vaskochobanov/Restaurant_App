@@ -1,5 +1,6 @@
 package app.restaurant.web;
 
+import app.restaurant.models.bindings.CustomerAddOrderBindingModel;
 import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
 import app.restaurant.models.dtos.*;
 import app.restaurant.models.entities.enums.MealType;
@@ -89,6 +90,6 @@ public class ApiController {
     }
     @PostMapping("/new-order-cust")
     public void postCustomerAddNewOrder(@RequestBody String data) {
-
+        orderTypeService.createNewOrderFromCustomer(gson.fromJson(data, CustomerAddOrderBindingModel[].class));
     }
 }

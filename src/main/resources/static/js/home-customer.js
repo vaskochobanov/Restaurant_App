@@ -46,10 +46,18 @@ document.addEventListener("DOMContentLoaded", () => {
     minusButton.innerText = "-";
     minusButton.addEventListener("click", () => {
       let currentNumber = Number(mealsCount.value);
-      currentNumber--;
-      mealsCount.value = currentNumber;
-      totalSum -= el.price;
-      totalSumEl.innerText = `Total Sum: ${totalSum.toFixed(2)} $`;
+      if (currentNumber > 0) {
+          currentNumber--;
+          if (currentNumber < 0) {
+              currentNumber = 0;
+          }
+          mealsCount.value = currentNumber;
+          totalSum -= el.price;
+          if (totalSum < 0) {
+              totalSum = 0;
+          }
+          totalSumEl.innerText = `Total Sum: ${totalSum.toFixed(2)} $`;
+      }
     });
     let mealsCount = document.createElement("input");
     divMealButtonsHolder.appendChild(mealsCount);
@@ -106,27 +114,27 @@ document.addEventListener("DOMContentLoaded", () => {
       formNewOrder.action = "/home";
       formNewOrder.classList.add("form-place-order");
       placeOrderButton.addEventListener("click", () => {
-        let inputFieldsArr = document.getElementsByClassName("menu-meal-count");
-        let mealIdsArr = document.getElementsByClassName("mealHiddenId");
-        let resultOrder = [];
-        for (let i = 0; i < inputFieldsArr.length; i++) {
-          if (Number(inputFieldsArr[i].value)) {
-            let current = {
-              mealId: Number(mealIdsArr[i].value),
-              quantity: Number(inputFieldsArr[i].value),
-              customerId: Number(customerId.value),
-              tableId: Number(tableId.value),
-            };
-            resultOrder.push(current);
-          }
-        }
-        fetch("http://localhost:8080/api/new-order-cust", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(resultOrder),
-        });
+          let inputFieldsArr = document.getElementsByClassName("menu-meal-count");
+          let mealIdsArr = document.getElementsByClassName("mealHiddenId");
+          let resultOrder = [];
+          for (let i = 0; i < inputFieldsArr.length; i++) {
+              if (Number(inputFieldsArr[i].value)) {
+                  let current = {
+                      mealId: Number(mealIdsArr[i].value),
+                      quantity: Number(inputFieldsArr[i].value),
+                      customerId: Number(customerId.value),
+                      tableId: Number(tableId.value),
+                    };
+                    resultOrder.push(current);
+                }
+            }
+            fetch("http://localhost:8080/api/new-order-cust", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(resultOrder),
+            });
       });
       window.addEventListener("pageshow", (event) => {
         filterField.value = "";
