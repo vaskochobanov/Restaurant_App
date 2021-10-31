@@ -22,4 +22,5 @@ public interface UserService extends UserDetailsService {
     User getUserByUsername(String username);
     List<WaiterViewDto> getAllWaiters();
     Long getIdByUsername(String username);
+    User getOnlineUserById(Long onlineUserId);
 }

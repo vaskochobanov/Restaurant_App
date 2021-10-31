@@ -3,36 +3,39 @@ document.addEventListener("DOMContentLoaded", () => {
   let customerId = document.getElementById("customerId");
   let tableId = document.getElementById("tableId");
   let mainContent = document.getElementById("mainContent");
+  let divCardsContainer = document.createElement("div");
+  mainContent.appendChild(divCardsContainer);
+  divCardsContainer.classList.add("card-wrapper", "row", "row-cols-1", "row-cols-md-3", "g-4");
   let totalSumEl = document.getElementById("totalSum");
   let totalSum = 0;
   totalSumEl.innerText = `Total Sum: ${totalSum} $`;
-  let createRow = (el) => {
+  let createCard = (el) => {
     let divWrappingCard = document.createElement("div");
-    mainContent.appendChild(divWrappingCard);
-    divWrappingCard.classList.add("card");
-    let divMealType = document.createElement("div");
-    divWrappingCard.appendChild(divMealType);
-    divMealType.classList.add("card-header", "waiter-menu");
-    divMealType.innerText = el.type;
+    divCardsContainer.appendChild(divWrappingCard);
+    divWrappingCard.classList.add("card", "cards");
+    let mealImg = document.createElement("img");
+    divWrappingCard.appendChild(mealImg);
+    mealImg.classList.add("card-img-top");
+    mealImg.src = el.imageUrl;
     let divCardBody = document.createElement("div");
     divWrappingCard.appendChild(divCardBody);
-    divCardBody.classList.add("card-body", "waiter-menu");
-    let h5MealName = document.createElement("h5");
+    divCardBody.classList.add("card-body", "cust-card-body");
+    let h5MealName = document.createElement("h5");  
     divCardBody.appendChild(h5MealName);
     h5MealName.classList.add("card-title");
     h5MealName.innerText = el.name;
     let pMealDescription = document.createElement("p");
     divCardBody.appendChild(pMealDescription);
-    pMealDescription.classList.add("card-text", "waiter-order-meals");
+    pMealDescription.classList.add("card-text");
     pMealDescription.innerText = el.description;
-    let pMealIngredients = document.createElement("p");
-    divCardBody.appendChild(pMealIngredients);
-    pMealIngredients.classList.add("card-text", "waiter-order-meals");
-    pMealIngredients.innerText = el.ingredients;
     let h5Price = document.createElement("h5");
     divCardBody.appendChild(h5Price);
     h5Price.classList.add("card-title");
     h5Price.innerText = `${el.price} $`;
+    let pMealIngredients = document.createElement("p");
+    divCardBody.appendChild(pMealIngredients);
+    pMealIngredients.classList.add("card-text");
+    pMealIngredients.innerText = el.ingredients;
     let divMealButtonsHolder = document.createElement("div");
     divCardBody.appendChild(divMealButtonsHolder);
     divMealButtonsHolder.classList.add("menu-buttons-holder");
@@ -82,14 +85,14 @@ document.addEventListener("DOMContentLoaded", () => {
       let mealsArr = JSON.parse(strigifiedResponce);
       let filteredArr = [...mealsArr];
       filterField.addEventListener("input", (event) => {
-        mainContent.innerHTML = "";
+        divCardsContainer.innerHTML = "";
         filteredArr = mealsArr.filter((m) =>
           m.name.toLowerCase().includes(event.target.value.toLowerCase())
         );
-        filteredArr.forEach((m) => createRow(m));
+        filteredArr.forEach((m) => createCard(m));
       });
       filteredArr.forEach((m) => {
-        createRow(m);
+        createCard(m);
       });
       let placeOrderButton = document.createElement("button");
       placeOrderButton.type = "submit";

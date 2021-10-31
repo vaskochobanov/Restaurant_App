@@ -186,6 +186,9 @@ table tr:last-child td:last-child {
 .menu-buttons-holder {
   display: flex;
   margin-top: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
 }
 .menu-buttons {
   min-width: 38px;
@@ -208,6 +211,9 @@ table tr:last-child td:last-child {
 }
 .cust-logout {
   border: none;
+}
+.cust-card-body {
+  margin-bottom: 3rem;
 }
 @media (max-width: 350px) {
   .main-nav {

@@ -1,11 +1,13 @@
 package app.restaurant.services.impl;
 
+import app.restaurant.models.bindings.CustomerAddOrderBindingModel;
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
 import app.restaurant.models.dtos.*;
 import app.restaurant.models.entities.Order;
 import app.restaurant.models.entities.OrderType;
+import app.restaurant.models.entities.User;
 import app.restaurant.repositories.OrderTypeRepository;
 import app.restaurant.services.MealPreparationService;
 import app.restaurant.services.OrderService;
@@ -163,5 +165,11 @@ public class OrderTypeServiceImpl implements OrderTypeService {
     public Long getTableIdByName(String tableName) {
         OrderType result = orderTypeRepository.findByName(tableName).orElse(null);
         return result.getId();
+    }
+
+    @Override
+    public void createNewOrderFromCustomer(CustomerAddOrderBindingModel[] mealsArr) {
+        OrderType online = orderTypeRepository.findByName("online").orElse(null);
+        User onlineUser = userService.getOnlineUserById(mealsArr[0].getCustomerId());
     }
 }

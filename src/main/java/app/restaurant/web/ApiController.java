@@ -87,4 +87,8 @@ public class ApiController {
     public void postWaiterEditOrder(@PathVariable Long id, @RequestBody String data) {
         orderTypeService.editOrder(id, gson.fromJson(data, WaiterAddOrderBindingModel[].class));
     }
+    @PostMapping("/new-order-cust")
+    public void postCustomerAddNewOrder(@RequestBody String data) {
+
+    }
 }

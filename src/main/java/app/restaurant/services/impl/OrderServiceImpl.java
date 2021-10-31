@@ -2,6 +2,7 @@ package app.restaurant.services.impl;
 
 import app.restaurant.models.entities.Order;
 import app.restaurant.models.entities.OrderType;
+import app.restaurant.models.entities.User;
 import app.restaurant.repositories.OrderRepository;
 import app.restaurant.services.MealPreparationService;
 import app.restaurant.services.OrderService;
@@ -69,5 +70,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteOrderById(Long orderId) {
         orderRepository.deleteById(orderId);
+    }
+
+    @Override
+    public Order createNewOrderFromCustomer(OrderType online, User onlineUser) {
+        return null;
     }
 }

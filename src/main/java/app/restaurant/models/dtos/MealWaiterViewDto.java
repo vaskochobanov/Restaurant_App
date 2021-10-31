@@ -7,6 +7,7 @@ public class MealWaiterViewDto {
     private Double price;
     private String description;
     private String ingredients;
+    private String imageUrl;
 
     public MealWaiterViewDto() {
     }
@@ -57,5 +58,13 @@ public class MealWaiterViewDto {
 
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

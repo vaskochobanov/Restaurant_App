@@ -174,4 +174,9 @@ public class UserServiceImpl implements UserService {
     public Long getIdByUsername(String username) {
         return userRepository.findIdByUsername(username);
     }
+
+    @Override
+    public User getOnlineUserById(Long onlineUserId) {
+        return userRepository.findById(onlineUserId).orElse(null);
+    }
 }

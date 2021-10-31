@@ -1,5 +1,6 @@
 package app.restaurant.services;
 
+import app.restaurant.models.bindings.CustomerAddOrderBindingModel;
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
@@ -24,4 +25,5 @@ public interface OrderTypeService {
     List<WaiterMealsInOrder> getAllMealsInOrderForTableId(Long tableId);
     void editOrder(Long tableId, WaiterAddOrderBindingModel[] mealsArr);
     Long getTableIdByName(String tableName);
+    void createNewOrderFromCustomer(CustomerAddOrderBindingModel[] mealsArr);
 }
