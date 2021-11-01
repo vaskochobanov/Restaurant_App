@@ -54,6 +54,8 @@ public class HomeController {
             return "home-baker";
         } else if (role.equals("ROLE_WAITER")) {
             model.addAttribute("waiterId", userService.getIdByUsername(authentication.getName()));
+            model.addAttribute("onlineAssigned",
+                    orderTypeService.checkWaiterForOnline(userService.getIdByUsername(authentication.getName())));
             return "home-waiter";
         } else if (role.equals("ROLE_CUSTOMER")) {
             Long orderId = orderService.getOrderIdByCustomerId(userService.getIdByUsername(authentication.getName()));

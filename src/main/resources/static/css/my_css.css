@@ -190,6 +190,9 @@ table tr:last-child td:last-child {
   bottom: 0;
   margin-bottom: 1rem;
 }
+.menu-buttons-holder-waiter {
+  display: flex;
+}
 .menu-buttons {
   min-width: 38px;
   font-size: 1.5rem;

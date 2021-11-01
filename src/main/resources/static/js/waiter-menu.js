@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pMealIngredients.innerText = el.ingredients;
     let divMealButtonsHolder = document.createElement("div");
     divCardBody.appendChild(divMealButtonsHolder);
-    divMealButtonsHolder.classList.add("menu-buttons-holder");
+    divMealButtonsHolder.classList.add("menu-buttons-holder-waiter");
     let minusButton = document.createElement("button");
     divMealButtonsHolder.appendChild(minusButton);
     minusButton.type = "button";

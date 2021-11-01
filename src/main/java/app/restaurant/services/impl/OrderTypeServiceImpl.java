@@ -189,4 +189,13 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         });
         return result;
     }
+
+    @Override
+    public boolean checkWaiterForOnline(Long waiterId) {
+        OrderType onlineTable = this.getTableByName("online");
+        if (onlineTable.getWaiter().getId() == waiterId) {
+            return true;
+        }
+        return false;
+    }
 }

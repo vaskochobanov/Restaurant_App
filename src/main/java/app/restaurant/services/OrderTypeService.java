@@ -28,4 +28,5 @@ public interface OrderTypeService {
     Long getTableIdByName(String tableName);
     void createNewOrderFromCustomer(CustomerAddOrderBindingModel[] mealsArr);
     List<OrderTypeCustomerViewDto> onlineOrderByCustomerId(Long custId);
+    boolean checkWaiterForOnline(Long waiterId);
 }

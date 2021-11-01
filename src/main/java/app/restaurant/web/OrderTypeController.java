@@ -94,4 +94,8 @@ public class OrderTypeController {
         model.addAttribute("tableId", id);
         return "edit-order";
     }
+    @GetMapping("/online-orders")
+    public String onlineOrders() {
+        return "online-orders";
+    }
 }

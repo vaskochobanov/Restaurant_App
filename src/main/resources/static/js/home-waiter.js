@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let h5Sum = document.createElement("h5");
             divCardBody.appendChild(h5Sum);
             h5Sum.classList.add("card-title", "table-check");
-            h5Sum.innerText = el.sum;
+            h5Sum.innerText = el.sum.toFixed(2);
             let endForm = document.createElement("form");
             divCardBody.appendChild(endForm);
             endForm.classList.add("waiter-end-button");
