@@ -218,6 +218,17 @@ table tr:last-child td:last-child {
 .has-order {
   color: green !important;
 }
+.customer-order {
+  margin-left: auto;
+  margin-right: auto;
+}
+.cust-order-card-body {
+  background-color: rgb(33, 37, 41);
+  color: white;
+}
+.cust-order-meal-item {
+  background-color: rgb(33, 37, 41);
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;

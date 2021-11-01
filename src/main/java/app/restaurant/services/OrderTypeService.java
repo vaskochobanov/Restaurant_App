@@ -4,6 +4,7 @@ import app.restaurant.models.bindings.CustomerAddOrderBindingModel;
 import app.restaurant.models.bindings.OrderTypeAddBindingModel;
 import app.restaurant.models.bindings.OrderTypeEditBindingModel;
 import app.restaurant.models.bindings.WaiterAddOrderBindingModel;
+import app.restaurant.models.dtos.OrderTypeCustomerViewDto;
 import app.restaurant.models.dtos.OrderTypeViewDto;
 import app.restaurant.models.dtos.OrderTypeWaiterViewDto;
 import app.restaurant.models.dtos.WaiterMealsInOrder;
@@ -26,4 +27,5 @@ public interface OrderTypeService {
     void editOrder(Long tableId, WaiterAddOrderBindingModel[] mealsArr);
     Long getTableIdByName(String tableName);
     void createNewOrderFromCustomer(CustomerAddOrderBindingModel[] mealsArr);
+    List<OrderTypeCustomerViewDto> onlineOrderByCustomerId(Long custId);
 }

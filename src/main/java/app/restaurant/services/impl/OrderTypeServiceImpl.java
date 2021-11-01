@@ -176,4 +176,17 @@ public class OrderTypeServiceImpl implements OrderTypeService {
             mealPreparationService.createNewMealPreparationFromWaiter(onlineOrder, mi.getMealId(), mi.getQuantity());
         });
     }
+
+    @Override
+    public List<OrderTypeCustomerViewDto> onlineOrderByCustomerId(Long custId) {
+        Long orderIdToDisplay = orderService.getOrderIdByCustomerId(custId);
+        Double totalSum = mealPreparationService.getSumOfOrderId(orderIdToDisplay);
+        List<OrderTypeCustomerViewDto> result = new ArrayList<>();
+        mealPreparationService.getMealPreparationsbyOrderId(orderIdToDisplay).stream().forEach(mp -> {
+            OrderTypeCustomerViewDto current = modelMapper.map(mp, OrderTypeCustomerViewDto.class);
+            current.setTotalSum(totalSum);
+            result.add(current);
+        });
+        return result;
+    }
 }

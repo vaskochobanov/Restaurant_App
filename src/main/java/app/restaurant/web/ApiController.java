@@ -92,4 +92,8 @@ public class ApiController {
     public void postCustomerAddNewOrder(@RequestBody String data) {
         orderTypeService.createNewOrderFromCustomer(gson.fromJson(data, CustomerAddOrderBindingModel[].class));
     }
+    @GetMapping("/cust-order/{custId}")
+    public ResponseEntity<List<OrderTypeCustomerViewDto>> getOnlineOrderForCustomer(@PathVariable Long custId) {
+        return ResponseEntity.status(200).body(orderTypeService.onlineOrderByCustomerId(custId));
+    }
 }

@@ -63,10 +63,21 @@
 <!-- Page Content-->
 <div class="container px-4 px-lg-5 main-content barman-main-content">
     <div class="input-group input-group-lg filter-field">
-<!--        <input type="hidden" id="customerId" th:value="${customerId}">-->
+       <input type="hidden" id="customerId" th:value="${customerId}">
+       <input type="hidden" id="tableId" th:value="${tableId}">
     </div>
     <div id="mainContent">
-
+        <!-- <div class="card customer-order" style="width: 18rem;">
+            <div class="card-body cust-order-card-body">
+                <h5 class="card-title">Online Order</h5>
+                <p class="card-text">5,69 $</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item cust-order-meal-item waiter-meal-done">An item</li>
+                <li class="list-group-item cust-order-meal-item waiter-meal-preparing">A second item</li>
+                <li class="list-group-item cust-order-meal-item waiter-meal-done">A third item</li>
+            </ul>
+        </div> -->
     </div>
 </div>
 <!-- Footer-->
@@ -81,6 +92,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="/js/scripts.js"></script>
-<script src="/js/home-customer.js"></script>
+<script src="/js/home-customer-order.js"></script>
 </body>
 </html>

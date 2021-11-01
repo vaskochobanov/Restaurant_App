@@ -59,19 +59,26 @@ public class HomeController {
             Long orderId = orderService.getOrderIdByCustomerId(userService.getIdByUsername(authentication.getName()));
             if (orderId == null) {
                 model.addAttribute("hasOrder", false);
+                model.addAttribute("customerId", userService.getIdByUsername(authentication.getName()));
+                model.addAttribute("tableId", orderTypeService.getTableIdByName("online"));
+                return "home-customer";
             }
             else {
                 model.addAttribute("hasOrder", true);
+                model.addAttribute("customerId", userService.getIdByUsername(authentication.getName()));
+                model.addAttribute("tableId", orderTypeService.getTableIdByName("online"));
+                return "home-customer-order";
             }
-            model.addAttribute("customerId", userService.getIdByUsername(authentication.getName()));
-            model.addAttribute("tableId", orderTypeService.getTableIdByName("online"));
-            return "home-customer";
         }
         return null;
     }
 
     @GetMapping("/home-customer-order")
-    public String customerWithOrder() {
+    public String customerWithOrder(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("hasOrder", true);
+        model.addAttribute("customerId", userService.getIdByUsername(authentication.getName()));
+        model.addAttribute("tableId", orderTypeService.getTableIdByName("online"));
         return "home-customer-order";
     }
 }
