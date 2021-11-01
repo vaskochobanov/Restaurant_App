@@ -96,4 +96,12 @@ public class ApiController {
     public ResponseEntity<List<OrderTypeCustomerViewDto>> getOnlineOrderForCustomer(@PathVariable Long custId) {
         return ResponseEntity.status(200).body(orderTypeService.onlineOrderByCustomerId(custId));
     }
+    @GetMapping("/waiter-online-orders")
+    public ResponseEntity<List<OnlineOrderViewDto>> generateAllOnlineOrders() {
+        return ResponseEntity.status(200).body(orderTypeService.getAllOnlineOrdersInfo());
+    }
+    @PostMapping("/close-online-order")
+    public void postWaiterCloseOnlineOrder(@RequestBody String data) {
+        orderTypeService.closeOnlineOrder(gson.fromJson(data, Long.class));
+    }
 }

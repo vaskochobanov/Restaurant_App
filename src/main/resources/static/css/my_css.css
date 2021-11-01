@@ -232,6 +232,9 @@ table tr:last-child td:last-child {
 .cust-order-meal-item {
   background-color: rgb(33, 37, 41);
 }
+.waiter-online-title {
+  color: white;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;

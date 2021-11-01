@@ -16,4 +16,6 @@ public interface OrderService {
     void deleteOrderById(Long orderId);
     Order createNewOrderFromCustomer(OrderType online, User onlineUser);
     Long getOrderIdByCustomerId(Long customerId);
+    List<Order> getActiveOnlineOrders();
+    Order getOrderById(Long orderId);
 }

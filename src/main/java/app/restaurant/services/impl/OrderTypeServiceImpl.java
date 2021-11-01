@@ -198,4 +198,31 @@ public class OrderTypeServiceImpl implements OrderTypeService {
         }
         return false;
     }
+
+    @Override
+    public List<OnlineOrderViewDto> getAllOnlineOrdersInfo() {
+        List<OnlineOrderViewDto> result = new ArrayList<>();
+        List<Order> onlineOrders = orderService.getActiveOnlineOrders();
+        onlineOrders.stream().forEach(o -> {
+            OnlineOrderViewDto current = new OnlineOrderViewDto();
+            List<OnlineOrderMealPrepViewDto> currentOrderMeals = new ArrayList<>();
+            current.setCustomerName(o.getOnlineUser().getUsername());
+            current.setTotalSum(mealPreparationService.getSumOfOrderId(o.getId()));
+            current.setId(o.getId());
+            this.onlineOrderByCustomerId(o.getOnlineUser().getId()).stream().forEach(mp -> {
+                OnlineOrderMealPrepViewDto onlineOrderMealPrepViewDto = modelMapper.map(mp, OnlineOrderMealPrepViewDto.class);
+                currentOrderMeals.add(onlineOrderMealPrepViewDto);
+            });
+            current.setListMeals(currentOrderMeals);
+            result.add(current);
+        });
+        return result;
+    }
+
+    @Override
+    public void closeOnlineOrder(Long orderId) {
+        Order toClose = orderService.getOrderById(orderId);
+        toClose.setOpen(false);
+        orderService.saveOrder(toClose);
+    }
 }

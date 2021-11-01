@@ -10,6 +10,7 @@ import app.restaurant.services.OrderTypeService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -84,5 +85,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Long getOrderIdByCustomerId(Long customerId) {
         return orderRepository.findOrderByCustomerId(customerId).orElse(null);
+    }
+
+    @Override
+    public List<Order> getActiveOnlineOrders() {
+        return orderRepository.findActiveOnlineOrders();
+    }
+
+    @Override
+    public Order getOrderById(Long orderId) {
+        return orderRepository.findById((orderId)).orElse(null);
     }
 }
