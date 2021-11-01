@@ -50,6 +50,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/home">Home</a>
                     </li>
+                    <li class="nav-item" th:if="${hasOrder}">
+                        <a class="nav-link has-order" aria-current="page" href="/home-customer-order">Order</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="" id="totalSum">Total</a>
                     </li>

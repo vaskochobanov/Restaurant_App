@@ -58,14 +58,20 @@ public class HomeController {
         } else if (role.equals("ROLE_CUSTOMER")) {
             Long orderId = orderService.getOrderIdByCustomerId(userService.getIdByUsername(authentication.getName()));
             if (orderId == null) {
-                model.addAttribute("customerId", userService.getIdByUsername(authentication.getName()));
-                model.addAttribute("tableId", orderTypeService.getTableIdByName("online"));
-                return "home-customer";
+                model.addAttribute("hasOrder", false);
             }
             else {
-                return "home-customer-order";
+                model.addAttribute("hasOrder", true);
             }
+            model.addAttribute("customerId", userService.getIdByUsername(authentication.getName()));
+            model.addAttribute("tableId", orderTypeService.getTableIdByName("online"));
+            return "home-customer";
         }
         return null;
+    }
+
+    @GetMapping("/home-customer-order")
+    public String customerWithOrder() {
+        return "home-customer-order";
     }
 }

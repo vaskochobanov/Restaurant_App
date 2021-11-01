@@ -215,6 +215,9 @@ table tr:last-child td:last-child {
 .cust-card-body {
   margin-bottom: 3rem;
 }
+.has-order {
+  color: green !important;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;

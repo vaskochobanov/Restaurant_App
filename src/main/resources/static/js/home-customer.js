@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formNewOrder.appendChild(placeOrderButton);
       mainContent.appendChild(formNewOrder);
       formNewOrder.method = "GET";
-      formNewOrder.action = "/home";
+      formNewOrder.action = "/home-customer-order";
       formNewOrder.classList.add("form-place-order");
       placeOrderButton.addEventListener("click", () => {
           let inputFieldsArr = document.getElementsByClassName("menu-meal-count");
