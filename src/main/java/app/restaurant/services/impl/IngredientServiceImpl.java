@@ -222,4 +222,9 @@ public class IngredientServiceImpl implements IngredientService {
     public void updateIngredient(Ingredient ingredient) {
         ingredientRepository.save(ingredient);
     }
+
+    @Override
+    public List<String> getUniqueIngredientsNames() {
+        return ingredientRepository.findAllUniqueIngredientNames();
+    }
 }

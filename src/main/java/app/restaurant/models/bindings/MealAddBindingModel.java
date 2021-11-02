@@ -83,7 +83,6 @@ public class MealAddBindingModel {
     }
 
     @NotBlank(message = "You must input at least one ingredient")
-    @Size(min = 5, message = "Ingredient format is not valid")
     public String getIngredients() {
         return ingredients;
     }

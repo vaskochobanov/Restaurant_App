@@ -104,4 +104,8 @@ public class ApiController {
     public void postWaiterCloseOnlineOrder(@RequestBody String data) {
         orderTypeService.closeOnlineOrder(gson.fromJson(data, Long.class));
     }
+    @GetMapping("/ingredients-names")
+    public ResponseEntity<List<String>> loadAllIngredientsNames() {
+        return ResponseEntity.status(200).body(ingredientService.getUniqueIngredientsNames());
+    }
 }

@@ -13,4 +13,5 @@ public interface IngredientService {
     void deleteIngredient(Long id);
     Ingredient getIngredientByName(String name);
     void updateIngredient(Ingredient ingredient);
+    List<String> getUniqueIngredientsNames();
 }

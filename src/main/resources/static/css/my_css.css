@@ -235,6 +235,17 @@ table tr:last-child td:last-child {
 .waiter-online-title {
   color: white;
 }
+.ingredient-inline {
+  display: flex;
+}
+.ingredient-count {
+  width: 6rem;
+  text-align: center;
+}
+.meal-add-ingredient-button {
+  width: 8rem;
+  margin-left: 0.8rem;
+}
 @media (max-width: 350px) {
   .main-nav {
     padding-top: 0.2rem;
