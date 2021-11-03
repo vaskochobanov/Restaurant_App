@@ -14,7 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findOpenOrderByTableId(Long tableId);
     @Query("select o from Order o where o.open = true and o.orderType.name = ?1")
     Optional<Order> findOpenOrderByTableName(String tableName);
-    @Query("select o.id from Order o where o.onlineUser.id = ?1")
+    @Query("select o.id from Order o where o.onlineUser.id = ?1 and o.open = true ")
     Optional<Long> findOrderByCustomerId(Long customerId);
     @Query("select o from Order o where o.open = true and o.onlineUser is not null")
     List<Order> findActiveOnlineOrders();
