@@ -6,6 +6,7 @@ import app.restaurant.models.entities.Ingredient;
 import app.restaurant.repositories.IngredientRepository;
 import app.restaurant.services.IngredientService;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -230,5 +231,14 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<String> getUniqueIngredientsNames() {
         return ingredientRepository.findAllUniqueIngredientNames();
+    }
+
+    @Scheduled(cron = "0 0 8 * * *")
+    public void deleteOlderIngredients() {
+        List<Ingredient> result = ingredientRepository.findIngredientsAfterBestBefore();
+        ingredientRepository.findIngredientsAfterBestBefore().stream().forEach(i -> {
+            ingredientRepository.delete(i);
+        });
+        System.out.println("Ingredients deleted");
     }
 }

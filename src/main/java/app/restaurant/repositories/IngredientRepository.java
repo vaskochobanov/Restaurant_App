@@ -15,4 +15,6 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     List<Ingredient> findAllSortedByExpiryDate();
     @Query("select distinct(i.name) from Ingredient i")
     List<String> findAllUniqueIngredientNames();
+    @Query("select i from Ingredient i where i.bestBefore < current_date")
+    List<Ingredient> findIngredientsAfterBestBefore();
 }
