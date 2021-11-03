@@ -215,7 +215,11 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient getIngredientByName(String name) {
-        return ingredientRepository.findByName(name).orElse(null);
+        List<Ingredient> searchResult = ingredientRepository.findByName(name);
+        if (searchResult.size() > 0) {
+            return searchResult.get(0);
+        }
+        return null;
     }
 
     @Override

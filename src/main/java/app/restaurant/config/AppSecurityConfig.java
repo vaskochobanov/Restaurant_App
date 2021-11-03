@@ -23,6 +23,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/js/**", "/css/**", "/img/**").permitAll()
                 .antMatchers("/", "/users/register", "/users/login").permitAll()
+                .antMatchers("/tables/online-orders").hasRole("WAITER")
+                .antMatchers("/tables/edit-order/**").hasRole("WAITER")
+                .antMatchers("/api/close-order").hasRole("WAITER")
                 .antMatchers("/**").authenticated().and().formLogin().loginProcessingUrl("/users/login")
                 .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/home")
                 .failureForwardUrl("/users/log-error").and().logout().logoutUrl("/logout").logoutSuccessUrl("/")

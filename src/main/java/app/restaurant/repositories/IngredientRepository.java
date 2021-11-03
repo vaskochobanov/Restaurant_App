@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
-    Optional<Ingredient> findByName(String name);
+    List<Ingredient> findByName(String name);
     @Query("select i from Ingredient i order by i.bestBefore")
     List<Ingredient> findAllSortedByExpiryDate();
     @Query("select distinct(i.name) from Ingredient i")
