@@ -43,19 +43,4 @@ public class HomeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/home")).andExpect(status().isOk())
                 .andExpect(view().name("home-admin"));
     }
-    private void init() {
-        User user = new User();
-        user.setFullName("Customer 1");
-        user.setPassword("123456");
-        user.setRole(UserRole.CUSTOMER);
-        user.setUsername("customer1");
-        user.setId(1L);
-        User admin = new User();
-        admin.setFullName("Admin 1");
-        admin.setPassword("123456");
-        admin.setRole(UserRole.ADMIN);
-        admin.setUsername("admin");
-        admin.setId(2L);
-        userRepository.save(admin);
-    }
 }

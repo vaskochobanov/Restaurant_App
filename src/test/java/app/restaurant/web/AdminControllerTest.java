@@ -3,6 +3,7 @@ package app.restaurant.web;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.repositories.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,6 @@ public class AdminControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private UserRepository userRepository;
-    @BeforeEach
-    public void setUp() {
-        this.init();
-    }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
     public void shouldReturnValidStatusViewNameAndModelGetAdminAddUsers() throws Exception {
@@ -51,18 +48,9 @@ public class AdminControllerTest {
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
     public void shouldReturnValidStatusViewNameAndModelGetAdminEditUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/admin/user-edit/1")).andExpect(status().isOk())
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/user-edit/2")).andExpect(status().isOk())
                 .andExpect(view().name("edit-single-user")).andExpect(model().attributeExists("roles"))
                 .andExpect(model().attributeExists("userForEdit"))
                 .andExpect(model().attributeExists("nullError"));
-    }
-    private void init() {
-        User user = new User();
-        user.setFullName("Test User");
-        user.setPassword("123456");
-        user.setRole(UserRole.ADMIN);
-        user.setUsername("admin");
-        user.setId(1L);
-        userRepository.save(user);
     }
 }

@@ -3,6 +3,7 @@ package app.restaurant.web;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.repositories.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,6 @@ public class OrderTypeControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private UserRepository userRepository;
-    @BeforeEach
-    public void setUp() {
-        this.init();
-    }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
     public void shouldReturnValidStatusViewNameAndModelGetAdminAddTable() throws Exception {
@@ -51,7 +48,7 @@ public class OrderTypeControllerTest {
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
     public void shouldReturnValidStatusViewNameAndModelGetAdminEditTable() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/tables/single-edit/1")).andExpect(status().isOk())
+        mockMvc.perform(MockMvcRequestBuilders.get("/tables/single-edit/2")).andExpect(status().isOk())
                 .andExpect(view().name("edit-single-table")).andExpect(model().attributeExists("tableToEdit"))
                 .andExpect(model().attributeExists("waiters")).andExpect(model().attributeExists("hasErrors"));
     }
@@ -67,21 +64,5 @@ public class OrderTypeControllerTest {
     public void shouldReturnValidStatusViewNameAndModelGetWaiterOnlineOrders() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/tables/online-orders")).andExpect(status().isOk())
                 .andExpect(view().name("online-orders"));
-    }
-    private void init() {
-        User user = new User();
-        user.setFullName("Test User");
-        user.setPassword("123456");
-        user.setRole(UserRole.ADMIN);
-        user.setUsername("admin");
-        user.setId(1L);
-        userRepository.save(user);
-        User waiter = new User();
-        waiter.setFullName("Waiter 1");
-        waiter.setPassword("123456");
-        waiter.setRole(UserRole.WAITER);
-        waiter.setUsername("waiter1");
-        waiter.setId(3L);
-        userRepository.save(waiter);
     }
 }

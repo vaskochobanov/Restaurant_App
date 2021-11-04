@@ -29,34 +29,46 @@ public class ApiControllerTest {
     private MealRepository mealRepository;
     @Autowired
     private UserRepository userRepository;
-    @BeforeEach
-    public void setUp() {
-        this.init();
-    }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
     public void shouldReturnValidStatusViewNameAndModelGetAdminAPIMeals() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/meals")).andExpect(status().isOk())
-                .andExpect(jsonPath("[0].name").value("testmeal"));
+                .andExpect(jsonPath("[0].name").value("Fruit Salad"));
     }
-    private void init() {
-        User user = new User();
-        user.setFullName("Test User");
-        user.setPassword("123456");
-        user.setRole(UserRole.ADMIN);
-        user.setUsername("admin");
-        user.setId(1L);
-        userRepository.save(user);
-        Meal meal = new Meal();
-        meal.setActive(true);
-        meal.setDescription("Test meal description");
-        meal.setId(1L);
-        meal.setImageUrl("http://testmeal.jpg");
-        meal.setIngredients("cucumbers-0.1,tomatoes-0.1");
-        meal.setName("testmeal");
-        meal.setPrice(4.99);
-        meal.setPromoted(false);
-        meal.setType(MealType.SALAD);
-        mealRepository.save(meal);
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
+    public void shouldReturnValidStatusViewNameAndModelGetAdminAPIIngredients() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/ingredients")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("cucumbers"));
+    }
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
+    public void shouldReturnValidStatusViewNameAndModelGetAdminAPIUsers() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/users")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].username").value("admin"));
+    }
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
+    public void shouldReturnValidStatusViewNameAndModelGetAdminAPITables() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/tables")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("online"));
+    }
+    @Test
+    @WithMockUser(username = "waiter1", roles = {"WAITER"}, password = "123456")
+    public void shouldReturnValidStatusViewNameAndModelGetWaiterAPITables() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/waiter-home/3")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("t1"));
+    }
+    @Test
+    @WithMockUser(username = "waiter1", roles = {"WAITER"}, password = "123456")
+    public void shouldReturnValidStatusViewNameAndModelGetWaiterAPIMenu() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/waiter-menu")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("Beer"));
+    }
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
+    public void shouldReturnValidStatusViewNameAndModelGetAdminAPIIngredientsNames() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/ingredients-names")).andExpect(status().isOk())
+                .andExpect(jsonPath("[1]").value("beer"));
     }
 }

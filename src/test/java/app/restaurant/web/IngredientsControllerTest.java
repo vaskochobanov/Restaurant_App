@@ -3,6 +3,7 @@ package app.restaurant.web;
 import app.restaurant.models.entities.User;
 import app.restaurant.models.entities.enums.UserRole;
 import app.restaurant.repositories.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,6 @@ public class IngredientsControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private UserRepository userRepository;
-    @BeforeEach
-    public void setUp() {
-        this.init();
-    }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
     public void shouldReturnValidStatusViewNameAndModelGetAdminAddIngredient() throws Exception {
@@ -47,14 +44,5 @@ public class IngredientsControllerTest {
     public void shouldReturnValidStatusViewNameAndModelGetAdminDeleteIngredient() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/ingredients/delete/1")).andExpect(status().is(302))
                 .andExpect(view().name("redirect:/ingredients/edit-storage"));
-    }
-    private void init() {
-        User user = new User();
-        user.setFullName("Test User");
-        user.setPassword("123456");
-        user.setRole(UserRole.ADMIN);
-        user.setUsername("admin");
-        user.setId(1L);
-        userRepository.save(user);
     }
 }
