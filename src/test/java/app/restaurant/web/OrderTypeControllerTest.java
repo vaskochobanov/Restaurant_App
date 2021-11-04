@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
-public class MealControllerTest {
+public class OrderTypeControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -30,38 +30,43 @@ public class MealControllerTest {
     }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
-    public void shouldReturnValidStatusViewNameAndModelGetAdminAddMeal() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/meals/add")).andExpect(status().isOk())
-                .andExpect(view().name("admin-add-meal")).andExpect(model().attributeExists("types"))
-                .andExpect(model().attributeExists("mealAddBindingModel"))
-                .andExpect(model().attributeExists("mealExists"));
+    public void shouldReturnValidStatusViewNameAndModelGetAdminAddTable() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/tables/add")).andExpect(status().isOk())
+                .andExpect(view().name("admin-add-order-type")).andExpect(model().attributeExists("waiters"))
+                .andExpect(model().attributeExists("orderTypeAddBindingModel"))
+                .andExpect(model().attributeExists("orderTypeExists"));
     }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
-    public void shouldReturnValidStatusViewNameAndModelGetAdminEditMeal() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/meals/edit")).andExpect(status().isOk())
-                .andExpect(view().name("admin-edit-meals")).andExpect(model().attributeExists("meals"));
+    public void shouldReturnValidStatusViewNameAndModelGetAdminEditTables() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/tables/edit")).andExpect(status().isOk())
+                .andExpect(view().name("admin-edit-tables")).andExpect(model().attributeExists("tables"));
     }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
-    public void shouldReturnValidStatusViewNameAndModelGetAdminDeleteUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/meals/delete/1")).andExpect(status().is(302))
-                .andExpect(view().name("redirect:/meals/edit"));
+    public void shouldReturnValidStatusViewNameAndModelGetAdminDeleteTable() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/tables/delete/1")).andExpect(status().is(302))
+                .andExpect(view().name("redirect:/tables/edit"));
     }
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"}, password = "123456")
-    public void shouldReturnValidStatusViewNameAndModelGetAdminEditSingleMeal() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/meals/single-edit/1")).andExpect(status().isOk())
-                .andExpect(view().name("edit-single-meal")).andExpect(model().attributeExists("mealForEdit"))
-                .andExpect(model().attributeExists("hasErrors")).andExpect(model().attributeExists("priceNotValid"))
-                .andExpect(model().attributeExists("ingredientsNotValid"));
+    public void shouldReturnValidStatusViewNameAndModelGetAdminEditTable() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/tables/single-edit/1")).andExpect(status().isOk())
+                .andExpect(view().name("edit-single-table")).andExpect(model().attributeExists("tableToEdit"))
+                .andExpect(model().attributeExists("waiters")).andExpect(model().attributeExists("hasErrors"));
     }
     @Test
     @WithMockUser(username = "waiter1", roles = {"WAITER"}, password = "123456")
-    public void shouldReturnValidStatusViewNameAndModelGetWaiterMealsMenu() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/meals/meals-menu/2")).andExpect(status().isOk())
-                .andExpect(view().name("waiter-menu")).andExpect(model().attributeExists("waiterId"))
+    public void shouldReturnValidStatusViewNameAndModelGetWaiterEditOrder() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/tables/edit-order/1")).andExpect(status().isOk())
+                .andExpect(view().name("edit-order")).andExpect(model().attributeExists("waiterId"))
                 .andExpect(model().attributeExists("tableId"));
+    }
+    @Test
+    @WithMockUser(username = "waiter1", roles = {"WAITER"}, password = "123456")
+    public void shouldReturnValidStatusViewNameAndModelGetWaiterOnlineOrders() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/tables/online-orders")).andExpect(status().isOk())
+                .andExpect(view().name("online-orders"));
     }
     private void init() {
         User user = new User();
