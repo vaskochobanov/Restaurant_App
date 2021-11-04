@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 public class SomeTestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //System.out.println("Interceptor works");
+        if (request.getRequestURI().equals("/api/drinks")) {
+        System.out.println("Barman loaded drinks from waiting orders");
+        }
         return true;
     }
 
