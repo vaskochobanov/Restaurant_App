@@ -62,4 +62,9 @@ public class MealPreparationServiceImplTest {
         serviceToTest.initDessertsMealPreparations(order);
         Assertions.assertEquals(2, mockMealPreparationRepository.count());
     }
+    @Test
+    public void testGetSumOfOrderId() {
+        Mockito.when(mockMealPreparationRepository.findSumOfMealsInOrder(1L)).thenReturn(8.49);
+        Assertions.assertEquals(8.49, serviceToTest.getSumOfOrderId(1L));
+    }
 }
