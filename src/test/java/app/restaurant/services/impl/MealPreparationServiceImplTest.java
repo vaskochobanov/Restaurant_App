@@ -3,8 +3,8 @@ package app.restaurant.services.impl;
 import app.restaurant.models.entities.Order;
 import app.restaurant.repositories.MealPreparationRepository;
 import app.restaurant.services.IngredientService;
-import app.restaurant.services.MealPreparationService;
 import app.restaurant.services.MealService;
+import app.restaurant.services.NeedToBuyService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +25,12 @@ public class MealPreparationServiceImplTest {
     ModelMapper mockModelMapper;
     @Mock
     IngredientService mockIngredientService;
+    @Mock
+    NeedToBuyService mockNeedToBuyService;
     @BeforeEach
     public void setUp() {
         serviceToTest = new MealPreparationServiceImpl(mockMealPreparationRepository, mockMealService, mockModelMapper,
-                mockIngredientService);
+                mockIngredientService, mockNeedToBuyService);
     }
     @Test
     public void testInitDrinkMealPreparations() {

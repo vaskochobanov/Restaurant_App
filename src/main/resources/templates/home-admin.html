@@ -66,8 +66,9 @@
             class="card text-white bg-secondary my-5 py-4 text-center intro-text"
     >
         <div class="card-body intro-text-content">
-            <p class="text-white m-0 intro-text-content-p">
-                Welcome to Restaurant management panel!
+            <p class="text-white m-0 intro-text-content-p"
+               th:text="|Welcome to Restaurant management panel! You need to buy: ${needToBuy}|">
+                Welcome to Restaurant management panel! You need to buy:
             </p>
         </div>
     </div>

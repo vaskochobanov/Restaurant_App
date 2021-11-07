@@ -1,9 +1,6 @@
 package app.restaurant.web;
 
-import app.restaurant.services.MealService;
-import app.restaurant.services.OrderService;
-import app.restaurant.services.OrderTypeService;
-import app.restaurant.services.UserService;
+import app.restaurant.services.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,13 +16,15 @@ public class HomeController {
     private final MealService mealService;
     private final OrderTypeService orderTypeService;
     private final OrderService orderService;
+    private final NeedToBuyService needToBuyService;
 
     public HomeController(UserService userService, MealService mealService, OrderTypeService orderTypeService,
-                          OrderService orderService) {
+                          OrderService orderService, NeedToBuyService needToBuyService) {
         this.userService = userService;
         this.mealService = mealService;
         this.orderTypeService = orderTypeService;
         this.orderService = orderService;
+        this.needToBuyService = needToBuyService;
     }
 
     @GetMapping("/")
@@ -43,6 +42,7 @@ public class HomeController {
         String role = roles.get(0);
         if (role.equals("ROLE_ADMIN")) {
             //todo admin must know which products are getting low
+            model.addAttribute("needToBuy", String.join(", ", needToBuyService.getAllUniqueIngredientsToBuy()));
             return "home-admin";
         } else if (role.equals("ROLE_BARMAN")) {
             return "home-barman";

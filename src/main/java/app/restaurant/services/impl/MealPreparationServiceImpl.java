@@ -11,6 +11,7 @@ import app.restaurant.repositories.MealPreparationRepository;
 import app.restaurant.services.IngredientService;
 import app.restaurant.services.MealPreparationService;
 import app.restaurant.services.MealService;
+import app.restaurant.services.NeedToBuyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,16 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     private final MealService mealService;
     private final ModelMapper modelMapper;
     private final IngredientService ingredientService;
+    private final NeedToBuyService needToBuyService;
 
     public MealPreparationServiceImpl(MealPreparationRepository mealPreparationRepository, MealService mealService,
-                                      ModelMapper modelMapper, IngredientService ingredientService) {
+                                      ModelMapper modelMapper, IngredientService ingredientService,
+                                      NeedToBuyService needToBuyService) {
         this.mealPreparationRepository = mealPreparationRepository;
         this.mealService = mealService;
         this.modelMapper = modelMapper;
         this.ingredientService = ingredientService;
+        this.needToBuyService = needToBuyService;
     }
 
     @Override
@@ -130,7 +134,7 @@ public class MealPreparationServiceImpl implements MealPreparationService {
     }
 
     @Override
-    public void prepareMeal(Long id) throws NullPointerException {
+    public void prepareMeal(Long id) {
         MealPreparation forPrepare = mealPreparationRepository.findById(id).orElse(null);
         Arrays.stream(forPrepare.getMeal().getIngredients().split(",")).forEach(i -> {
             //in this array in position 0 is ingredient name and on position 1 is quantity for this meal
@@ -148,11 +152,13 @@ public class MealPreparationServiceImpl implements MealPreparationService {
                     }
                     else {
                         quantityNeeded -= currentIngredient.getQuantity();
+                        needToBuyService.addToBuy(currentIngredientName);
                         ingredientService.deleteIngredient(currentIngredient.getId());
                     }
                 }
                 else {
                     forPrepare.setNotEnoughIngredients(true);
+                    needToBuyService.addToBuy(currentIngredientName);
                     break;
                 }
             }

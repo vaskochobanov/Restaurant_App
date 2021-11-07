@@ -4,6 +4,7 @@ import app.restaurant.models.entities.Meal;
 import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.repositories.MealRepository;
 import app.restaurant.services.IngredientService;
+import app.restaurant.services.NeedToBuyService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,9 +23,11 @@ public class MealServiceImplTest {
     ModelMapper mockModelMapper;
     @Mock
     IngredientService mockIngredientService;
+    @Mock
+    NeedToBuyService mockNeedYoBuyService;
     @BeforeEach
     public void setUp() {
-        serviceToTest = new MealServiceImpl(mockMealRepository, mockModelMapper, mockIngredientService);
+        serviceToTest = new MealServiceImpl(mockMealRepository, mockModelMapper, mockIngredientService, mockNeedYoBuyService);
     }
     @Test
     public void testGetMealByName() {

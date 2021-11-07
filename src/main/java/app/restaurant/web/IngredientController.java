@@ -2,6 +2,7 @@ package app.restaurant.web;
 
 import app.restaurant.models.bindings.IngredientAddBindingModel;
 import app.restaurant.services.IngredientService;
+import app.restaurant.services.NeedToBuyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,13 +18,16 @@ import javax.validation.Valid;
 @RequestMapping("/ingredients")
 public class IngredientController {
     private final IngredientService ingredientService;
+    private final NeedToBuyService needToBuyService;
 
-    public IngredientController(IngredientService ingredientService) {
+    public IngredientController(IngredientService ingredientService, NeedToBuyService needToBuyService) {
         this.ingredientService = ingredientService;
+        this.needToBuyService = needToBuyService;
     }
 
     @GetMapping("/add")
     public String getAddIngredient(Model model) {
+        model.addAttribute("needToBuy", String.join(", ", needToBuyService.getAllUniqueIngredientsToBuy()));
         if (!model.containsAttribute("ingredientAddBindingModel")) {
             model.addAttribute("ingredientAddBindingModel", new IngredientAddBindingModel());
         }

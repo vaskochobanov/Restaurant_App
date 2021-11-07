@@ -5,10 +5,12 @@ import app.restaurant.models.dtos.IngredientViewDto;
 import app.restaurant.models.entities.Ingredient;
 import app.restaurant.repositories.IngredientRepository;
 import app.restaurant.services.IngredientService;
+import app.restaurant.services.NeedToBuyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,17 +19,22 @@ import java.util.stream.Collectors;
 public class IngredientServiceImpl implements IngredientService {
     private final IngredientRepository ingredientRepository;
     private final ModelMapper modelMapper;
+    private final NeedToBuyService needToBuyService;
 
-    public IngredientServiceImpl(IngredientRepository ingredientRepository, ModelMapper modelMapper) {
+    public IngredientServiceImpl(IngredientRepository ingredientRepository, ModelMapper modelMapper,
+                                 NeedToBuyService needToBuyService) {
         this.ingredientRepository = ingredientRepository;
         this.modelMapper = modelMapper;
+        this.needToBuyService = needToBuyService;
     }
 
     @Override
+    @Transactional
     public void addIngredient(IngredientAddBindingModel ingredientAddBindingModel) {
         Ingredient toAdd = modelMapper.map(ingredientAddBindingModel, Ingredient.class);
         toAdd.setName(ingredientAddBindingModel.getName().toLowerCase());
         ingredientRepository.save(toAdd);
+        needToBuyService.deleteNeededIngredient(ingredientAddBindingModel.getName());
     }
 
     @Override

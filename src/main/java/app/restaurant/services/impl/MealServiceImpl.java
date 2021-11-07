@@ -11,6 +11,7 @@ import app.restaurant.models.entities.enums.MealType;
 import app.restaurant.repositories.MealRepository;
 import app.restaurant.services.IngredientService;
 import app.restaurant.services.MealService;
+import app.restaurant.services.NeedToBuyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +24,13 @@ public class MealServiceImpl implements MealService {
     private final MealRepository mealRepository;
     private final ModelMapper modelMapper;
     private final IngredientService ingredientService;
+    private final NeedToBuyService needToBuyService;
 
-    public MealServiceImpl(MealRepository mealRepository, ModelMapper modelMapper, IngredientService ingredientService) {
+    public MealServiceImpl(MealRepository mealRepository, ModelMapper modelMapper, IngredientService ingredientService, NeedToBuyService needToBuyService) {
         this.mealRepository = mealRepository;
         this.modelMapper = modelMapper;
         this.ingredientService = ingredientService;
+        this.needToBuyService = needToBuyService;
     }
 
     @Override
@@ -233,10 +236,12 @@ public class MealServiceImpl implements MealService {
             Ingredient toCheck = ingredientService.getIngredientByName(ingredientName);
             if (toCheck == null) {
                 result = false;
+                needToBuyService.addToBuy(ingredientName);
                 break;
             }
             if (toCheck.getQuantity() <= ingredientQuantity * 10) {
                 result = false;
+                needToBuyService.addToBuy(ingredientName);
                 break;
             }
         }
