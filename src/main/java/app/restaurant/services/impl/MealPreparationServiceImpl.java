@@ -153,7 +153,7 @@ public class MealPreparationServiceImpl implements MealPreparationService {
                 }
                 else {
                     forPrepare.setNotEnoughIngredients(true);
-                    throw new NullPointerException("Ingredient does not exist in storage");
+                    break;
                 }
             }
             forPrepare.setPrepared(true);

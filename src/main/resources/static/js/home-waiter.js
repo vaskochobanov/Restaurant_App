@@ -71,9 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
             el.listMeals.forEach(m => {
                 let mealP = document.createElement("p");
                 divListMeals.appendChild(mealP);
-                mealP.innerText = m.mealName;
+                if (m.notEnoughIngredients) {
+                    mealP.innerText = `${m.mealName} - (NP)`;
+                }
+                else {
+                    mealP.innerText = m.mealName;
+                }
                 mealP.classList.add("card-text", "waiter-order-meals");
-                if (m.prepared) {
+                if (m.prepared && !m.notEnoughIngredients) {
                     mealP.classList.add("waiter-meal-done");
                 }
                 else {

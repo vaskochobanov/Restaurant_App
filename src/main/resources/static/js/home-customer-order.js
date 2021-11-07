@@ -26,13 +26,18 @@ document.addEventListener("DOMContentLoaded", () => {
             let currentLi = document.createElement("li");
             ulMeals.appendChild(currentLi);
             currentLi.classList.add("list-group-item", "cust-order-meal-item");
-            if (m.prepared) {
+            if (m.prepared && !m.notEnoughIngredients) {
                 currentLi.classList.add("waiter-meal-done");
             }
             else {
                 currentLi.classList.add("waiter-meal-preparing");
             }
-            currentLi.innerText = m.mealName;
+            if (m.notEnoughIngredients) {
+                currentLi.innerText = `${m.mealName} (NP)`;
+            }
+            else {
+                currentLi.innerText = m.mealName;
+            }
         });
     });
 })

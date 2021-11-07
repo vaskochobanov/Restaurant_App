@@ -29,7 +29,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/new-order", "/api/edit-order/**", "/api/waiter-online-orders").hasRole("WAITER")
                 .antMatchers("/meals/meals-menu/**", "/api/close-online-order").hasRole("WAITER")
                 .antMatchers("/tables/online-orders").hasRole("WAITER")
-                .antMatchers("/home-customer-order", "/api/mew-order-cust", "/api/cust-order/**").hasRole("CUSTOMER")
+                .antMatchers("/home-customer-order", "/api/mew-order-cust", "/api/cust-order/**",
+                        "/api/waiter-menu").hasRole("CUSTOMER")
                 .antMatchers("/prep/**", "/api/drinks").hasRole("BARMAN")
                 .antMatchers("/prep/**", "/api/salads").hasRole("STARTERS")
                 .antMatchers("/prep/**", "/api/main-dish").hasRole("CHEF")

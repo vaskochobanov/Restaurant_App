@@ -4,6 +4,7 @@ public class OrderTypeCustomerViewDto {
     private String mealName;
     private boolean isPrepared;
     private Double totalSum;
+    private boolean notEnoughIngredients;
 
     public OrderTypeCustomerViewDto() {
     }
@@ -30,5 +31,13 @@ public class OrderTypeCustomerViewDto {
 
     public void setTotalSum(Double totalSum) {
         this.totalSum = totalSum;
+    }
+
+    public boolean isNotEnoughIngredients() {
+        return notEnoughIngredients;
+    }
+
+    public void setNotEnoughIngredients(boolean notEnoughIngredients) {
+        this.notEnoughIngredients = notEnoughIngredients;
     }
 }
