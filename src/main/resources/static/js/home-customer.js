@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       totalSumEl.innerText = `Total Sum: ${totalSum.toFixed(2)} $`;
     });
   };
-  fetch("http://localhost:8080/api/customer-menu", {
+  fetch("http://localhost:8080/api/waiter-menu", {
     headers: {
       "Content-Type": "application/json",
     },
